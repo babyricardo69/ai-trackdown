@@ -1,5 +1,6 @@
-# ai-trackdown Configuration with GitHub Issues Sync
+# AI Trackdown Configuration Template with GitHub Integration
 # For teams using GitHub as their primary development platform
+# Copy this template to your TASKTRACK.md file and customize
 
 version: 1
 project:
@@ -7,44 +8,42 @@ project:
   id_prefix: "GH"
   default_epic_budget: 25000
 
-# GitHub Issues integration
-sync:
+# Manual GitHub Issues integration patterns
+integration_patterns:
   github:
-    enabled: true
+    manual_sync: true
     repo: "your-org/your-repo"
-    auth_method: "token"
+    workflow: "copy_and_paste_integration"
     
-    # Field mapping
-    mapping:
+    # Manual field mapping guidelines
+    mapping_guidelines:
       issue:
-        title: title
+        title: "Copy title from AI Trackdown task"
         body: |
-          ${description}
+          Copy description from AI Trackdown task
           
           ## Acceptance Criteria
-          ${acceptance_criteria}
+          Copy acceptance criteria from task
           
           ## AI Context
-          ${ai_context}
-        labels: labels
-        assignee: 
-          transform: strip_at
-        milestone: epic.github_milestone
+          Reference AI Trackdown task ID
+        labels: "Manually apply corresponding labels"
+        assignee: "Manually assign GitHub user"
+        milestone: "Link to corresponding epic milestone"
     
-    # Sync rules
-    sync_rules:
-      directions: ["push", "pull"]
-      include_types: ["issue", "task"]
+    # Manual sync process
+    sync_process:
+      directions: ["export_to_github", "import_status_updates"]
+      include_types: ["issue", "task"]  
       exclude_labels: ["no-sync"]
-      auto_sync: true
-      sync_interval: "15m"
+      frequency: "weekly_manual_sync"
 
 # Enhanced AI configuration for development teams
 ai:
   token_tracking:
-    enabled: true
+    manual_tracking: true
     require_agent_id: true
-    budget_alerts: true
+    budget_alerts: "manual_review_process"
     
   providers:
     claude:
@@ -62,21 +61,21 @@ ai:
       cost_per_1k_input: 0.002
       cost_per_1k_output: 0.004
 
-  agents:
+  usage_guidelines:
     claude:
       max_tokens_per_task: 5000
-      allowed_operations: ["read", "comment", "update"]
+      recommended_use: ["architecture", "documentation", "code_review"]
     
     gpt4:
       max_tokens_per_task: 4000
-      allowed_operations: ["read", "comment"]
+      recommended_use: ["coding", "debugging"]
 
 # Git workflow integration
 git:
-  hooks:
-    auto_install: true
-    commit_parsing: true
-    branch_protection: false
+  commit_conventions:
+    task_references: true
+    token_reporting: true
+    branch_naming: false
   
   patterns:
     commit_task_ref: "\\b(EPIC|ISSUE|TASK)-\\d+\\b"
@@ -85,10 +84,9 @@ git:
       in_review: ["review", "pr", "merge"]
       done: ["fix", "close", "resolve", "complete"]
 
-# Workflow automation
-automation:
-  rules:
-    - trigger: "commit"
+# Manual workflow processes
+workflow_processes:
+  status_updates:
+    - trigger: "commit_with_task_ref"
       pattern: "fix\\((.+)\\):"
-      action: "update_status"
-      status: "in-review"
+      manual_action: "update_task_status_to_in_review"

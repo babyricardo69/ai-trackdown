@@ -1,9 +1,9 @@
-# ShopFlow E-commerce Platform Enhancement - ai-trackdown Project Index
+# ShopFlow E-commerce Platform Enhancement - AI Trackdown Project Index
 # Generated: 2025-01-07T16:30:00Z
 # Format: llms.txt v1.0
 
 ## Project Overview
-ShopFlow E-commerce Platform Enhancement using ai-trackdown methodology
+ShopFlow E-commerce Platform Enhancement using AI Trackdown methodology
 Active development: Mobile-first redesign, modern authentication, AI recommendations
 Team size: 12 developers, 3 AI agents (Claude, GPT-4, Copilot)
 Duration: January 1 - March 15, 2025 (11 weeks)

@@ -1,5 +1,5 @@
 # ShopFlow E-commerce Platform Enhancement
-## ai-trackdown Project Dashboard
+## AI Trackdown Project Dashboard
 
 **Project Status:** Active Development  
 **Start Date:** 2025-01-01  

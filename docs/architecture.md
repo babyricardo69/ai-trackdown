@@ -1,10 +1,10 @@
-# ai-trackdown Architecture
+# AI-Trackdown Architecture
 
-This document provides a comprehensive overview of ai-trackdown's architecture, design principles, and implementation details.
+This document provides a comprehensive overview of AI-Trackdown's architecture, design principles, and framework implementation.
 
 ## 🎯 Design Philosophy
 
-ai-trackdown is built on five core principles that make it revolutionary for AI-enhanced development:
+AI-Trackdown is built on five core principles that make it revolutionary for AI-enhanced development:
 
 ### 1. Text-First Architecture
 **Principle**: All data stored as human-readable text files  
@@ -26,835 +26,545 @@ ai-trackdown is built on five core principles that make it revolutionary for AI-
 **Why**: Avoid vendor dependency and ensure longevity  
 **Implementation**: Pure markdown files, standard formats, easy migration  
 
-### 5. Progressive Enhancement
-**Principle**: Core features work offline, advanced features when connected  
-**Why**: Reliability and performance over complex dependencies  
-**Implementation**: Local-first with optional cloud integrations  
+### 5. Template-Driven Framework
+**Principle**: Standardized templates with manual workflows  
+**Why**: Consistency without tool dependency  
+**Implementation**: Configurable templates, bash scripts, manual processes  
 
-## 🏗️ System Architecture
+## 🏗️ Framework Architecture
 
 ### High-Level Overview
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                     ai-trackdown System                        │
+│                   AI-Trackdown Framework                        │
 ├─────────────────────────────────────────────────────────────────┤
 │                                                                 │
-│  ┌─────────────┐    ┌─────────────┐    ┌─────────────┐         │
-│  │    CLI      │    │  File       │    │   Git       │         │
-│  │  Interface  │◄──►│ System      │◄──►│ Integration │         │
-│  │             │    │             │    │             │         │
-│  └─────────────┘    └─────────────┘    └─────────────┘         │
-│         │                   │                   │              │
-│         ▼                   ▼                   ▼              │
-│  ┌─────────────┐    ┌─────────────┐    ┌─────────────┐         │
-│  │   Parser    │    │  Generator  │    │    Sync     │         │
-│  │   Engine    │    │   Engine    │    │   Engine    │         │
-│  │             │    │             │    │             │         │
-│  └─────────────┘    └─────────────┘    └─────────────┘         │
-│         │                   │                   │              │
-│         └───────────────────┼───────────────────┘              │
-│                             ▼                                  │
-│              ┌─────────────────────────────────┐               │
-│              │         Data Layer              │               │
-│              │                                 │               │
-│              │  ┌─────┐ ┌─────┐ ┌─────┐       │               │
-│              │  │Tasks│ │Epics│ │Meta │       │               │
-│              │  │     │ │     │ │Data │       │               │
-│              │  └─────┘ └─────┘ └─────┘       │               │
-│              └─────────────────────────────────┘               │
+│  ┌───────────────┐  ┌──────────────┐  ┌─────────────────────┐  │
+│  │   Templates   │  │ Config Files │  │  Manual Workflows   │  │
+│  │               │  │              │  │                     │  │
+│  │ • epic.md     │  │ • config.yaml│  │ • Creation scripts  │  │
+│  │ • issue.md    │  │ • github.yaml│  │ • Status updates    │  │
+│  │ • task.md     │  │ • jira.yaml  │  │ • Token tracking    │  │
+│  │ • custom.md   │  │ • llms.txt   │  │ • Reporting         │  │
+│  └───────────────┘  └──────────────┘  └─────────────────────┘  │
 │                                                                 │
 ├─────────────────────────────────────────────────────────────────┤
-│                    External Integrations                       │
+│                         File System                             │
+├─────────────────────────────────────────────────────────────────┤
 │                                                                 │
-│  ┌─────────────┐ ┌─────────────┐ ┌─────────────┐ ┌───────────┐ │
-│  │   GitHub    │ │    Jira     │ │   Linear    │ │    AI     │ │
-│  │   Issues    │ │  Projects   │ │   Teams     │ │  Agents   │ │
-│  └─────────────┘ └─────────────┘ └─────────────┘ └───────────┘ │
+│  .ai-trackdown/          tasks/                docs/            │
+│  ├── config.yaml         ├── epics/            ├── llms-full.txt│
+│  ├── llms.txt           ├── issues/           └── guides/      │
+│  ├── templates/         └── tasks/                             │
+│  └── integrations/                                             │
+│                                                                 │
+├─────────────────────────────────────────────────────────────────┤
+│                      Git Repository                             │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                 │
+│  ┌─────────────┐  ┌──────────────┐  ┌─────────────────────────┐ │
+│  │   Commits   │  │   Branches   │  │    External Systems     │ │
+│  │             │  │              │  │                         │ │
+│  │ • Task refs │  │ • Epic       │  │ • GitHub Issues         │ │
+│  │ • Token     │  │ • Feature    │  │ • Jira Tickets          │ │
+│  │   tracking  │  │ • Hotfix     │  │ • Linear Tasks          │ │
+│  │ • Progress  │  │ • Release    │  │ • Slack notifications   │ │
+│  └─────────────┘  └──────────────┘  └─────────────────────────┘ │
+│                                                                 │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
-### Core Components
+### Framework Components
 
-#### 1. CLI Interface Layer
-The command-line interface provides the primary user interaction:
+#### 1. Template System
+**Purpose**: Standardized markdown templates for consistent task structure  
+**Components**:
+- Epic templates for high-level goals
+- Issue templates for development features
+- Task templates for implementation details
+- Custom templates for specialized workflows
 
-```
-src/cli/
-├── commands/           # Individual CLI commands
-│   ├── create.js      # Create epics/issues/tasks
-│   ├── list.js        # List and filter items
-│   ├── update.js      # Update item properties
-│   ├── sync.js        # External system sync
-│   ├── tokens.js      # Token usage tracking
-│   └── generate.js    # llms.txt generation
-├── parser.js          # Command-line argument parsing
-├── output.js          # Formatted terminal output
-└── index.js           # Main CLI entry point
-```
+#### 2. Configuration Management
+**Purpose**: Project settings and integration configurations  
+**Components**:
+- Project metadata and token budgets
+- Workflow definitions (statuses, labels, priorities)
+- Integration mappings for external systems
+- Validation rules and constraints
 
-**Key Features:**
-- Interactive prompts for complex operations
-- Rich terminal output with colors and formatting
-- Bash completion support
-- Progress indicators for long operations
+#### 3. Manual Workflow Scripts
+**Purpose**: Bash/Python utilities for common operations  
+**Components**:
+- Task creation and ID generation
+- Status updates and assignment
+- Token usage tracking and reporting
+- Integration export/import scripts
 
-#### 2. File System Layer
-Manages the markdown file structure and operations:
+#### 4. AI Context System
+**Purpose**: Optimized information for AI agent consumption  
+**Components**:
+- llms.txt project index files
+- AI_CONTEXT blocks in tasks
+- Relationship mapping and dependencies
+- Token-efficient context generation
 
-```
-src/filesystem/
-├── structure.js       # Directory structure management
-├── templates.js       # File template system
-├── validation.js      # File format validation
-├── indexing.js        # File indexing and search
-└── migration.js       # Format migration utilities
-```
+## 📊 Data Model
 
-**File Format Specification:**
-```markdown
----
-# YAML frontmatter with structured metadata
-id: ISSUE-001
-type: issue
-title: "Task title"
-status: in-progress
-epic: EPIC-001
-assignee: @username
-created: 2025-01-07T10:00:00Z
-updated: 2025-01-07T14:30:00Z
-labels: [tag1, tag2]
-estimate: 5
-token_usage:
-  total: 1247
-  by_agent:
-    claude: 892
-    gpt4: 355
-sync:
-  github: 145
-  jira: AUTH-234
----
+### Core Entities
 
-# Markdown content
-Task description, acceptance criteria, technical notes, etc.
-```
-
-#### 3. Parser Engine
-Handles markdown parsing and frontmatter processing:
-
-```
-src/parsers/
-├── markdown.js        # Core markdown parsing
-├── frontmatter.js     # YAML frontmatter handling
-├── validation.js      # Schema validation
-├── transform.js       # Data transformation
-└── export.js          # Export to various formats
-```
-
-**Parsing Pipeline:**
-1. **File Reading**: Read markdown file from filesystem
-2. **Frontmatter Extraction**: Parse YAML metadata
-3. **Content Parsing**: Process markdown body
-4. **Validation**: Validate against schema
-5. **Transformation**: Convert to internal format
-
-#### 4. Generator Engine
-Creates llms.txt files and other generated content:
-
-```
-src/generators/
-├── llms-txt.js        # llms.txt standard implementation
-├── context.js         # AI context generation
-├── reports.js         # Status and analytics reports
-├── exports.js         # Data export utilities
-└── hooks.js           # Git hook generation
+```mermaid
+erDiagram
+    PROJECT ||--o{ EPIC : contains
+    EPIC ||--o{ ISSUE : contains
+    ISSUE ||--o{ TASK : contains
+    
+    PROJECT {
+        string name
+        string id_prefix
+        integer token_budget
+        string default_assignee
+        date start_date
+        date target_date
+    }
+    
+    EPIC {
+        string id PK
+        string title
+        string status
+        string owner
+        date target_date
+        integer token_budget
+        integer token_usage
+        array labels
+    }
+    
+    ISSUE {
+        string id PK
+        string title
+        string status
+        string epic FK
+        string assignee
+        integer estimate
+        string priority
+        array labels
+        object token_usage
+    }
+    
+    TASK {
+        string id PK
+        string title
+        string status
+        string issue FK
+        string assignee
+        integer estimate
+        array labels
+        object token_usage
+    }
 ```
 
-**llms.txt Generation Process:**
-```javascript
-// Simplified generation flow
-const generateLlmsTxt = async (project) => {
-  const overview = await generateProjectOverview(project);
-  const keyFiles = await identifyKeyFiles(project);
-  const currentFocus = await getCurrentPriorities(project);
-  const quickCommands = generateQuickCommands(project);
-  const integrationStatus = await getIntegrationStatus(project);
-  
-  return formatLlmsTxt({
-    overview,
-    keyFiles,
-    currentFocus,
-    quickCommands,
-    integrationStatus
-  });
-};
-```
+### File Structure Specification
 
-#### 5. Sync Engine
-Manages bidirectional synchronization with external systems:
-
-```
-src/sync/
-├── base.js            # Base synchronization interface
-├── github.js          # GitHub Issues integration
-├── jira.js            # Jira integration
-├── linear.js          # Linear integration
-├── conflict.js        # Conflict resolution
-└── mapping.js         # Field mapping utilities
-```
-
-**Synchronization Architecture:**
-```
-Local Tasks (Source of Truth)
-      ↕ (bidirectional sync)
-External Systems (GitHub/Jira/Linear)
-```
-
-**Sync Strategy:**
-1. **Local First**: Local markdown files are the source of truth
-2. **Incremental Sync**: Only sync changed items via timestamps
-3. **Conflict Resolution**: Last-write-wins with conflict files
-4. **Field Mapping**: Configurable field mappings per platform
-
-#### 6. Git Integration
-Seamlessly integrates with git workflows:
-
-```
-src/git/
-├── hooks.js           # Git hook management
-├── commits.js         # Commit message parsing
-├── branches.js        # Branch naming utilities
-├── status.js          # Git status integration
-└── history.js         # Git history analysis
-```
-
-**Git Hook System:**
-```bash
-# post-commit hook
-#!/bin/bash
-# Auto-update task status based on commit messages
-ai-trackdown parse-commit "$1"
-ai-trackdown generate-llms-txt
-
-# pre-push hook  
-#!/bin/bash
-# Sync with external systems before push
-ai-trackdown sync --all
-ai-trackdown validate-tokens --warn-threshold=1000
-```
-
-## 📁 Directory Structure Deep Dive
-
-### Project Root Structure
 ```
 project-root/
-├── .ai-trackdown/              # System configuration and metadata
-│   ├── config.yaml           # Project configuration
-│   ├── cache/                # Performance caches
-│   │   ├── index.json        # File index cache
-│   │   └── tokens.json       # Token usage cache
-│   ├── sync/                 # Synchronization state
-│   │   ├── github.json       # GitHub sync metadata
-│   │   ├── jira.json         # Jira sync metadata
-│   │   └── linear.json       # Linear sync metadata
-│   ├── templates/            # Custom templates (optional)
-│   │   ├── epic.md          
-│   │   ├── issue.md         
-│   │   └── task.md          
-│   └── llms.txt             # Auto-generated AI index
-├── tasks/                    # Task storage hierarchy
-│   ├── epics/               # High-level project epics
-│   │   ├── EPIC-001-user-authentication.md
-│   │   └── EPIC-002-payment-integration.md
-│   ├── issues/              # Development issues/features
-│   │   ├── ISSUE-001-login-flow.md
+├── .ai-trackdown/                   # Framework configuration
+│   ├── config.yaml                  # Main configuration
+│   ├── llms.txt                     # AI context index
+│   ├── templates/                   # Task templates
+│   │   ├── epic.md                  # Epic template
+│   │   ├── issue.md                 # Issue template
+│   │   ├── task.md                  # Task template
+│   │   └── custom-*.md              # Custom templates
+│   └── integrations/                # External system configs
+│       ├── github.yaml              # GitHub integration
+│       ├── jira.yaml                # Jira integration
+│       └── linear.yaml              # Linear integration
+│
+├── tasks/                          # Task files
+│   ├── epics/                      # Epic definitions
+│   │   ├── EPIC-001-auth-system.md
+│   │   └── EPIC-002-api-platform.md
+│   ├── issues/                     # Issue/story definitions
+│   │   ├── ISSUE-001-oauth-login.md
 │   │   ├── ISSUE-002-password-reset.md
-│   │   └── ISSUE-003-oauth-integration.md
-│   └── tasks/               # Granular implementation tasks
-│       ├── TASK-001-create-login-form.md
-│       ├── TASK-002-implement-oauth.md
-│       └── TASK-003-add-jwt-handling.md
-├── docs/                    # Extended documentation
-│   ├── llms-full.txt        # Complete project context for AI
-│   ├── architecture.md      # Project architecture notes
-│   └── decisions.md         # Architectural decision records
-└── TASKTRACK.md             # Project dashboard/overview
-```
-
-### Configuration System
-
-#### Primary Configuration (.ai-trackdown/config.yaml)
-```yaml
-version: 1
-project:
-  name: "My AI Project"
-  id_prefix: "PROJ"
-  default_epic_budget: 50000
-  timezone: "UTC"
-
-formats:
-  date: "YYYY-MM-DDTHH:mm:ssZ"
-  id_pattern: "{type}-{number:04d}"
-  branch_pattern: "{type}/{id}-{slug}"
-
-sync:
-  github:
-    enabled: true
-    repo: "org/repo-name"
-    auth_method: "token"
-    sync_interval: "1h"
-    field_mapping:
-      title: title
-      body: description
-      labels: labels
-      assignee: assignee
-      
-  jira:
-    enabled: true
-    url: "https://company.atlassian.net"
-    project: "PROJ"
-    auth_method: "oauth2"
-    
-  linear:
-    enabled: false
-
-ai:
-  llms_txt:
-    auto_generate: true
-    include_closed: false
-    context_depth: 3
-    update_frequency: "on_change"
-    
-  token_tracking:
-    enabled: true
-    require_agent_id: true
-    cost_alerts: true
-    providers:
-      claude:
-        model: "claude-3.5-sonnet"
-        cost_per_1k_input: 0.003
-        cost_per_1k_output: 0.015
-      gpt4:
-        model: "gpt-4-turbo"
-        cost_per_1k_input: 0.01
-        cost_per_1k_output: 0.03
-        
-  agents:
-    claude:
-      max_tokens_per_task: 5000
-      allowed_operations: ["read", "comment", "update"]
-      context_format: "detailed"
-    
-git:
-  hooks:
-    auto_install: true
-    commit_parsing: true
-    branch_protection: false
-  
-  patterns:
-    commit_task_ref: "\\b(EPIC|ISSUE|TASK)-\\d+\\b"
-    status_keywords:
-      in_progress: ["start", "begin", "wip"]
-      in_review: ["review", "pr", "merge"]
-      done: ["fix", "close", "resolve", "complete"]
-
-workflows:
-  default:
-    statuses: ["todo", "in-progress", "in-review", "done"]
-    transitions:
-      todo -> in-progress: auto
-      in-progress -> in-review: requires_commit
-      in-review -> done: requires_approval
-      
-automation:
-  rules:
-    - trigger: "commit"
-      pattern: "fix\\((.+)\\):"
-      action: "update_status"
-      status: "in-review"
-      
-    - trigger: "token_usage"
-      threshold: 0.9
-      action: "alert"
-      channels: ["slack", "email"]
+│   │   └── ISSUE-003-2fa-setup.md
+│   └── tasks/                      # Task implementations
+│       ├── TASK-001-login-form.md
+│       ├── TASK-002-oauth-config.md
+│       └── TASK-003-jwt-validation.md
+│
+├── docs/                           # Documentation
+│   ├── llms-full.txt              # Complete AI context
+│   ├── project-guide.md           # Project documentation
+│   └── api-specs/                 # API specifications
+│
+├── TASKTRACK.md                    # Project dashboard
+├── README.md                       # Project overview
+└── CHANGELOG.md                    # Change history
 ```
 
 ## 🔄 Data Flow Architecture
 
-### 1. Task Creation Flow
-```
-User Input → CLI Parser → Template Engine → File Writer → Git Add → Hook Trigger → llms.txt Update
+### Task Lifecycle Flow
+
+```mermaid
+flowchart TD
+    A[Copy Template] --> B[Generate ID]
+    B --> C[Update Frontmatter]
+    C --> D[Edit Content]
+    D --> E[Git Commit]
+    E --> F{Status Update?}
+    F -->|Yes| G[Manual Edit]
+    F -->|No| H[AI Context Update]
+    G --> H
+    H --> I[Token Tracking]
+    I --> J[Integration Sync]
+    J --> K[Progress Reporting]
+    K --> L{Complete?}
+    L -->|No| F
+    L -->|Yes| M[Archive/Close]
 ```
 
-**Detailed Steps:**
-1. **User Input**: `ai-trackdown create issue "Login flow"`
-2. **CLI Parser**: Parse command and extract parameters
-3. **Template Engine**: Load appropriate template (issue.md)
-4. **File Writer**: Create markdown file with frontmatter
-5. **Git Add**: Stage new file in git
-6. **Hook Trigger**: Run post-commit hooks
-7. **llms.txt Update**: Regenerate AI context files
+### Manual Workflow Process
 
-### 2. Status Update Flow
-```
-Status Change → File Update → Git Commit → External Sync → Notification
-```
-
-**Implementation:**
-```javascript
-const updateTaskStatus = async (taskId, newStatus) => {
-  // 1. Load and validate task
-  const task = await loadTask(taskId);
-  validateStatusTransition(task.status, newStatus);
-  
-  // 2. Update file
-  task.status = newStatus;
-  task.updated = new Date().toISOString();
-  await saveTask(task);
-  
-  // 3. Git operations
-  await gitAdd(task.filepath);
-  await gitCommit(`update(${taskId}): status changed to ${newStatus}`);
-  
-  // 4. External sync
-  if (config.sync.enabled) {
-    await syncWithExternal(task);
-  }
-  
-  // 5. Regenerate AI context
-  await generateLlmsTxt();
-  
-  // 6. Notifications
-  await notifyStatusChange(task, newStatus);
-};
-```
-
-### 3. Synchronization Flow
-```
-External Change → Webhook/Poll → Conflict Check → Merge → Local Update → Git Commit
-```
-
-**Bidirectional Sync Strategy:**
-```javascript
-const syncWithGitHub = async (options = {}) => {
-  const { since, full } = options;
-  
-  // 1. Get local changes
-  const localChanges = await getLocalChanges(since);
-  
-  // 2. Get remote changes  
-  const remoteChanges = await github.getChanges(since);
-  
-  // 3. Identify conflicts
-  const conflicts = identifyConflicts(localChanges, remoteChanges);
-  
-  // 4. Resolve conflicts (last-write-wins)
-  const resolved = await resolveConflicts(conflicts);
-  
-  // 5. Apply remote changes locally
-  for (const change of remoteChanges) {
-    await applyRemoteChange(change);
-  }
-  
-  // 6. Push local changes remotely
-  for (const change of localChanges) {
-    await pushLocalChange(change);
-  }
-  
-  // 7. Update sync metadata
-  await updateSyncState('github', new Date());
-};
-```
-
-### 4. Token Tracking Flow
-```
-AI Operation → Token Count → Attribution → File Update → Budget Check → Alert (if needed)
-```
-
-**Token Attribution System:**
-```javascript
-const trackTokenUsage = async (taskId, agent, tokenCount, operation) => {
-  // 1. Load task
-  const task = await loadTask(taskId);
-  
-  // 2. Update token usage
-  if (!task.token_usage) task.token_usage = { total: 0, by_agent: {} };
-  task.token_usage.total += tokenCount;
-  task.token_usage.by_agent[agent] = (task.token_usage.by_agent[agent] || 0) + tokenCount;
-  
-  // 3. Calculate cost
-  const cost = calculateCost(agent, tokenCount);
-  
-  // 4. Update epic budget
-  if (task.epic) {
-    await updateEpicBudget(task.epic, tokenCount, cost);
-  }
-  
-  // 5. Check budget alerts
-  const budgetStatus = await checkBudgetStatus(task.epic);
-  if (budgetStatus.alert) {
-    await sendBudgetAlert(budgetStatus);
-  }
-  
-  // 6. Save changes
-  await saveTask(task);
-  
-  // 7. Log activity
-  await logTokenUsage(taskId, agent, tokenCount, operation, cost);
-};
+```mermaid
+sequenceDiagram
+    participant Dev as Developer
+    participant FS as File System
+    participant Git as Git Repository
+    participant AI as AI Agent
+    participant Ext as External Systems
+    
+    Dev->>FS: Copy template to tasks/
+    Dev->>FS: Edit YAML frontmatter
+    Dev->>FS: Update markdown content
+    Dev->>Git: Commit task file
+    
+    Dev->>AI: Request assistance
+    AI->>FS: Read task + context
+    AI->>Dev: Provide guidance
+    Dev->>FS: Update token usage
+    
+    Dev->>FS: Update task status
+    Dev->>Git: Commit progress
+    
+    Dev->>Ext: Manual sync (optional)
+    Ext-->>FS: Update sync metadata
 ```
 
 ## 🧠 AI Integration Architecture
 
-### llms.txt Standard Implementation
+### Token Economics Model
 
-ai-trackdown implements the llms.txt standard for AI discoverability:
-
-#### Index File Structure (/llms.txt)
-```txt
-# ai-trackdown Project Index
-# Generated: 2025-01-07T15:00:00Z
-# Format: llms.txt v1.0
-
-## Project Overview
-Task management for [Project Name]
-Technology: Node.js, React, PostgreSQL
-Team size: 5 developers
-Active epics: 3
-Open issues: 27
-Current sprint: Authentication system
-
-## Key Files
-/tasks/epics/: High-level project epics and goals
-/tasks/issues/: Active development issues and features  
-/tasks/tasks/: Granular implementation tasks
-/TASKTRACK.md: Project status dashboard and overview
-/docs/llms-full.txt: Complete project context and history
-
-## Current Focus  
-Primary: EPIC-001 User Authentication (70% complete)
-- ISSUE-001: OAuth2 login flow (in-progress, @alice)
-- ISSUE-002: Password reset system (pending)
-- ISSUE-003: Two-factor authentication (blocked)
-
-Secondary: EPIC-002 Payment Integration (planning)
-- Requirements gathering in progress
-- Stripe vs PayPal evaluation
-
-## Quick Commands
-View open issues: `ai-trackdown list --status=open --assignee=@me`
-Check token usage: `ai-trackdown tokens report --period=week`
-Generate context: `ai-trackdown context EPIC-001 --for=claude`
-Sync with GitHub: `ai-trackdown sync github --incremental`
-
-## Integration Status
-GitHub Issues: Synced (2025-01-07T14:55:00Z)
-Jira: Synced (2025-01-07T14:00:00Z)  
-Linear: Not configured
-
-## Token Budget Status
-Total budget: 100,000 tokens/month
-Used this month: 25,847 tokens (25.8%)
-Largest consumer: EPIC-001 (12,847 tokens)
-Efficiency trend: Improving (+15% vs last month)
-```
-
-#### Complete Context File (/docs/llms-full.txt)
-```txt
-# ai-trackdown Complete Project Context
-# Generated: 2025-01-07T15:00:00Z
-# This file provides comprehensive context for AI agents
-
-## Project Architecture
-[Detailed architecture overview]
-
-## Active Work Items
-[Complete task details with context]
-
-## Code Structure  
-[Key files and their purposes]
-
-## Recent Decisions
-[Architectural decisions and rationale]
-
-## Development Standards
-[Coding standards, patterns, best practices]
-
-## Integration Points
-[API endpoints, external dependencies]
-
-## Testing Strategy
-[Test coverage, automation, quality gates]
-```
-
-### AI Context Optimization
-
-#### Context Markers in Tasks
-```markdown
-## AI Context
-<!-- AI_CONTEXT_START -->
-This task implements OAuth2 authentication for the user management system.
-
-Key Files:
-- src/auth/oauth.js: Main OAuth2 implementation
-- src/components/OAuthButton.tsx: Frontend OAuth button
-- config/oauth.json: Provider configurations
-
-Dependencies:
-- passport-oauth2: OAuth2 strategy implementation
-- jsonwebtoken: JWT token handling
-- express-session: Session management
-
-Security Considerations:
-- PKCE flow for enhanced security
-- CSRF protection via state parameter
-- Secure cookie handling with httpOnly flag
-
-Related Context:
-- EPIC-001: Parent authentication epic
-- ISSUE-002: Password reset (shares user model)
-- TASK-001: User model creation (dependency)
-
-Business Logic:
-- Support Google and GitHub providers
-- Automatic user profile creation
-- Role assignment based on email domain
-<!-- AI_CONTEXT_END -->
-```
-
-#### Token-Optimized Context Generation
-```javascript
-const generateOptimizedContext = (task, options = {}) => {
-  const { depth = 1, includeHistory = false, targetAgent = 'claude' } = options;
-  
-  let context = {
-    task: sanitizeForTokens(task),
-    dependencies: [],
-    codeContext: {},
-    businessContext: {}
-  };
-  
-  // Include dependencies based on depth
-  if (depth > 0) {
-    context.dependencies = getRelatedTasks(task, depth);
-  }
-  
-  // Agent-specific formatting
-  if (targetAgent === 'claude') {
-    context = formatForClaude(context);
-  } else if (targetAgent === 'gpt4') {
-    context = formatForGPT4(context);
-  }
-  
-  // Token budget management
-  const estimatedTokens = estimateTokenCount(context);
-  if (estimatedTokens > options.maxTokens) {
-    context = truncateContext(context, options.maxTokens);
-  }
-  
-  return context;
-};
-```
-
-### Token Economics System
-
-#### Cost Tracking Model
-```javascript
-const tokenProviders = {
-  claude: {
-    model: 'claude-3.5-sonnet',
-    costPer1kInput: 0.003,
-    costPer1kOutput: 0.015,
-    estimateRatio: 0.7 // input/output ratio
-  },
-  gpt4: {
-    model: 'gpt-4-turbo',
-    costPer1kInput: 0.01,
-    costPer1kOutput: 0.03,
-    estimateRatio: 0.6
-  },
-  copilot: {
-    model: 'gpt-3.5-turbo',
-    costPer1kInput: 0.0015,
-    costPer1kOutput: 0.002,
-    estimateRatio: 0.8
-  }
-};
-
-const calculateTokenCost = (provider, inputTokens, outputTokens) => {
-  const config = tokenProviders[provider];
-  const inputCost = (inputTokens / 1000) * config.costPer1kInput;
-  const outputCost = (outputTokens / 1000) * config.costPer1kOutput;
-  return inputCost + outputCost;
-};
-```
-
-#### Budget Management
-```javascript
-const budgetManager = {
-  async checkBudget(epicId, proposedUsage) {
-    const epic = await loadEpic(epicId);
-    const currentUsage = epic.token_usage?.total || 0;
-    const budget = epic.token_budget || config.defaultEpicBudget;
+```mermaid
+flowchart LR
+    A[Epic Budget] --> B[Issue Budget]
+    B --> C[Task Usage]
+    C --> D[Agent Tracking]
+    D --> E[Cost Calculation]
+    E --> F[Budget Alerts]
     
-    const newUsage = currentUsage + proposedUsage;
-    const utilizationRate = newUsage / budget;
+    subgraph "Token Tracking"
+        D1[Claude Usage]
+        D2[GPT-4 Usage]
+        D3[Other Agents]
+    end
     
-    return {
-      budget,
-      currentUsage,
-      proposedUsage,
-      newUsage,
-      utilizationRate,
-      withinBudget: utilizationRate <= 1.0,
-      nearLimit: utilizationRate > 0.8,
-      alertNeeded: utilizationRate > config.budgetAlertThreshold
-    };
-  },
-  
-  async optimizeContext(context, maxTokens) {
-    // AI-driven context optimization
-    const tokenCount = estimateTokenCount(context);
+    D --> D1
+    D --> D2
+    D --> D3
     
-    if (tokenCount <= maxTokens) return context;
+    subgraph "Reporting"
+        F1[Daily Reports]
+        F2[Weekly Summary]
+        F3[Epic Analysis]
+    end
     
-    // Priority-based truncation
-    const optimized = {
-      ...context,
-      dependencies: context.dependencies.slice(0, 3), // Keep top 3
-      history: [], // Remove history first
-      codeContext: summarizeCodeContext(context.codeContext)
-    };
+    F --> F1
+    F --> F2
+    F --> F3
+```
+
+### AI Context Generation
+
+```mermaid
+flowchart TD
+    A[Task Files] --> B[Parse YAML]
+    B --> C[Extract Relationships]
+    C --> D[Build Context Tree]
+    D --> E[Generate llms.txt]
     
-    return optimized;
-  }
-};
+    F[AI_CONTEXT Blocks] --> G[Extract Context]
+    G --> D
+    
+    H[Project Config] --> I[Include Metadata]
+    I --> D
+    
+    E --> J[Token Optimization]
+    J --> K[Context Validation]
+    K --> L[AI-Ready Context]
 ```
 
-## 🔧 Plugin Architecture
+### Context Optimization Strategy
 
-### Plugin System Design
-```
-src/plugins/
-├── base.js            # Base plugin interface
-├── registry.js        # Plugin registry and loader
-├── hooks.js           # Plugin hook system
-└── builtin/           # Built-in plugins
-    ├── github.js      # GitHub integration
-    ├── jira.js        # Jira integration
-    └── slack.js       # Slack notifications
-```
+1. **Hierarchical Context**: Epic → Issue → Task relationship mapping
+2. **Dependency Tracking**: Automatic relationship discovery
+3. **Token Budgeting**: Context size limits and priorities
+4. **Smart Filtering**: Include only relevant information
+5. **Update Triggers**: Manual refresh points for context
 
-### Plugin Interface
-```javascript
-class PluginBase {
-  constructor(config) {
-    this.config = config;
-    this.name = this.constructor.name;
-  }
-  
-  // Lifecycle hooks
-  async initialize() {}
-  async activate() {}
-  async deactivate() {}
-  
-  // Event hooks
-  async onTaskCreated(task) {}
-  async onTaskUpdated(task, changes) {}
-  async onTokenUsage(task, usage) {}
-  async onSync(event) {}
-  
-  // CLI extensions
-  getCommands() { return []; }
-  getMiddleware() { return []; }
-}
-```
+## 🔌 Integration Architecture
 
-### Example Plugin (Slack Notifications)
-```javascript
-class SlackPlugin extends PluginBase {
-  async onTaskUpdated(task, changes) {
-    if (changes.status && this.config.notifyOnStatusChange) {
-      await this.sendSlackMessage({
-        channel: this.config.channel,
-        message: `Task ${task.id} status changed to ${task.status}`,
-        task: task
-      });
-    }
-  }
-  
-  async onTokenUsage(task, usage) {
-    if (usage.budget_alert) {
-      await this.sendSlackMessage({
-        channel: this.config.alertChannel,
-        message: `⚠️ Token budget alert for ${task.epic}: ${usage.utilization}% used`,
-        priority: 'high'
-      });
-    }
-  }
-}
+### External System Integration
+
+```mermaid
+flowchart TB
+    subgraph "AI-Trackdown Core"
+        A[Task Files]
+        B[Config Files]
+        C[Integration Scripts]
+    end
+    
+    subgraph "Export Layer"
+        D[GitHub Export]
+        E[Jira Export]
+        F[Linear Export]
+        G[Custom Export]
+    end
+    
+    subgraph "External Systems"
+        H[GitHub Issues]
+        I[Jira Tickets]
+        J[Linear Tasks]
+        K[Other Tools]
+    end
+    
+    A --> D
+    A --> E
+    A --> F
+    A --> G
+    
+    B --> D
+    B --> E
+    B --> F
+    
+    D --> H
+    E --> I
+    F --> J
+    G --> K
+    
+    H -.-> D
+    I -.-> E
+    J -.-> F
+    K -.-> G
 ```
 
-## 📊 Performance Considerations
+### Integration Patterns
 
-### File System Optimization
-- **Lazy Loading**: Only load task files when needed
-- **Indexing**: Maintain searchable index cache
-- **Batch Operations**: Group file operations for efficiency
-- **Watch System**: Monitor file changes for real-time updates
+#### 1. Export-Based Sync
+- **Pattern**: One-way export from AI-Trackdown to external systems
+- **Use Case**: Creating GitHub issues from AI-Trackdown tasks
+- **Implementation**: JSON/API export scripts
 
-### Memory Management
-- **Streaming**: Process large files in streams
-- **Caching**: LRU cache for frequently accessed tasks
-- **Garbage Collection**: Explicit cleanup of large objects
-- **Memory Limits**: Configurable memory usage limits
+#### 2. Import-Based Sync
+- **Pattern**: One-way import from external systems to AI-Trackdown
+- **Use Case**: Importing existing GitHub issues into AI-Trackdown
+- **Implementation**: API fetch and template generation scripts
 
-### Network Optimization
-- **Connection Pooling**: Reuse HTTP connections
-- **Rate Limiting**: Respect external API limits
-- **Retry Logic**: Exponential backoff for failures
-- **Compression**: Gzip compression for API calls
+#### 3. Bidirectional Sync
+- **Pattern**: Two-way synchronization with conflict resolution
+- **Use Case**: Maintaining consistency between AI-Trackdown and Jira
+- **Implementation**: Sync state tracking and manual conflict resolution
 
-### Scalability Targets
-- **Tasks**: Support 10,000+ tasks per repository
-- **Performance**: < 100ms for read operations
-- **Sync**: < 500ms for incremental sync
-- **Context**: < 1s for llms.txt generation
+#### 4. Reference-Based Integration
+- **Pattern**: Store external system references in AI-Trackdown
+- **Use Case**: Link AI-Trackdown tasks to external tickets
+- **Implementation**: Sync metadata in task frontmatter
 
-## 🔒 Security Architecture
+## 🛡️ Security Architecture
 
-### Data Protection
-- **Local Storage**: No sensitive data in plain text
-- **Encryption**: Optional encryption for sensitive fields
-- **Credentials**: OS keychain integration
-- **Audit Trail**: Complete activity logging
+### Data Security Model
 
-### API Security
-- **Authentication**: OAuth2 and token-based auth
-- **Authorization**: Scope-limited API access
-- **Rate Limiting**: Prevent API abuse
-- **Validation**: Input sanitization and validation
+```mermaid
+flowchart TD
+    A[File System Permissions] --> B[Git History Protection]
+    B --> C[Configuration Validation]
+    C --> D[Template Security]
+    D --> E[Integration Authentication]
+    
+    subgraph "Access Control"
+        F[File Permissions 644]
+        G[Directory Permissions 755]
+        H[Git Hook Validation]
+    end
+    
+    subgraph "Data Protection"
+        I[No Sensitive Data in Files]
+        J[Environment Variable Secrets]
+        K[HTTPS-Only Integrations]
+    end
+    
+    A --> F
+    A --> G
+    B --> H
+    C --> I
+    E --> J
+    E --> K
+```
 
-### Git Security
-- **Signed Commits**: GPG signing support
-- **Branch Protection**: Prevent direct pushes to main
-- **Hook Validation**: Secure git hook execution
-- **Secret Detection**: Prevent accidental secret commits
+### Security Principles
 
-## 🚀 Future Architecture Considerations
+1. **No Credentials in Files**: All secrets via environment variables
+2. **Minimal Permissions**: Restrictive file and directory permissions
+3. **Validation at Input**: YAML and template validation
+4. **Secure Defaults**: HTTPS-only, certificate validation
+5. **Audit Trail**: Git history for all changes
 
-### Planned Enhancements
-1. **Distributed Sync**: Multi-repository coordination
-2. **Real-time Collaboration**: WebSocket-based live updates
-3. **AI Agent Framework**: Pluggable AI agent system
-4. **Advanced Analytics**: Machine learning insights
-5. **Mobile Support**: Offline-capable mobile apps
+## 📈 Scalability Architecture
 
-### Extensibility Points
-1. **Custom Sync Providers**: New integration platforms
-2. **AI Model Support**: Additional LLM providers
-3. **Workflow Engines**: Custom workflow implementations
-4. **Report Generators**: Custom analytics and reports
-5. **Authentication Providers**: Enterprise SSO integration
+### Performance Characteristics
 
-This architecture ensures ai-trackdown remains lightweight, performant, and extensible while providing revolutionary capabilities for AI-enhanced development teams.
+| Aspect | Small Project (< 100 tasks) | Medium Project (< 1000 tasks) | Large Project (< 10000 tasks) |
+|--------|----------------------------|-------------------------------|-------------------------------|
+| **File Operations** | Instant | < 1s | < 5s |
+| **Context Generation** | < 1s | < 5s | < 30s |
+| **Token Calculation** | Instant | < 2s | < 10s |
+| **Git Operations** | Instant | < 1s | < 3s |
+| **Integration Sync** | < 5s | < 30s | < 2min |
+
+### Scalability Strategies
+
+#### 1. File Organization
+- **Directory Sharding**: Split large task sets across subdirectories
+- **Archive Management**: Move completed tasks to archive directories
+- **Index Files**: Maintain lightweight index files for quick access
+
+#### 2. Context Management
+- **Lazy Loading**: Generate context on demand
+- **Caching**: Cache expensive operations like token calculations
+- **Incremental Updates**: Update only changed context
+
+#### 3. Integration Optimization
+- **Batch Operations**: Group multiple updates into single API calls
+- **Rate Limiting**: Respect external system rate limits
+- **Parallel Processing**: Process independent tasks concurrently
+
+#### 4. Git Performance
+- **Shallow Clones**: Use shallow clones for CI/CD
+- **File Filtering**: Use git sparse-checkout for large repos
+- **LFS Integration**: Store large files in Git LFS if needed
+
+## 🔧 Implementation Architecture
+
+### Technology Stack
+
+#### Core Technologies
+- **File Format**: GitHub Flavored Markdown with YAML frontmatter
+- **Configuration**: YAML configuration files
+- **Scripting**: Bash and Python for automation
+- **Version Control**: Git for all data storage
+- **Templates**: Jinja2-style template variables
+
+#### External Dependencies
+- **Required**: Git, basic Unix tools (grep, sed, awk)
+- **Optional**: Python (for advanced scripts), jq (for JSON processing)
+- **Integrations**: curl/wget (for API calls), gh/jira CLI tools
+
+### Framework Extension Points
+
+#### 1. Custom Templates
+- **Location**: `.ai-trackdown/templates/`
+- **Format**: Markdown with YAML frontmatter
+- **Variables**: Configurable substitution variables
+- **Validation**: Schema validation for custom fields
+
+#### 2. Workflow Customization
+- **Configuration**: Status, label, and priority definitions
+- **Validation Rules**: Custom validation logic
+- **Transition Rules**: Allowed status transitions
+- **Required Fields**: Field requirements by status
+
+#### 3. Integration Plugins
+- **Export Scripts**: Custom export format scripts
+- **Import Scripts**: Custom data import scripts
+- **Sync Logic**: Bidirectional synchronization patterns
+- **Webhook Handlers**: Event-driven integrations
+
+#### 4. Reporting Extensions
+- **Report Templates**: Custom report formats
+- **Data Aggregation**: Custom metrics and calculations
+- **Visualization**: Integration with charting tools
+- **Export Formats**: Multiple output format support
+
+## 🎯 Design Decisions
+
+### Key Architectural Decisions
+
+#### 1. Why Markdown + YAML?
+- **Human Readable**: Can be edited in any text editor
+- **AI Friendly**: Optimal token efficiency for LLMs
+- **Git Native**: Perfect for version control and diffing
+- **Tool Agnostic**: Works with any markdown processor
+- **Future Proof**: Will be readable for decades
+
+#### 2. Why File-Based Storage?
+- **Simplicity**: No database setup or maintenance
+- **Portability**: Easy to backup, migrate, and share
+- **Performance**: Excellent for small to medium datasets
+- **Reliability**: Files don't go down or corrupt easily
+- **Transparency**: All data is visible and inspectable
+
+#### 3. Why Manual Workflows?
+- **Reliability**: No daemon processes or background services
+- **Control**: Users control exactly when operations happen
+- **Transparency**: Every operation is explicit and visible
+- **Debugging**: Easy to understand and fix issues
+- **Simplicity**: No complex state management or race conditions
+
+#### 4. Why Template-Driven?
+- **Consistency**: Ensures uniform task structure
+- **Flexibility**: Easy to customize for different needs
+- **Standards**: Promotes best practices and conventions
+- **Migration**: Easy to evolve templates over time
+- **Integration**: Templates can map to external systems
+
+### Trade-offs and Limitations
+
+#### Advantages
+- ✅ Zero runtime dependencies
+- ✅ Perfect git integration
+- ✅ AI-optimized design
+- ✅ Human-readable format
+- ✅ Easy backup and migration
+- ✅ No vendor lock-in
+- ✅ Scales to thousands of tasks
+- ✅ Works offline
+- ✅ Simple debugging
+
+#### Limitations
+- ❌ Manual workflows require discipline
+- ❌ No real-time collaboration features
+- ❌ Limited query capabilities without scripts
+- ❌ No built-in UI (by design)
+- ❌ Requires git knowledge
+- ❌ Not suitable for very large datasets (>10k tasks)
+- ❌ No automatic conflict resolution
+- ❌ Limited concurrent editing support
+
+### Future Architecture Considerations
+
+#### Potential Enhancements
+1. **Optional CLI Tools**: Lightweight tools for common operations
+2. **Web Dashboard**: Read-only web interface for visualization
+3. **API Layer**: REST API for programmatic access
+4. **Real-time Sync**: Event-driven integration updates
+5. **Advanced Search**: Full-text search capabilities
+6. **Mobile Support**: Mobile-friendly viewing and editing
+
+#### Backwards Compatibility
+- **File Format Stability**: Markdown + YAML format will remain stable
+- **Template Evolution**: Templates can evolve with backwards compatibility
+- **Configuration Migration**: Automated migration for config changes
+- **Data Preservation**: All historical data will remain accessible
+
+This architecture ensures AI-Trackdown remains simple, reliable, and future-proof while providing powerful capabilities for AI-native development workflows.

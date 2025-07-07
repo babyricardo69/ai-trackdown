@@ -1,770 +1,671 @@
-# ai-trackdown CLI Reference
+# AI-Trackdown Template Reference
 
-Complete command-line interface reference for ai-trackdown.
+Complete template and configuration reference for AI-Trackdown documentation framework.
 
-## Installation and Setup
+## Setup and Configuration
 
-### Global Installation
+### Template Setup
 ```bash
-npm install -g ai-trackdown
+# Copy templates to your project
+cp -r /path/to/ai-trackdown/templates/* .ai-trackdown/templates/
+
+# Download templates from repository
+wget https://github.com/your-org/ai-trackdown/archive/templates.zip
+unzip templates.zip -d .ai-trackdown/templates/
 ```
 
-### Project Initialization
-```bash
-ai-trackdown init [options]
+### Project Configuration
+```yaml
+# .ai-trackdown/config.yaml
+project:
+  name: "My Project"
+  token_budget: 50000
+  default_assignee: "@team-lead"
+  
+templates:
+  epic: ".ai-trackdown/templates/epic.md"
+  issue: ".ai-trackdown/templates/issue.md"
+  task: ".ai-trackdown/templates/task.md"
+
+integrations:
+  github: ".ai-trackdown/integrations/github.yaml"
+  jira: ".ai-trackdown/integrations/jira.yaml"
 ```
 
-**Options:**
-- `--force` - Overwrite existing configuration
-- `--template <name>` - Use specific project template
-- `--no-git-hooks` - Skip git hooks installation
-
-**Examples:**
-```bash
-# Basic initialization
-ai-trackdown init
-
-# Force reinitialize existing project
-ai-trackdown init --force
-
-# Initialize with custom template
-ai-trackdown init --template=enterprise
-```
-
-## Core Commands
+## Template Usage Patterns
 
 ### Status and Information
 
-#### `ai-trackdown status [options]`
-Display project status and overview.
+#### Project Status Dashboard
+Maintain project status in TASKTRACK.md using this structure:
 
-**Options:**
-- `--epic <id>` - Show status for specific epic
-- `--team <name>` - Filter by team
-- `--format <type>` - Output format (table, json, markdown)
-- `--summary` - Show summary only
+```markdown
+# Project Status Dashboard
 
-**Examples:**
-```bash
-# Project overview
-ai-trackdown status
+## Overview
+- **Project:** My AI Project
+- **Phase:** Development
+- **Budget Used:** 12,847 / 50,000 tokens (25.7%)
 
-# Epic-specific status
-ai-trackdown status --epic=EPIC-001
+## Active Epics
+- EPIC-001: User Authentication (in-progress, 70% complete)
+- EPIC-002: Payment Integration (todo)
 
-# Team status
-ai-trackdown status --team=frontend
-
-# JSON output for automation
-ai-trackdown status --format=json
+## Current Sprint
+- 3 issues in progress
+- 2 issues in review  
+- 5 issues completed this week
 ```
 
-#### `ai-trackdown list [options]`
-List and filter tasks.
+#### Task Filtering and Queries
+Use bash commands to filter and query tasks:
 
-**Options:**
-- `--type <type>` - Filter by type (epic, issue, task)
-- `--status <status>` - Filter by status
-- `--assignee <user>` - Filter by assignee
-- `--epic <id>` - Show items in specific epic
-- `--labels <labels>` - Filter by labels (comma-separated)
-- `--priority <level>` - Filter by priority
-- `--created-since <date>` - Show items created since date
-- `--limit <number>` - Limit number of results
-- `--sort <field>` - Sort by field (created, updated, priority)
-- `--format <type>` - Output format
-
-**Examples:**
 ```bash
 # List all open issues
-ai-trackdown list --type=issue --status=open
+grep -l "status: open" tasks/issues/*.md
 
-# Your assigned tasks
-ai-trackdown list --assignee=@me --status=in-progress
+# Find your assigned tasks
+grep -l "assignee: @me" tasks/**/*.md | grep "status: in-progress"
 
 # High priority items
-ai-trackdown list --priority=high
+grep -l "priority: high" tasks/**/*.md
 
 # Recent items
-ai-trackdown list --created-since="2025-01-01" --sort=created
+find tasks/ -name "*.md" -newermt "2025-01-01" | head -10
 
-# JSON output for scripts
-ai-trackdown list --format=json --status=open
+# Parse YAML frontmatter for reporting
+python -c "
+import yaml, glob
+for f in glob.glob('tasks/**/*.md', recursive=True):
+    with open(f) as file:
+        content = file.read()
+        if content.startswith('---'):
+            yaml_part = content.split('---')[1]
+            data = yaml.safe_load(yaml_part)
+            print(f'{data.get(\"id\")}: {data.get(\"status\")} - {data.get(\"title\")}')
+"
 ```
 
-### Creating Items
+### Creating Items Using Templates
 
-#### `ai-trackdown create epic <title> [options]`
-Create a new epic.
+#### Epic Template Usage
+Create epics by copying and customizing the epic template:
 
-**Options:**
-- `--description <text>` - Epic description
-- `--owner <user>` - Epic owner
-- `--target-date <date>` - Target completion date
-- `--token-budget <number>` - Token budget for epic
-- `--labels <labels>` - Labels (comma-separated)
-- `--template <name>` - Use specific template
-
-**Examples:**
 ```bash
-# Basic epic
-ai-trackdown create epic "User Authentication System"
+# Copy epic template
+cp .ai-trackdown/templates/epic.md tasks/epics/EPIC-001-user-authentication-system.md
 
-# Epic with full details
-ai-trackdown create epic "Payment Integration" \
-  --description="Integrate payment processing with Stripe" \
-  --owner=@team-lead \
-  --target-date="2025-03-01" \
-  --token-budget=50000 \
-  --labels="payment,security,high-priority"
-
-# Epic from template
-ai-trackdown create epic "Security Audit" --template=security-epic
+# Edit the template
+vim tasks/epics/EPIC-001-user-authentication-system.md
 ```
 
-#### `ai-trackdown create issue <title> [options]`
-Create a new issue.
+**Epic Template Structure:**
+```yaml
+---
+id: EPIC-001
+type: epic
+title: User Authentication System
+status: todo
+owner: "@team-lead"
+target_date: "2025-03-01"
+token_budget: 50000
+labels: [authentication, security, high-priority]
+created: "2025-01-07T10:00:00Z"
+updated: "2025-01-07T10:00:00Z"
+---
 
-**Options:**
-- `--epic <id>` - Parent epic
-- `--description <text>` - Issue description
-- `--assignee <user>` - Assignee
-- `--estimate <points>` - Story point estimate
-- `--priority <level>` - Priority (low, medium, high, critical)
-- `--labels <labels>` - Labels (comma-separated)
-- `--template <name>` - Use specific template
+# User Authentication System
 
-**Examples:**
-```bash
-# Basic issue
-ai-trackdown create issue "Implement OAuth2 login"
+## Description
+Comprehensive authentication system supporting multiple providers.
 
-# Issue with details
-ai-trackdown create issue "Password reset flow" \
-  --epic=EPIC-001 \
-  --assignee=@developer \
-  --estimate=5 \
-  --priority=high \
-  --labels="authentication,frontend"
+## Success Criteria
+- [ ] OAuth2 integration
+- [ ] Password reset flow
+- [ ] Two-factor authentication
+- [ ] Security audit completed
 
-# Issue from template
-ai-trackdown create issue "Security review" --template=security-review
+## Token Budget Allocation
+- Requirements analysis: 10,000 tokens
+- Implementation: 25,000 tokens
+- Testing & validation: 15,000 tokens
+
+## AI Context
+<!-- AI_CONTEXT_START -->
+Authentication system for SaaS application. Supports OAuth2, password reset, and 2FA.
+Key components: auth service, user management, session handling.
+Security requirements: OWASP compliance, secure token storage, audit logging.
+<!-- AI_CONTEXT_END -->
 ```
 
-#### `ai-trackdown create task <title> [options]`
-Create a new task.
+#### Issue Template Usage
+Create issues by copying and customizing the issue template:
 
-**Options:**
-- `--issue <id>` - Parent issue
-- `--description <text>` - Task description
-- `--assignee <user>` - Assignee
-- `--estimate <hours>` - Time estimate in hours
-- `--labels <labels>` - Labels (comma-separated)
-- `--template <name>` - Use specific template
-
-**Examples:**
 ```bash
-# Basic task
-ai-trackdown create task "Create login form component"
+# Copy issue template  
+cp .ai-trackdown/templates/issue.md tasks/issues/ISSUE-001-implement-oauth2-login.md
 
-# Task with details
-ai-trackdown create task "Implement JWT validation" \
-  --issue=ISSUE-001 \
-  --assignee=@developer \
-  --estimate=4 \
-  --labels="backend,security"
+# Customize for specific requirements
+vim tasks/issues/ISSUE-001-implement-oauth2-login.md
 ```
 
-### Updating Items
+**Issue Template Structure:**
+```yaml
+---
+id: ISSUE-001
+type: issue
+title: Implement OAuth2 login
+status: todo
+epic: EPIC-001
+assignee: "@developer"
+estimate: 8
+priority: high
+labels: [authentication, oauth, frontend]
+created: "2025-01-07T10:00:00Z"
+updated: "2025-01-07T10:00:00Z"
+token_usage:
+  total: 0
+  by_agent: {}
+---
 
-#### `ai-trackdown update <id> [options]`
-Update existing item properties.
+# Implement OAuth2 login
 
-**Options:**
-- `--status <status>` - Update status
-- `--assignee <user>` - Update assignee
-- `--priority <level>` - Update priority
-- `--estimate <points>` - Update estimate
-- `--add-labels <labels>` - Add labels
-- `--remove-labels <labels>` - Remove labels
-- `--comment <text>` - Add comment
-- `--target-date <date>` - Update target date (epics only)
+## Description
+Implement secure OAuth2 authentication flow supporting Google and GitHub providers.
 
-**Examples:**
-```bash
-# Update status
-ai-trackdown update ISSUE-001 --status=in-progress
+## Acceptance Criteria
+- [ ] OAuth2 provider configuration
+- [ ] Authorization code flow implementation
+- [ ] Token validation and refresh
+- [ ] User profile integration
+- [ ] Security audit completed
 
-# Assign to user
-ai-trackdown update TASK-001 --assignee=@developer
+## Dependencies
+- Requires: EPIC-001 setup
+- Blocks: TASK-002, TASK-003
 
-# Add comment and update status
-ai-trackdown update ISSUE-001 --status=in-review --comment="Ready for review"
-
-# Update multiple properties
-ai-trackdown update EPIC-001 \
-  --status=in-progress \
-  --target-date="2025-02-15" \
-  --add-labels="high-priority"
+## AI Context
+<!-- AI_CONTEXT_START -->
+OAuth2 implementation for user authentication. Uses PKCE flow for security.
+Files: src/auth/oauth.js, components/OAuthButton.tsx
+Dependencies: passport-oauth2, jsonwebtoken
+<!-- AI_CONTEXT_END -->
 ```
 
-#### `ai-trackdown assign <id> <user>`
-Assign item to user.
+#### Task Template Usage
+Create tasks by copying and customizing the task template:
 
-**Examples:**
 ```bash
-# Assign to specific user
-ai-trackdown assign ISSUE-001 @developer
+# Copy task template
+cp .ai-trackdown/templates/task.md tasks/tasks/TASK-001-create-login-form.md
 
-# Assign to yourself
-ai-trackdown assign TASK-001 @me
-
-# Unassign
-ai-trackdown assign ISSUE-001 --unassign
+# Add implementation details
+vim tasks/tasks/TASK-001-create-login-form.md
 ```
 
-#### `ai-trackdown close <id> [options]`
-Close/complete an item.
+**Task Template Structure:**
+```yaml
+---
+id: TASK-001
+type: task
+title: Create login form component
+status: todo
+issue: ISSUE-001
+assignee: "@frontend-dev"
+estimate: 4
+labels: [frontend, component]
+created: "2025-01-07T10:00:00Z"
+updated: "2025-01-07T10:00:00Z"
+---
 
-**Options:**
-- `--comment <text>` - Closing comment
-- `--resolution <type>` - Resolution type (completed, duplicate, wontfix)
+# Create login form component
 
-**Examples:**
+## Description
+Create reusable React login form component with OAuth2 integration.
+
+## Implementation Details
+- React functional component with hooks
+- Form validation using Formik
+- OAuth2 button integration
+- Responsive design
+
+## Definition of Done
+- [ ] Component implemented
+- [ ] Unit tests written
+- [ ] Storybook documentation
+- [ ] Accessibility compliance
+```
+
+### Updating Items Manually
+
+#### File-Based Updates
+Update task properties by editing the YAML frontmatter:
+
 ```bash
-# Simple close
-ai-trackdown close TASK-001
+# Edit task file directly
+vim tasks/issues/ISSUE-001-implement-oauth2-login.md
 
-# Close with comment
-ai-trackdown close ISSUE-001 --comment="Implemented and tested"
+# Update specific fields in the frontmatter:
+# status: todo → in-progress
+# assignee: "@developer"
+# priority: high
+# updated: "2025-01-07T14:30:00Z"
+```
 
-# Close as duplicate
-ai-trackdown close ISSUE-001 --resolution=duplicate --comment="Duplicate of ISSUE-005"
+**Status Update Example:**
+```yaml
+---
+id: ISSUE-001
+status: in-progress  # Changed from 'todo'
+assignee: "@developer"  # Updated assignee
+updated: "2025-01-07T14:30:00Z"  # Updated timestamp
+---
+```
+
+**Adding Comments:**
+Add a comments section in the markdown body:
+
+```markdown
+## Progress Updates
+- 2025-01-07: Started OAuth2 implementation
+- 2025-01-07: Ready for review - @developer
+```
+
+#### Assignment Management
+```bash
+# Update assignee in file
+sed -i 's/assignee: ".*"/assignee: "@new-developer"/' tasks/issues/ISSUE-001-*.md
+
+# Bulk assignment updates
+for file in tasks/issues/ISSUE-*.md; do
+    sed -i 's/assignee: "@old-dev"/assignee: "@new-dev"/' "$file"
+done
+```
+
+#### Closing/Completing Items
+```bash
+# Update status to done
+vim tasks/issues/ISSUE-001-implement-oauth2-login.md
+# Change status: in-progress → done
+# Add completion notes in Progress Updates section
 ```
 
 ## Token Tracking
 
-### Recording Token Usage
+### Manual Token Recording
+Update token usage in task files:
 
-#### `ai-trackdown tokens add <id> [options]`
-Record AI token usage for a task.
-
-**Options:**
-- `--agent <name>` - AI agent name (required)
-- `--count <number>` - Token count (required)
-- `--purpose <text>` - Purpose description
-- `--cost-center <name>` - Cost center for billing
-- `--input-tokens <number>` - Input tokens (if different from total)
-- `--output-tokens <number>` - Output tokens (if different from total)
-
-**Examples:**
-```bash
-# Basic token tracking
-ai-trackdown tokens add ISSUE-001 --agent=claude --count=1247
-
-# Detailed tracking
-ai-trackdown tokens add ISSUE-001 \
-  --agent=claude \
-  --count=1247 \
-  --purpose="Requirements analysis and API design" \
-  --cost-center="backend-development"
-
-# Separate input/output tracking
-ai-trackdown tokens add ISSUE-001 \
-  --agent=gpt4 \
-  --input-tokens=500 \
-  --output-tokens=800 \
-  --purpose="Code generation"
-```
-
-#### `ai-trackdown tokens correct <id> [options]`
-Correct previously recorded token usage.
-
-**Options:**
-- `--agent <name>` - AI agent name
-- `--count <number>` - Correct token count
-- `--reason <text>` - Correction reason
-
-**Examples:**
-```bash
-# Correct token count
-ai-trackdown tokens correct ISSUE-001 \
-  --agent=claude \
-  --count=1500 \
-  --reason="API tracking error"
+```yaml
+# In task frontmatter
+token_usage:
+  total: 1247
+  by_agent:
+    claude: 892
+    gpt4: 355
+  sessions:
+    - date: "2025-01-07"
+      agent: claude
+      count: 1247
+      purpose: "Requirements analysis and API design"
+      cost_center: "backend-development"
 ```
 
 ### Token Reporting
+Create reports by parsing task files:
 
-#### `ai-trackdown tokens report [options]`
-Generate token usage reports.
-
-**Options:**
-- `--period <period>` - Time period (day, week, month, quarter, year)
-- `--since <date>` - Start date
-- `--until <date>` - End date
-- `--by <grouping>` - Group by (agent, epic, assignee, cost-center)
-- `--epic <id>` - Report for specific epic
-- `--agent <name>` - Report for specific agent
-- `--format <type>` - Output format (table, json, csv)
-- `--detailed` - Include detailed breakdown
-
-**Examples:**
 ```bash
-# Weekly report
-ai-trackdown tokens report --period=week
+# Extract all token usage
+grep -r "token_usage:" tasks/ | head -10
 
-# Monthly report by epic
-ai-trackdown tokens report --period=month --by=epic
-
-# Custom date range
-ai-trackdown tokens report \
-  --since="2025-01-01" \
-  --until="2025-01-31" \
-  --by=agent
-
-# Detailed CSV export
-ai-trackdown tokens report --period=month --format=csv --detailed
+# Parse token data with Python
+python -c "
+import yaml, glob
+total_tokens = 0
+by_agent = {}
+for f in glob.glob('tasks/**/*.md', recursive=True):
+    with open(f) as file:
+        content = file.read()
+        if '---' in content:
+            try:
+                yaml_part = content.split('---')[1]
+                data = yaml.safe_load(yaml_part)
+                if 'token_usage' in data:
+                    usage = data['token_usage']
+                    total_tokens += usage.get('total', 0)
+                    for agent, count in usage.get('by_agent', {}).items():
+                        by_agent[agent] = by_agent.get(agent, 0) + count
+            except: pass
+print(f'Total tokens: {total_tokens}')
+print(f'By agent: {by_agent}')
+"
 ```
 
-#### `ai-trackdown tokens budget [options]`
-Manage token budgets and alerts.
+### Budget Management
+Track budgets in epic files and configuration:
 
-**Options:**
-- `--epic <id>` - Set budget for epic
-- `--limit <number>` - Budget limit
-- `--alert-threshold <percent>` - Alert threshold (0.0-1.0)
-- `--status` - Show budget status
-- `--all-epics` - Show status for all epics
+```yaml
+# In epic files
+token_budget: 50000
+token_usage:
+  total: 12847
+  percentage: 25.7
+  alert_threshold: 0.8
 
-**Examples:**
-```bash
-# Set epic budget
-ai-trackdown tokens budget --epic=EPIC-001 --limit=50000
-
-# Set budget with alerts
-ai-trackdown tokens budget \
-  --epic=EPIC-001 \
-  --limit=50000 \
-  --alert-threshold=0.8
-
-# Check budget status
-ai-trackdown tokens budget --status --all-epics
+# In config.yaml
+budgets:
+  EPIC-001: 50000
+  EPIC-002: 30000
+  default_epic_budget: 25000
 ```
 
-## AI and Context Generation
+## AI Context Generation
 
-### llms.txt Generation
+### llms.txt Maintenance
+Manually maintain llms.txt files:
 
-#### `ai-trackdown generate llms-txt [options]`
-Generate llms.txt files for AI context.
-
-**Options:**
-- `--full` - Generate complete context file
-- `--minimal` - Generate minimal index only
-- `--include-closed` - Include closed items
-- `--depth <number>` - Context depth level
-- `--output <file>` - Output file path
-
-**Examples:**
 ```bash
-# Standard generation
-ai-trackdown generate llms-txt
-
-# Full context with closed items
-ai-trackdown generate llms-txt --full --include-closed
-
-# Minimal index only
-ai-trackdown generate llms-txt --minimal
-
-# Custom output location
-ai-trackdown generate llms-txt --output=docs/ai-context.txt
+# Update main llms.txt
+vim .ai-trackdown/llms.txt
 ```
 
-#### `ai-trackdown context <id> [options]`
-Generate AI context for specific item.
+**llms.txt Structure:**
+```txt
+# AI-Trackdown Project Index
+# Generated: 2025-01-07T15:00:00Z
 
-**Options:**
-- `--for <agent>` - Target AI agent
-- `--depth <number>` - Include related items depth
-- `--include-dependencies` - Include dependency context
-- `--format <type>` - Output format (markdown, json, text)
-- `--max-tokens <number>` - Maximum token limit
+## Project Overview
+User authentication system for SaaS application
+Active epics: 1 (Authentication System)
+Open issues: 3
+Current focus: OAuth2 implementation
 
-**Examples:**
-```bash
-# Basic context
-ai-trackdown context EPIC-001
+## Key Files
+/tasks/epics/: Project epics and major features
+/tasks/issues/: Development issues and requirements
+/tasks/tasks/: Implementation tasks and subtasks
+/TASKTRACK.md: Project status dashboard
 
-# Agent-specific context
-ai-trackdown context ISSUE-001 --for=claude --depth=3
+## Current Priorities
+1. EPIC-001: User Authentication (in-progress, 70% complete)
+   - ISSUE-001: OAuth2 login (in-progress)
+   - ISSUE-002: Password reset (pending)
+   - ISSUE-003: Two-factor auth (pending)
 
-# Limited token context
-ai-trackdown context TASK-001 --max-tokens=2000
+## Integration Status
+GitHub: Manually synced (2025-01-07)
+Token Budget: 50,000 (25.7% used)
 ```
 
-### AI Analysis
+### Context for AI Agents
+Create context by reading specific files:
 
-#### `ai-trackdown analyze <target> [options]`
-AI-powered analysis and suggestions.
-
-**Options:**
-- `--suggest-tasks` - Suggest task breakdown
-- `--estimate` - Provide effort estimates
-- `--dependencies` - Analyze dependencies
-- `--risks` - Identify risks
-- `--agent <name>` - AI agent to use
-- `--budget <tokens>` - Token budget for analysis
-
-**Examples:**
 ```bash
-# Suggest task breakdown
-ai-trackdown analyze ISSUE-001 --suggest-tasks
+# Generate context for specific work
+cat tasks/epics/EPIC-001-*.md tasks/issues/ISSUE-001-*.md
 
-# Risk analysis
-ai-trackdown analyze EPIC-001 --risks --agent=claude
+# AI agents can read context directly
+cat .ai-trackdown/llms.txt
 
-# Dependency analysis
-ai-trackdown analyze ISSUE-001 --dependencies --budget=1000
+# Include dependency context
+grep -A 5 "Dependencies" tasks/issues/ISSUE-001-*.md
 ```
 
-## Synchronization
+## Integration Configuration
 
-### Setup Integrations
-
-#### `ai-trackdown sync setup <platform> [options]`
-Configure synchronization with external platforms.
-
-**Platforms:** `github`, `jira`, `linear`
-
-**GitHub Options:**
-- `--repo <repo>` - Repository (org/repo)
-- `--token <token>` - Personal access token
-- `--auth <method>` - Authentication method (token, app)
-
-**Jira Options:**
-- `--url <url>` - Jira instance URL
-- `--project <key>` - Project key
-- `--username <user>` - Username
-- `--token <token>` - API token
-
-**Linear Options:**
-- `--team <team>` - Team identifier
-- `--token <token>` - API token
-
-**Examples:**
-```bash
-# GitHub setup
-ai-trackdown sync setup github \
-  --repo=myorg/myrepo \
-  --token="${GITHUB_TOKEN}"
-
-# Jira setup
-ai-trackdown sync setup jira \
-  --url="https://company.atlassian.net" \
-  --project="PROJ" \
-  --username="user@company.com" \
-  --token="${JIRA_TOKEN}"
-
-# Linear setup
-ai-trackdown sync setup linear \
-  --team="engineering" \
-  --token="${LINEAR_TOKEN}"
+### GitHub Integration Templates
+```yaml
+# .ai-trackdown/integrations/github.yaml
+repository: myorg/myrepo
+sync_enabled: false  # Manual sync only
+mapping:
+  issue:
+    title: title
+    body: |
+      ${description}
+      
+      ## Acceptance Criteria
+      ${acceptance_criteria}
+    labels: labels
+    assignees: 
+      - transform: strip_at(assignee)
 ```
 
-### Sync Operations
-
-#### `ai-trackdown sync <platform> [options]`
-Synchronize with external platform.
-
-**Options:**
-- `--full` - Full bidirectional sync
-- `--push` - Push local changes only
-- `--pull` - Pull remote changes only
-- `--since <date>` - Sync changes since date
-- `--items <ids>` - Sync specific items
-- `--dry-run` - Show what would be synced
-
-**Examples:**
-```bash
-# Full sync
-ai-trackdown sync github --full
-
-# Incremental sync
-ai-trackdown sync github --since="2025-01-01"
-
-# Push only
-ai-trackdown sync github --push
-
-# Dry run to preview changes
-ai-trackdown sync github --dry-run
+### Jira Integration Templates
+```yaml
+# .ai-trackdown/integrations/jira.yaml
+server: https://company.atlassian.net
+project: AUTH
+sync_enabled: false  # Manual sync only
+mapping:
+  story_points: estimate
+  epic_link: epic
+  status_mapping:
+    todo: "To Do"
+    in-progress: "In Progress"
+    in-review: "In Review"
+    done: "Done"
 ```
 
-#### `ai-trackdown sync status [platform]`
-Check synchronization status.
-
-**Examples:**
+### Manual Sync Workflows
 ```bash
-# All platforms
-ai-trackdown sync status
+# Export data for manual sync
+python -c "
+import yaml, glob, json
+issues = []
+for f in glob.glob('tasks/issues/*.md'):
+    with open(f) as file:
+        content = file.read()
+        if '---' in content:
+            yaml_part = content.split('---')[1]
+            body = '---'.join(content.split('---')[2:])
+            data = yaml.safe_load(yaml_part)
+            data['body'] = body.strip()
+            issues.append(data)
+print(json.dumps(issues, indent=2))
+" > export.json
 
-# Specific platform
-ai-trackdown sync status github
-
-# Detailed status
-ai-trackdown sync status --detailed
-```
-
-### Conflict Resolution
-
-#### `ai-trackdown sync conflicts [platform]`
-List synchronization conflicts.
-
-#### `ai-trackdown sync resolve [platform] [options]`
-Resolve synchronization conflicts.
-
-**Options:**
-- `--interactive` - Interactive resolution
-- `--auto` - Automatic resolution using strategy
-- `--strategy <type>` - Resolution strategy (local, remote, merge)
-
-**Examples:**
-```bash
-# List conflicts
-ai-trackdown sync conflicts github
-
-# Interactive resolution
-ai-trackdown sync resolve github --interactive
-
-# Auto-resolve with local preference
-ai-trackdown sync resolve github --auto --strategy=local
-```
-
-## Configuration
-
-### Configuration Management
-
-#### `ai-trackdown config get <key>`
-Get configuration value.
-
-#### `ai-trackdown config set <key> <value>`
-Set configuration value.
-
-#### `ai-trackdown config list`
-List all configuration.
-
-**Examples:**
-```bash
-# Get project name
-ai-trackdown config get project.name
-
-# Set token budget
-ai-trackdown config set project.default_epic_budget 50000
-
-# List AI providers
-ai-trackdown config get ai.providers
-```
-
-### Templates
-
-#### `ai-trackdown template list`
-List available templates.
-
-#### `ai-trackdown template create <type> <name>`
-Create custom template.
-
-#### `ai-trackdown template edit <name>`
-Edit existing template.
-
-**Examples:**
-```bash
-# List templates
-ai-trackdown template list
-
-# Create custom issue template
-ai-trackdown template create issue security-review
-
-# Edit epic template
-ai-trackdown template edit epic-default
-```
-
-## Git Integration
-
-### Git Hooks
-
-#### `ai-trackdown hooks install`
-Install git hooks.
-
-#### `ai-trackdown hooks uninstall`
-Remove git hooks.
-
-#### `ai-trackdown hooks status`
-Check hook installation status.
-
-**Examples:**
-```bash
-# Install hooks
-ai-trackdown hooks install
-
-# Check status
-ai-trackdown hooks status
-
-# Reinstall hooks
-ai-trackdown hooks install --force
-```
-
-### Commit Integration
-
-#### `ai-trackdown parse-commit <commit-hash>`
-Parse commit message for task references.
-
-**Examples:**
-```bash
-# Parse latest commit
-ai-trackdown parse-commit HEAD
-
-# Parse specific commit
-ai-trackdown parse-commit abc123def
+# Use export.json for manual import to external systems
 ```
 
 ## Validation and Maintenance
 
-### Validation
-
-#### `ai-trackdown validate [options]`
-Validate project data integrity.
-
-**Options:**
-- `--fix` - Automatically fix issues
-- `--summary` - Show summary only
-- `--type <type>` - Validate specific type only
-
-**Examples:**
+### File Validation
 ```bash
-# Validate all data
-ai-trackdown validate
+# Validate YAML frontmatter
+for file in tasks/**/*.md; do
+    echo "Validating $file"
+    python -c "
+import yaml
+with open('$file') as f:
+    content = f.read()
+    if content.startswith('---'):
+        yaml_part = content.split('---')[1]
+        try:
+            yaml.safe_load(yaml_part)
+            print('✓ Valid YAML')
+        except Exception as e:
+            print(f'✗ Invalid YAML: {e}')
+    else:
+        print('✗ No YAML frontmatter')
+"
+done
+```
 
-# Validate and fix issues
-ai-trackdown validate --fix
+### Data Integrity
+```bash
+# Check for missing required fields
+grep -L "^id:" tasks/**/*.md
+grep -L "^type:" tasks/**/*.md  
+grep -L "^title:" tasks/**/*.md
 
-# Summary only
-ai-trackdown validate --summary
+# Verify epic-issue relationships
+python -c "
+import yaml, glob
+epics = set()
+issues_with_epics = set()
+
+# Collect epic IDs
+for f in glob.glob('tasks/epics/*.md'):
+    with open(f) as file:
+        content = file.read()
+        if '---' in content:
+            data = yaml.safe_load(content.split('---')[1])
+            epics.add(data.get('id'))
+
+# Check issue references
+for f in glob.glob('tasks/issues/*.md'):
+    with open(f) as file:
+        content = file.read()
+        if '---' in content:
+            data = yaml.safe_load(content.split('---')[1])
+            epic = data.get('epic')
+            if epic and epic not in epics:
+                print(f'Orphaned issue {data.get(\"id\")} references missing epic {epic}')
+"
 ```
 
 ### Import/Export
 
-#### `ai-trackdown export [options]`
-Export project data.
-
-**Options:**
-- `--format <type>` - Export format (json, csv, markdown)
-- `--output <file>` - Output file
-- `--include-closed` - Include closed items
-
-**Examples:**
+#### Export Data
 ```bash
-# Export to JSON
-ai-trackdown export --format=json --output=backup.json
+# Export all tasks to JSON
+python -c "
+import yaml, glob, json
+data = {'epics': [], 'issues': [], 'tasks': []}
 
-# Export to CSV
-ai-trackdown export --format=csv --include-closed
+for category in ['epics', 'issues', 'tasks']:
+    for f in glob.glob(f'tasks/{category}/*.md'):
+        with open(f) as file:
+            content = file.read()
+            if '---' in content:
+                yaml_part = content.split('---')[1]
+                body = '---'.join(content.split('---')[2:])
+                item = yaml.safe_load(yaml_part)
+                item['body'] = body.strip()
+                data[category].append(item)
+
+print(json.dumps(data, indent=2))
+" > project-export.json
 ```
 
-#### `ai-trackdown import <file> [options]`
-Import project data.
-
-**Options:**
-- `--format <type>` - Import format
-- `--merge` - Merge with existing data
-- `--dry-run` - Preview import
-
-**Examples:**
+#### Import Data
 ```bash
-# Import from JSON
-ai-trackdown import backup.json --format=json
+# Import from JSON (create files from data)
+python -c "
+import json, yaml, os
+with open('project-export.json') as f:
+    data = json.load(f)
 
-# Dry run import
-ai-trackdown import data.csv --format=csv --dry-run
+for category in ['epics', 'issues', 'tasks']:
+    os.makedirs(f'tasks/{category}', exist_ok=True)
+    for item in data[category]:
+        body = item.pop('body', '')
+        filename = f'tasks/{category}/{item[\"id\"]}-{item[\"title\"].lower().replace(\" \", \"-\")}.md'
+        with open(filename, 'w') as f:
+            f.write('---\n')
+            f.write(yaml.dump(item))
+            f.write('---\n\n')
+            f.write(body)
+"
 ```
 
-## Global Options
+## Configuration Reference
 
-These options work with most commands:
+### Global Configuration
+```yaml
+# .ai-trackdown/config.yaml
+project:
+  name: "My AI Project"
+  description: "AI-native task management"
+  token_budget: 100000
+  default_assignee: "@team-lead"
 
-- `--help, -h` - Show help
-- `--version, -V` - Show version
-- `--verbose, -v` - Verbose output
-- `--quiet, -q` - Suppress non-error output
-- `--config <file>` - Use specific config file
-- `--no-color` - Disable colored output
-- `--format <type>` - Output format (table, json, csv, markdown)
+templates:
+  epic: ".ai-trackdown/templates/epic.md"
+  issue: ".ai-trackdown/templates/issue.md"  
+  task: ".ai-trackdown/templates/task.md"
+  security_review: ".ai-trackdown/templates/security-review.md"
 
-## Environment Variables
+workflows:
+  statuses: [todo, in-progress, in-review, done]
+  labels: [feature, bug, enhancement, security, documentation]
+  priorities: [low, medium, high, critical]
 
-- `AI_TRACKDOWN_CONFIG` - Configuration file path
-- `AI_TRACKDOWN_DEBUG` - Enable debug logging
-- `GITHUB_TOKEN` - GitHub API token
-- `JIRA_TOKEN` - Jira API token
-- `LINEAR_TOKEN` - Linear API token
-- `OPENAI_API_KEY` - OpenAI API key
+integrations:
+  github:
+    enabled: false
+    config: ".ai-trackdown/integrations/github.yaml"
+  jira:
+    enabled: false 
+    config: ".ai-trackdown/integrations/jira.yaml"
 
-## Exit Codes
+reporting:
+  token_costs:
+    claude: 0.000003  # per token
+    gpt4: 0.00003     # per token
+    gpt3: 0.000002    # per token
+```
 
-- `0` - Success
-- `1` - General error
-- `2` - Configuration error
-- `3` - Validation error
-- `4` - Sync error
-- `5` - Authentication error
+### Environment Variables
+```bash
+# Optional environment configuration
+export AI_TRACKDOWN_CONFIG=".ai-trackdown/config.yaml"
+export GITHUB_TOKEN="your-github-token"
+export JIRA_TOKEN="your-jira-token"
+```
 
-## Examples and Workflows
+## Manual Workflow Examples
 
 ### Daily Developer Workflow
 ```bash
-# Check your work
-ai-trackdown list --assignee=@me --status=open
+# Check your assigned work
+grep -l "assignee: @me" tasks/**/*.md | grep -v "status: done"
 
 # Start working on a task
-ai-trackdown update TASK-001 --status=in-progress
+vim tasks/issues/ISSUE-001-implement-oauth2-login.md
+# Update status to 'in-progress'
 
-# Record AI assistance
-ai-trackdown tokens add TASK-001 --agent=claude --count=456 --purpose="implementation help"
+# Record AI assistance manually
+vim tasks/issues/ISSUE-001-implement-oauth2-login.md
+# Add token usage in frontmatter
 
 # Complete the task
-git commit -m "feat(TASK-001): implement feature
-
-Token-Usage: claude=456"
-
-# Task automatically updated via git hooks
-ai-trackdown status TASK-001
+git commit -m "feat(ISSUE-001): implement OAuth2 flow"
+vim tasks/issues/ISSUE-001-implement-oauth2-login.md
+# Update status to 'done' and add completion notes
 ```
 
 ### Sprint Planning
 ```bash
 # Create new epic
-ai-trackdown create epic "Q1 Feature Release" --token-budget=100000
+cp .ai-trackdown/templates/epic.md tasks/epics/EPIC-002-payment-integration.md
+vim tasks/epics/EPIC-002-payment-integration.md
 
 # Break down into issues
-ai-trackdown create issue "User dashboard" --epic=EPIC-001 --estimate=8
-ai-trackdown create issue "Admin panel" --epic=EPIC-001 --estimate=13
+cp .ai-trackdown/templates/issue.md tasks/issues/ISSUE-004-stripe-integration.md
+cp .ai-trackdown/templates/issue.md tasks/issues/ISSUE-005-payment-ui.md
 
-# Generate AI context for planning
-ai-trackdown generate llms-txt
-
-# Check token budget allocation
-ai-trackdown tokens budget --status --all-epics
+# Update project dashboard
+vim TASKTRACK.md
 ```
 
 ### Weekly Reporting
 ```bash
-# Token usage report
-ai-trackdown tokens report --period=week --by=epic
+# Generate token usage report
+grep -r "token_usage:" tasks/ | python -c "
+import sys, yaml
+total = 0
+for line in sys.stdin:
+    # Parse token usage from grep output
+    pass
+print(f'Weekly token usage: {total}')
+"
 
-# Progress report
-ai-trackdown status --format=markdown > weekly-status.md
+# Update project status
+vim TASKTRACK.md
 
-# Sync with external systems
-ai-trackdown sync github --incremental
+# Export for external reporting
+python export_script.py > weekly-report.json
 ```
 
-This comprehensive CLI reference provides all the commands and options needed to effectively use ai-trackdown in development workflows.
+This template reference provides comprehensive guidance for using AI-Trackdown as a documentation framework rather than a CLI tool, focusing on manual workflows and template-based management.

@@ -1,6 +1,6 @@
 # Enterprise Integration Example
 
-This example demonstrates ai-trackdown in a large enterprise environment with multiple teams, external integrations, and advanced AI workflows.
+This example demonstrates AI Trackdown in a large enterprise environment with multiple teams, manual integration patterns, and advanced AI workflow documentation.
 
 ## Project Context
 
@@ -10,7 +10,7 @@ This example demonstrates ai-trackdown in a large enterprise environment with mu
 **AI Usage**: Heavy (architecture, code generation, review, documentation)  
 **Timeline**: 6 months  
 **Token Budget**: 500,000 tokens/month  
-**External Systems**: GitHub Enterprise, Jira, Slack, Linear
+**External Systems**: GitHub Enterprise, Jira, Slack, Linear (manual integration)
 
 ## Architecture Overview
 
@@ -28,12 +28,12 @@ This example demonstrates ai-trackdown in a large enterprise environment with mu
 │         └─────────────────┼─────────────────┘              │
 │                           │                                │
 │              ┌─────────────────────────────┐               │
-│              │      ai-trackdown Hub       │               │
+│              │   AI Trackdown Framework    │               │
 │              │                             │               │
 │              │  • Multi-team coordination  │               │
 │              │  • Token budget management  │               │
 │              │  • Cross-epic dependencies  │               │
-│              │  • Enterprise integrations  │               │
+│              │  • Manual integrations     │               │
 │              └─────────────────────────────┘               │
 │                           │                                │
 │         ┌─────────────────┼─────────────────┐              │
@@ -47,9 +47,9 @@ This example demonstrates ai-trackdown in a large enterprise environment with mu
 
 ## Configuration Setup
 
-### Enterprise-Grade Configuration
+### Enterprise-Grade Configuration Template
 
-`.ai-trackdown/config.yaml`:
+`TASKTRACK.md` configuration section (based on templates from `templates/config-examples.md`):
 ```yaml
 version: 1
 project:
@@ -85,23 +85,22 @@ teams:
     token_budget: 50000
     specialization: [architecture, security, performance]
 
-# Enterprise integrations
-sync:
+# Manual integration patterns
+integration_patterns:
   github:
-    enabled: true
+    manual_sync: true
     url: "https://github.enterprise.techcorp.com"
     repos:
       - "techcorp/customer-portal-frontend"
       - "techcorp/customer-portal-backend" 
       - "techcorp/customer-portal-infrastructure"
-    auth_method: "saml_sso"
-    org_restrictions: ["techcorp"]
+    workflow: "copy_issue_titles_and_descriptions"
     
   jira:
-    enabled: true
+    manual_sync: true
     url: "https://techcorp.atlassian.net"
     projects: ["CPR", "ARCH", "SEC"]
-    auth_method: "oauth2"
+    workflow: "export_epic_summaries_for_import"
     custom_fields:
       epic_link: "customfield_10001"
       story_points: "customfield_10002"
@@ -109,13 +108,13 @@ sync:
       compliance_tags: "customfield_10004"
       
   linear:
-    enabled: true
+    manual_sync: true
     teams: ["frontend", "backend", "devops"]
     workspace: "techcorp"
+    workflow: "weekly_status_export"
     
   slack:
-    enabled: true
-    channels:
+    reporting_channels:
       alerts: "#ai-tasktrack-alerts"
       updates: "#customer-portal-updates"
       token_reports: "#ai-cost-tracking"
@@ -178,29 +177,28 @@ security:
     ai_interactions: "development_team_only"
     compliance_reports: "compliance_team_only"
 
-# Enterprise automation
-automation:
-  budget_alerts:
+# Manual workflow patterns  
+workflow_patterns:
+  budget_monitoring:
     - threshold: 0.75
-      channels: ["slack", "email"]
-      recipients: ["finance@techcorp.com"]
+      action: "review_task_token_usage_manually"
+      notify: ["finance@techcorp.com"]
       
     - threshold: 0.90  
-      channels: ["slack", "email", "pagerduty"]
-      recipients: ["cto@techcorp.com", "finance@techcorp.com"]
-      escalation: true
+      action: "escalate_budget_review"
+      notify: ["cto@techcorp.com", "finance@techcorp.com"]
       
-  compliance_checks:
+  compliance_processes:
     - trigger: "task_creation"
-      check: "data_classification_required"
+      checklist: "verify_data_classification_in_frontmatter"
       
     - trigger: "ai_interaction"
-      check: "security_clearance_validation"
+      checklist: "validate_security_clearance_in_task_notes"
       
-  reporting:
+  reporting_schedule:
     frequency: "weekly"
     recipients: ["engineering-managers@techcorp.com"]
-    dashboards: ["token-usage", "velocity", "compliance"]
+    format: ["token-usage-spreadsheet", "velocity-summary", "compliance-checklist"]
 ```
 
 ## Epic Structure for Enterprise Scale
@@ -330,17 +328,15 @@ Implement enterprise-grade authentication supporting SSO, MFA, and compliance re
 
 #### Week 1: Architecture AI Sessions
 
-**Enterprise Architect AI (@claude-architect):**
-```bash
-# Generate comprehensive architecture analysis
-ai-trackdown context EPIC-001 --for=claude-architect --depth=5 --include-compliance
-
-# AI Architect analyzes requirements
-ai-trackdown tokens add ARCH-001 --agent=claude-architect --count=1234 \
-  --purpose="Compliance framework analysis" \
-  --cost-center="architecture" \
-  --security-classification="confidential"
-```
+**Enterprise Architect AI Session:**
+1. Provide comprehensive context from EPIC-001 documentation to Claude
+2. Include compliance requirements and security constraints
+3. Document token usage in ARCH-001 task file:
+   - Agent: claude-architect 
+   - Count: 1234 tokens
+   - Purpose: "Compliance framework analysis"
+   - Cost-center: "architecture"
+   - Security-classification: "confidential"
 
 **AI-Generated Architecture Report:**
 ```markdown
@@ -371,18 +367,13 @@ ai-trackdown tokens add ARCH-001 --agent=claude-architect --count=1234 \
 #### Week 2: Implementation Starts
 
 **Backend Team Sprint:**
-```bash
-# Start SSO service implementation
-ai-trackdown update BE-001 --status=in-progress --assignee=@mike-backend
-
-# AI-assisted implementation
-ai-trackdown tokens add BE-001 --agent=gpt4 --count=2345 \
-  --purpose="SSO service implementation" \
-  --cost-center="backend-development"
-
-# Daily standup integration
-ai-trackdown status --team=backend --format=slack-update
-```
+1. Update BE-001 task file: change status to `in-progress`, assign to @mike-backend
+2. Document AI-assisted implementation:
+   - Agent: gpt4
+   - Token count: 2345
+   - Purpose: "SSO service implementation"  
+   - Cost-center: "backend-development"
+3. Generate daily standup update by reviewing team task files
 
 **Generated Slack Update:**
 ```
@@ -413,13 +404,10 @@ ai-trackdown status --team=backend --format=slack-update
 
 ### Executive Dashboard
 
-```bash
-# Generate executive summary
-ai-trackdown report executive --period=month --format=pdf
-
-# Token ROI analysis
-ai-trackdown analyze roi --by-team --cost-benefit
-```
+Generate executive summary by:
+1. Reviewing monthly progress across all epic and issue files
+2. Compiling token usage from task frontmatter
+3. Calculating ROI based on documented time savings and costs
 
 **Sample Executive Report:**
 ```markdown
@@ -464,10 +452,10 @@ ai-trackdown analyze roi --by-team --cost-benefit
 
 ### Compliance Reporting
 
-```bash
-# Generate compliance report
-ai-trackdown compliance report --frameworks=SOX,GDPR,HIPAA --period=quarter
-```
+Generate compliance report by:
+1. Reviewing compliance tags and notes in task files
+2. Checking data classification markers in task frontmatter  
+3. Compiling audit trail from git commits and task updates
 
 **Sample Compliance Report:**
 ```markdown
@@ -503,13 +491,12 @@ ai-trackdown compliance report --frameworks=SOX,GDPR,HIPAA --period=quarter
 ### Multi-Agent Collaboration
 
 **Architecture Review Session:**
-```bash
-# Coordinate multiple AI agents for complex review
-ai-trackdown ai-session create architecture-review EPIC-001 \
-  --agents=claude-architect,gpt4-security,claude-performance \
-  --budget=5000 \
-  --output=architecture-review-report.md
-```
+Coordinate multiple AI interactions for complex review:
+1. Session with Claude for enterprise architecture analysis
+2. Session with GPT-4 for security threat modeling  
+3. Session with Claude for performance/scalability assessment
+4. Budget: 5000 tokens total
+5. Output: architecture-review-report.md
 
 **AI Session Transcript:**
 ```markdown
@@ -560,13 +547,12 @@ ai-trackdown ai-session create architecture-review EPIC-001 \
 ### Automated Quality Gates
 
 **Pre-Production AI Review:**
-```bash
-# Automated AI quality gate
-ai-trackdown ai-gate run pre-production EPIC-001 \
-  --checks=security,performance,compliance \
-  --threshold=90 \
-  --auto-block-on-fail
-```
+Manual quality gate process:
+1. Review security checklist with AI assistance
+2. Performance analysis using AI recommendations
+3. Compliance validation against documented requirements
+4. Threshold: 90% completion required
+5. Manual approval process based on review results
 
 **Quality Gate Results:**
 ```markdown
@@ -599,21 +585,21 @@ ai-trackdown ai-gate run pre-production EPIC-001 \
 ## Key Enterprise Learnings
 
 ### What Works at Scale
-1. **Multi-Team Coordination**: ai-trackdown provides unified view across teams
-2. **Token Budget Management**: Prevents cost overruns with predictable budgeting
-3. **Compliance Integration**: Automated compliance tracking saves audit time
-4. **AI Quality Gates**: Consistent quality standards across all teams
+1. **Multi-Team Coordination**: AI Trackdown provides unified documentation view across teams
+2. **Token Budget Management**: Manual tracking prevents cost overruns with predictable budgeting
+3. **Compliance Integration**: Document-based compliance tracking supports audit requirements
+4. **AI Quality Processes**: Consistent quality standards through documented workflows
 
 ### Enterprise-Specific Benefits
-1. **Cost Transparency**: CFO can track AI ROI at feature level
-2. **Audit Trail**: Complete traceability for compliance requirements
-3. **Security Integration**: AI interactions respect data classification
-4. **Cross-Team Visibility**: Executives see unified project status
+1. **Cost Transparency**: CFO can track AI ROI through documented token usage
+2. **Audit Trail**: Complete traceability through git commits and task documentation
+3. **Security Integration**: AI interactions respect documented data classification
+4. **Cross-Team Visibility**: Executives see unified project status through file-based reports
 
 ### Scaling Challenges Solved
-1. **Context Management**: AI agents maintain context across large codebases
-2. **Knowledge Sharing**: AI-generated summaries improve team communication
-3. **Quality Consistency**: Automated AI reviews ensure consistent standards
-4. **Resource Optimization**: Token tracking enables cost optimization
+1. **Context Management**: AI agents get context from comprehensive project documentation
+2. **Knowledge Sharing**: AI-generated summaries stored in documentation improve team communication
+3. **Quality Consistency**: Manual AI review processes ensure consistent standards
+4. **Resource Optimization**: Manual token tracking enables cost optimization
 
-This enterprise example demonstrates how ai-trackdown scales from individual developers to large organizations while maintaining the core benefits of AI-native task management, cost transparency, and productivity enhancement.
+This enterprise example demonstrates how AI Trackdown scales from individual developers to large organizations while maintaining the core benefits of AI-native task management, cost transparency, and productivity enhancement through manual documentation workflows.

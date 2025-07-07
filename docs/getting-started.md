@@ -1,53 +1,54 @@
-# Getting Started with ai-trackdown
+# Getting Started with AI-Trackdown Documentation Framework
 
-Welcome to ai-trackdown! This guide will help you get up and running with revolutionary markdown-based task management for AI development teams.
+Welcome to AI-Trackdown! This guide will help you get up and running with revolutionary markdown-based task management for AI development teams.
 
 ## 🎯 What You'll Learn
 
 By the end of this guide, you'll understand:
-- Why ai-trackdown is different from traditional task managers
-- How to set up your first AI-native project
-- How to track AI token usage and costs
+- Why AI-Trackdown is different from traditional task managers
+- How to set up your first AI-native project using templates
+- How to track AI token usage and costs manually
 - How to leverage llms.txt for instant AI context
 - How to integrate with existing development workflows
 
-## 🚀 Quick Start (5 minutes)
+## 🚀 Quick Setup (5 minutes)
 
 ### Prerequisites
 
-- Node.js 18.0.0 or higher
 - Git (for version control)
 - A text editor (VS Code, vim, etc.)
 - Basic familiarity with markdown
 
-### Step 1: Install ai-trackdown
+### Step 1: Copy Templates
 
 ```bash
-# Global installation (recommended)
-npm install -g ai-trackdown
+# Copy the AI-Trackdown templates to your project
+cp -r /path/to/ai-trackdown/templates/* my-ai-project/
 
-# Verify installation
-ai-trackdown --version
+# Or download templates from repository
+wget https://github.com/your-org/ai-trackdown/archive/templates.zip
+unzip templates.zip -d my-ai-project/
 ```
 
-### Step 2: Initialize Your First Project
+### Step 2: Setup Your Project Structure
 
 ```bash
 # Navigate to your project directory
 cd my-ai-project
 
-# Initialize ai-trackdown
-ai-trackdown init
+# Initialize git repository if needed
+git init
 
-# Follow the interactive setup
+# Create the recommended structure manually
+mkdir -p .ai-trackdown tasks/epics tasks/issues tasks/tasks docs
 ```
 
-The initialization creates this structure:
+The manual setup creates this structure:
 ```
 my-ai-project/
 ├── .ai-trackdown/
 │   ├── config.yaml          # Project configuration
-│   └── llms.txt             # AI context index (auto-generated)
+│   └── llms.txt             # AI context index (manually maintained)
 ├── tasks/
 │   ├── epics/               # High-level project goals
 │   ├── issues/              # Development issues/features
@@ -59,13 +60,17 @@ my-ai-project/
 
 ### Step 3: Create Your First Epic
 
-An epic represents a major feature or project milestone:
+An epic represents a major feature or project milestone. Copy the epic template:
 
 ```bash
-ai-trackdown create epic "User Authentication System"
+# Copy epic template
+cp .ai-trackdown/templates/epic.md tasks/epics/EPIC-001-user-authentication-system.md
+
+# Edit the template with your project details
+vim tasks/epics/EPIC-001-user-authentication-system.md
 ```
 
-This creates `tasks/epics/EPIC-001-user-authentication-system.md` with:
+The epic template includes:
 - Token budget tracking
 - Success metrics
 - Linked issues
@@ -73,54 +78,63 @@ This creates `tasks/epics/EPIC-001-user-authentication-system.md` with:
 
 ### Step 4: Add Issues to Your Epic
 
-Issues are specific features or requirements within an epic:
+Issues are specific features or requirements within an epic. Copy and customize issue templates:
 
 ```bash
-ai-trackdown create issue "Implement OAuth2 login" --epic=EPIC-001
-ai-trackdown create issue "Add password reset flow" --epic=EPIC-001
-ai-trackdown create issue "Implement two-factor auth" --epic=EPIC-001
+# Copy issue templates
+cp .ai-trackdown/templates/issue.md tasks/issues/ISSUE-001-implement-oauth2-login.md
+cp .ai-trackdown/templates/issue.md tasks/issues/ISSUE-002-add-password-reset-flow.md
+cp .ai-trackdown/templates/issue.md tasks/issues/ISSUE-003-implement-two-factor-auth.md
+
+# Update each issue file with specific requirements
 ```
 
 ### Step 5: Break Down Issues into Tasks
 
-Tasks are granular implementation steps:
+Tasks are granular implementation steps. Use the task template:
 
 ```bash
-ai-trackdown create task "Create login form component" --issue=ISSUE-001
-ai-trackdown create task "Set up OAuth2 provider configs" --issue=ISSUE-001
-ai-trackdown create task "Implement JWT token handling" --issue=ISSUE-001
+# Copy task templates
+cp .ai-trackdown/templates/task.md tasks/tasks/TASK-001-create-login-form-component.md
+cp .ai-trackdown/templates/task.md tasks/tasks/TASK-002-setup-oauth2-provider-configs.md
+cp .ai-trackdown/templates/task.md tasks/tasks/TASK-003-implement-jwt-token-handling.md
+
+# Customize each task with implementation details
 ```
 
 ### Step 6: Start Tracking AI Usage
 
-This is where ai-trackdown becomes revolutionary:
+This is where AI-Trackdown becomes revolutionary. Manually track token usage in task files:
 
-```bash
-# Record AI token usage for a task
-ai-trackdown tokens add ISSUE-001 --agent=claude --count=1247 --purpose="Requirements analysis"
-
-# Check token usage
-ai-trackdown tokens report --period=week
-
-# Set budget alerts
-ai-trackdown tokens budget --epic=EPIC-001 --limit=50000 --alert-threshold=0.8
+```yaml
+# In your task files, update the token_usage section:
+token_usage:
+  total: 1247
+  by_agent:
+    claude: 892
+    gpt4: 355
+  sessions:
+    - date: 2025-01-07
+      agent: claude
+      count: 1247
+      purpose: "Requirements analysis"
 ```
 
-### Step 7: Generate AI Context
+### Step 7: Maintain AI Context
 
-Make your project instantly readable by AI agents:
+Make your project instantly readable by AI agents by maintaining llms.txt files:
 
 ```bash
-# Generate llms.txt files
-ai-trackdown generate llms-txt
+# Manually update the main llms.txt file
+vim .ai-trackdown/llms.txt
 
-# View the generated context
-cat .ai-trackdown/llms.txt
+# Include project overview, current priorities, and key files
+# Follow the llms.txt standard format
 ```
 
 ## 🧠 Understanding the AI-First Approach
 
-### Traditional vs ai-trackdown Workflow
+### Traditional vs AI-Trackdown Workflow
 
 **Traditional Task Management:**
 1. Human creates task in web UI
@@ -129,11 +143,11 @@ cat .ai-trackdown/llms.txt
 4. Token usage is invisible
 5. Knowledge is siloed
 
-**ai-trackdown Workflow:**
+**AI-Trackdown Workflow:**
 1. Task created in markdown (human or AI)
 2. AI context embedded directly in files
 3. llms.txt provides instant project understanding
-4. Token usage tracked automatically
+4. Token usage tracked manually in task files
 5. Knowledge lives with code in git
 
 ### The Power of Markdown-First
@@ -147,12 +161,10 @@ cat .ai-trackdown/llms.txt
 
 ### Token Economics
 
-ai-trackdown introduces **token economics** to development:
+AI-Trackdown introduces **token economics** to development through manual tracking:
 
-```bash
-# Track costs per epic/issue/task
-ai-trackdown tokens report --by=epic
-
+```yaml
+# Track costs per epic/issue/task in TASKTRACK.md
 Token Usage Report (This Week)
 ============================
 EPIC-001 (Auth System): 12,847 tokens ($0.39) - 25.7% of budget
@@ -165,6 +177,8 @@ Top Token Consumers:
 2. GPT-4 (code review): 3,234 tokens
 3. Copilot (implementation): 1,157 tokens
 ```
+
+You can aggregate this data manually or create scripts to parse token usage from task files.
 
 ## 📝 Working with Tasks
 
@@ -227,38 +241,39 @@ Security considerations: PKCE, CSRF protection, secure cookie handling
 
 ### Status Management
 
-ai-trackdown supports flexible status workflows:
+AI-Trackdown supports flexible status workflows through manual file updates:
 
 ```bash
-# Update task status
-ai-trackdown update ISSUE-001 --status=in-progress
-ai-trackdown update ISSUE-001 --status=in-review
-ai-trackdown update ISSUE-001 --status=done
+# Update task status by editing the YAML frontmatter
+vim tasks/issues/ISSUE-001-implement-oauth2-login.md
 
-# Assign tasks
-ai-trackdown assign ISSUE-001 @developer
+# Change status field manually:
+# status: todo → in-progress → in-review → done
 
-# Add labels
-ai-trackdown label ISSUE-001 --add=priority-high,security
+# Update assignee field:
+# assignee: @developer
 
-# Update estimates
-ai-trackdown estimate ISSUE-001 --points=8
+# Add/update labels:
+# labels: [priority-high, security, authentication]
+
+# Update estimates:
+# estimate: 8
 ```
 
 ### Git Integration
 
-ai-trackdown integrates seamlessly with git workflows:
+AI-Trackdown integrates seamlessly with git workflows through conventional commits:
 
 ```bash
-# Git hooks automatically update tasks
+# Use conventional commit messages that reference tasks
 git commit -m "feat(ISSUE-001): implement OAuth2 flow"
-# → Updates ISSUE-001 status to 'in-review'
 
 git commit -m "fix(ISSUE-001): resolve PKCE validation"
-# → Adds commit reference to ISSUE-001
 
 git commit -m "close(ISSUE-001): OAuth2 implementation complete"
-# → Sets ISSUE-001 status to 'done'
+
+# Manually update task status after commits
+vim tasks/issues/ISSUE-001-implement-oauth2-login.md
 ```
 
 ### Branch Naming Convention
@@ -312,44 +327,44 @@ Token Budget: 50,000 (25.7% used)
 
 **Context Retrieval:**
 ```bash
-# Get AI-optimized context for specific work
-ai-trackdown context EPIC-001 --for=claude
-ai-trackdown context ISSUE-001 --depth=3 --include-dependencies
+# AI agents can read llms.txt files directly
+cat .ai-trackdown/llms.txt
+
+# Or read specific task context
+cat tasks/epics/EPIC-001-user-authentication-system.md
+cat tasks/issues/ISSUE-001-implement-oauth2-login.md
 ```
 
 **Token Tracking:**
-```bash
-# AI agents can self-report usage
-ai-trackdown tokens add ISSUE-001 --agent=claude --count=234 --operation=code-review
-
-# Automatic tracking via git hooks
-# (when AI agents commit with proper attribution)
+```yaml
+# AI agents can update token usage in task files manually
+# Add to the task file's frontmatter:
+token_usage:
+  total: 234
+  sessions:
+    - date: 2025-01-07
+      agent: claude
+      count: 234
+      operation: code-review
 ```
 
-**Task Suggestions:**
+**Task Management:**
 ```bash
-# AI can suggest task breakdowns
-ai-trackdown analyze ISSUE-001 --suggest-tasks --model=gpt4
+# AI agents can create new tasks using templates
+cp .ai-trackdown/templates/task.md tasks/tasks/TASK-004-new-task.md
+
+# Then customize the template with specific details
 ```
 
-## 🔄 Sync with External Systems
+## 🔄 Integration with External Systems
 
 ### GitHub Issues Integration
 
-```bash
-# Setup GitHub sync
-ai-trackdown sync setup github --repo=myorg/myrepo
+Create configuration templates for GitHub integration:
 
-# Bidirectional sync
-ai-trackdown sync github --full
-
-# Incremental sync
-ai-trackdown sync github --since=1h
-```
-
-**Mapping Configuration:**
 ```yaml
-# .ai-trackdown/sync/github.yaml
+# .ai-trackdown/integrations/github.yaml
+repository: myorg/myrepo
 mapping:
   issue:
     title: title
@@ -363,62 +378,78 @@ mapping:
       - transform: strip_at(assignee)
 ```
 
+Use the mapping configuration to manually sync or create scripts for automated sync.
+
 ### Jira Integration
 
-```bash
-# Setup Jira sync
-ai-trackdown sync setup jira --url=https://company.atlassian.net --project=AUTH
+Create Jira mapping templates:
 
-# Sync with custom field mapping
-ai-trackdown sync jira --map-story-points=estimate
+```yaml
+# .ai-trackdown/integrations/jira.yaml
+server: https://company.atlassian.net
+project: AUTH
+mapping:
+  story_points: estimate
+  epic_link: epic
+  status_mapping:
+    todo: "To Do"
+    in-progress: "In Progress"
+    done: "Done"
 ```
 
 ### Linear Integration
 
-```bash
-# Setup Linear sync
-ai-trackdown sync setup linear --team=engineering
+Create Linear configuration:
 
-# Sync with status mapping
-ai-trackdown sync linear --status-map="{in-progress: 'In Progress', done: 'Done'}"
+```yaml
+# .ai-trackdown/integrations/linear.yaml
+team: engineering
+status_mapping:
+  todo: "Backlog"
+  in-progress: "In Progress"
+  in-review: "In Review"
+  done: "Done"
 ```
 
 ## 📊 Reporting and Analytics
 
 ### Token Usage Reports
 
+Create manual reports by analyzing task files:
+
 ```bash
-# Weekly token usage
-ai-trackdown tokens report --period=week --by=agent
+# Parse token usage from all task files
+grep -r "token_usage:" tasks/ | sort
 
-# Cost analysis
-ai-trackdown tokens cost --epic=EPIC-001 --breakdown
-
-# Budget alerts
-ai-trackdown tokens alert --threshold=0.8 --email=dev@company.com
+# Create weekly reports manually
+# Or build scripts to aggregate data from YAML frontmatter
 ```
 
 ### Project Health
 
+Monitor project status through dashboard files:
+
 ```bash
-# Project status overview
-ai-trackdown status
+# Review project status in TASKTRACK.md
+cat TASKTRACK.md
 
-# Epic progress
-ai-trackdown progress --epic=EPIC-001
+# Check epic progress manually
+grep -A 10 "EPIC-001" tasks/epics/*.md
 
-# Velocity tracking
-ai-trackdown velocity --period=month --by-assignee
+# Track velocity by reviewing completed tasks
+grep "status: done" tasks/**/*.md
 ```
 
 ### AI Efficiency Metrics
 
-```bash
-# Token efficiency analysis
-ai-trackdown analyze tokens --optimize-suggestions
+Analyze AI usage patterns manually:
 
-# Context quality metrics
-ai-trackdown analyze context --completeness-score
+```bash
+# Review token usage patterns across tasks
+grep -r "agent:" tasks/ | sort | uniq -c
+
+# Analyze context quality by reviewing AI_CONTEXT blocks
+grep -A 5 "AI_CONTEXT_START" tasks/**/*.md
 ```
 
 ## 🛠️ Advanced Configuration
@@ -428,28 +459,30 @@ ai-trackdown analyze context --completeness-score
 Create custom templates for your team:
 
 ```bash
-# Create custom issue template
-ai-trackdown template create issue security-review
+# Copy base template and customize
+cp .ai-trackdown/templates/issue.md .ai-trackdown/templates/security-review.md
 
-# Use custom template
-ai-trackdown create issue "Security review" --template=security-review
+# Edit the custom template for security reviews
+vim .ai-trackdown/templates/security-review.md
+
+# Use custom template by copying it
+cp .ai-trackdown/templates/security-review.md tasks/issues/ISSUE-XXX-security-review.md
 ```
 
-### Automation Rules
+### Configuration Management
 
 ```yaml
 # .ai-trackdown/config.yaml
-automation:
-  rules:
-    - trigger: commit
-      pattern: "fix\\((.+)\\):"
-      action: update_status
-      status: in-review
-      
-    - trigger: token_usage
-      threshold: 0.9
-      action: alert
-      channels: [slack, email]
+project:
+  name: "My AI Project"
+  token_budget: 50000
+  default_assignee: "@team-lead"
+  
+templates:
+  epic: ".ai-trackdown/templates/epic.md"
+  issue: ".ai-trackdown/templates/issue.md"
+  task: ".ai-trackdown/templates/task.md"
+  security_review: ".ai-trackdown/templates/security-review.md"
 ```
 
 ### Team Workflows
@@ -459,10 +492,8 @@ automation:
 workflows:
   development:
     statuses: [todo, in-progress, in-review, done]
-    transitions:
-      todo -> in-progress: auto
-      in-progress -> in-review: requires_commit
-      in-review -> done: requires_approval
+    labels: [feature, bug, enhancement, security]
+    assignees: ["@dev1", "@dev2", "@dev3"]
 ```
 
 ## 🎓 Best Practices
@@ -496,35 +527,38 @@ workflows:
 
 ### Common Issues
 
-**"ai-trackdown command not found"**
-```bash
-# Reinstall globally
-npm uninstall -g ai-trackdown
-npm install -g ai-trackdown
-```
-
 **"Invalid YAML frontmatter"**
 ```bash
-# Validate task files
-ai-trackdown validate --fix-formatting
+# Validate YAML manually using yaml parsers
+python -c "import yaml; yaml.safe_load(open('tasks/issues/ISSUE-001.md').read().split('---')[1])"
+
+# Or use online YAML validators
 ```
 
-**"Sync conflicts with GitHub"**
+**"Integration issues"**
 ```bash
-# Check sync status
-ai-trackdown sync status
+# Check configuration files
+cat .ai-trackdown/integrations/github.yaml
 
-# Resolve conflicts manually
-ai-trackdown sync resolve --interactive
+# Verify file permissions
+ls -la .ai-trackdown/
 ```
 
-**"Token tracking not working"**
+**"Missing templates"**
 ```bash
-# Check git hooks installation
-ai-trackdown hooks status
+# Ensure templates directory exists
+ls .ai-trackdown/templates/
 
-# Reinstall hooks
-ai-trackdown hooks install --force
+# Copy missing templates from the framework
+cp -r /path/to/ai-trackdown/templates/* .ai-trackdown/templates/
+```
+
+**"Token tracking inconsistencies"**
+```bash
+# Manually verify token data in task files
+grep -r "token_usage:" tasks/ | head -5
+
+# Check for malformed YAML frontmatter
 ```
 
 ### Getting Help

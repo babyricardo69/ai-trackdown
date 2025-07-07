@@ -1,10 +1,9 @@
 # ai-trackdown
 
-> **Revolutionary markdown-based task management for the AI development era**
+> **Revolutionary markdown-based task management framework for the AI development era**
 
-[![npm version](https://badge.fury.io/js/ai-trackdown.svg)](https://badge.fury.io/js/ai-trackdown)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Node.js CI](https://github.com/ai-trackdown/ai-trackdown/workflows/Node.js%20CI/badge.svg)](https://github.com/ai-trackdown/ai-trackdown/actions)
+[![Documentation](https://img.shields.io/badge/docs-framework-blue.svg)](https://github.com/ai-trackdown/ai-trackdown)
 
 ## 🚨 Why AI-Trackdown is the issue management system for the ai orchestrated development era
 
@@ -16,7 +15,7 @@
 - **Vendor Lock-in**: Proprietary systems that trap your project data
 - **AI Accessibility**: Traditional systems are opaque to AI agents, requiring complex integrations
 
-**The Solution**: ai-trackdown is the first task management system designed from the ground up for human-AI collaborative development:
+**The Solution**: ai-trackdown is the first task management framework designed from the ground up for human-AI collaborative development:
 
 ✅ **Native AI Context**: Built-in llms.txt support means AI agents understand your project instantly  
 ✅ **Token Economics**: Track and optimize AI costs at every level (task/epic/project)  
@@ -24,48 +23,51 @@
 ✅ **Zero Lock-in**: Pure markdown files you can read, edit, and migrate anywhere  
 ✅ **AI-First Design**: Optimized for minimal token consumption and maximum AI efficiency  
 
-ai-trackdown isn't just another task manager - it's the missing infrastructure layer for AI-enhanced development teams.
+ai-trackdown isn't just another task manager - it's the missing documentation framework for AI-enhanced development teams.
+
+> **📋 Documentation Framework**: This project provides templates, examples, and documentation patterns. Working CLI tools are being developed separately.
 
 ## 🚀 Key Features
 
-- **Pure Markdown Storage**: All data stored as human-readable markdown files using GitHub Flavored Markdown (GFM)
-- **Native llms.txt Support**: Automatic generation of llms.txt files for AI discoverability and context
-- **Git-Native**: Leverages git's distributed nature with automatic state management via hooks
-- **Token Usage Tracking**: Track AI token usage at task/epic/project levels with cost analysis
-- **Bidirectional Sync**: Sync with GitHub Issues, Jira, and Linear in both directions
-- **Zero Dependencies**: Core functionality works offline with no external dependencies
+- **Pure Markdown Templates**: All templates and examples use human-readable markdown with GitHub Flavored Markdown (GFM)
+- **Native llms.txt Support**: Templates for generating llms.txt files for AI discoverability and context
+- **Git-Native Structure**: File organization leverages git's distributed nature with state management patterns
+- **Token Usage Tracking**: Template structures for tracking AI token usage at task/epic/project levels
+- **Integration Patterns**: Documentation patterns for GitHub Issues, Jira, and Linear integration
+- **Zero Dependencies**: Template system works offline with no external dependencies
 - **AI-Optimized**: Structured for minimal token consumption and maximum AI efficiency
 
-## 📦 Installation
+## 📦 Getting Started
 
-### Global Installation (Recommended)
-
-```bash
-npm install -g ai-trackdown
-```
-
-### Local Installation
-
-```bash
-npm install ai-trackdown
-```
-
-### From Source
+### Clone the Framework
 
 ```bash
 git clone https://github.com/ai-trackdown/ai-trackdown.git
 cd ai-trackdown
-npm install
-npm link
 ```
+
+### Copy Templates to Your Project
+
+```bash
+# Copy the template structure to your project
+cp -r templates/ your-project/
+cd your-project
+```
+
+### Framework Structure
+
+This framework provides documentation patterns and templates - no installation required.
 
 ## 🏁 Quick Start
 
-### 1. Initialize a New Project
+### 1. Set Up Your Project Structure
+
+Copy the template directory structure to your project:
 
 ```bash
+# Copy templates from the framework
+cp -r templates/basic-setup/ your-project/
 cd your-project
-ai-trackdown init
 ```
 
 This creates the basic directory structure:
@@ -83,41 +85,47 @@ your-project/
 
 ### 2. Create Your First Epic
 
+Copy and customize the epic template:
+
 ```bash
-ai-trackdown create epic "User Authentication System"
+# Use the epic template
+cp templates/task-templates/epic-template.md tasks/epics/EPIC-001-user-authentication.md
+# Edit with your epic details
 ```
 
 ### 3. Add Issues to the Epic
 
+Copy and customize issue templates:
+
 ```bash
-ai-trackdown create issue "Implement login flow" --epic=EPIC-001
-ai-trackdown create issue "Add password reset" --epic=EPIC-001
+# Use the issue template
+cp templates/task-templates/issue-template.md tasks/issues/ISSUE-001-login-flow.md
+# Edit with your issue details and link to EPIC-001
 ```
 
 ### 4. Break Down Issues into Tasks
 
+Copy and customize task templates:
+
 ```bash
-ai-trackdown create task "Create login form component" --issue=ISSUE-001
-ai-trackdown create task "Implement OAuth2 integration" --issue=ISSUE-001
+# Use the task template
+cp templates/task-templates/task-template.md tasks/tasks/TASK-001-login-form.md
+# Edit with your task details and link to ISSUE-001
 ```
 
 ### 5. Track AI Token Usage
 
-```bash
-ai-trackdown tokens add ISSUE-001 --agent=claude --count=892 --purpose="Requirements analysis"
-```
+Follow the token tracking patterns in the templates to manually log AI usage.
 
 ### 6. Generate llms.txt for AI Context
 
-```bash
-ai-trackdown generate llms-txt
-```
+Use the llms.txt template and customize for your project structure.
 
 ## 🔧 Configuration
 
 ### Basic Configuration
 
-Create `.ai-trackdown/config.yaml`:
+Use the provided `.ai-trackdown/config.yaml` template:
 
 ```yaml
 version: 1
@@ -133,66 +141,58 @@ sync:
 
 ### Advanced Configuration
 
-See [Configuration Guide](docs/configuration.md) for complete options including:
-- Integration setups (GitHub, Jira, Linear)
-- Token tracking configuration
-- AI agent permissions
-- Git hooks setup
+See [Configuration Guide](docs/configuration.md) for complete template options including:
+- Integration setup patterns (GitHub, Jira, Linear)
+- Token tracking configuration examples
+- AI agent permission templates
+- Git hooks setup guides
 
 ## 📖 Usage
 
-### Core Commands
+### Framework Workflow
+
+Follow these manual workflows using the provided templates:
 
 ```bash
-# Project Management
-ai-trackdown init                                    # Initialize new project
-ai-trackdown status                                  # Show project status
+# Project Setup
+cp -r templates/basic-setup/ your-project/           # Copy project structure
+vim your-project/.ai-trackdown/config.yaml          # Customize configuration
 
 # Creating Items
-ai-trackdown create epic "Epic Title"
-ai-trackdown create issue "Issue Title" --epic=EPIC-001
-ai-trackdown create task "Task Title" --issue=ISSUE-001
+cp templates/task-templates/epic-template.md tasks/epics/EPIC-XXX.md    # Create epic
+cp templates/task-templates/issue-template.md tasks/issues/ISSUE-XXX.md # Create issue  
+cp templates/task-templates/task-template.md tasks/tasks/TASK-XXX.md    # Create task
 
-# Listing and Filtering
-ai-trackdown list                                    # List all items
-ai-trackdown list --type=issue --status=open        # Filter by type and status
-ai-trackdown list --assignee=@me                    # Show your assignments
-ai-trackdown list --epic=EPIC-001                   # Show items in specific epic
-
-# Updating Status
-ai-trackdown update ISSUE-001 --status=in-progress
-ai-trackdown close TASK-001 --comment="Completed"
-ai-trackdown assign ISSUE-001 @username
+# Managing Status
+# Edit YAML frontmatter in task files to update status
+# Use examples/status-workflows/ for common patterns
 
 # Token Tracking
-ai-trackdown tokens add ISSUE-001 --agent=claude --count=500
-ai-trackdown tokens report --period=week
-ai-trackdown tokens budget --epic=EPIC-001 --limit=50000
+# Follow token tracking patterns in task templates
+# Use examples/token-tracking/ for reporting templates
 
-# Sync Operations
-ai-trackdown sync github --full                     # Full sync with GitHub
-ai-trackdown sync jira --since=1h                   # Incremental sync
-ai-trackdown sync status                             # Show sync status
+# Integration Setup
+# Follow examples/integrations/ for GitHub/Jira/Linear patterns
+# Use webhook templates for bidirectional sync
 
-# AI Operations
-ai-trackdown generate llms-txt                       # Generate llms.txt index
-ai-trackdown context EPIC-001                        # Get AI context for epic
-ai-trackdown analyze ISSUE-001 --suggest-tasks      # AI task suggestions
+# AI Context Generation
+# Use templates/llms-txt/ for generating AI context files
+# Follow examples/ai-integration/ for optimization patterns
 ```
 
 ### File Structure
 
-ai-trackdown uses a simple, intuitive file structure:
+The framework provides this simple, intuitive template structure:
 
 ```
 project-root/
 ├── .ai-trackdown/
-│   ├── config.yaml              # System configuration
-│   ├── sync/                    # Sync state and mappings
+│   ├── config.yaml              # Configuration template
+│   ├── sync/                    # Sync pattern templates
 │   │   ├── github.json
 │   │   ├── jira.json
 │   │   └── linear.json
-│   └── llms.txt                 # Auto-generated index
+│   └── llms.txt                 # AI context template
 ├── tasks/
 │   ├── epics/
 │   │   ├── EPIC-001-user-authentication.md
@@ -204,13 +204,13 @@ project-root/
 │       ├── TASK-001-create-login-form.md
 │       └── TASK-002-implement-oauth.md
 ├── docs/
-│   └── llms-full.txt            # Complete task context
-└── TASKTRACK.md                 # Project task overview
+│   └── llms-full.txt            # Complete task context template
+└── TASKTRACK.md                 # Project task overview template
 ```
 
 ### Task File Format
 
-Each task file follows a structured markdown format:
+Each task template follows a structured markdown format:
 
 ```markdown
 ---
@@ -268,119 +268,116 @@ Dependencies: Redis for session storage, JWT library
 
 ### llms.txt Support
 
-ai-trackdown automatically generates llms.txt files following the standard:
+The framework provides llms.txt templates following the standard:
 
-- `/llms.txt` - Project index for quick AI context
-- `/docs/llms-full.txt` - Complete project context
+- `/llms.txt` - Project index template for quick AI context
+- `/docs/llms-full.txt` - Complete project context template
 
 ### Token Tracking
 
-Track AI token usage across your project:
+Track AI token usage using the provided templates:
 
 ```bash
-# Add token usage
-ai-trackdown tokens add ISSUE-001 --agent=claude --count=892
+# Follow token tracking patterns in task templates
+# Edit YAML frontmatter to log token usage:
+#   token_usage:
+#     total: 892
+#     by_agent:
+#       claude: 892
 
-# View reports
-ai-trackdown tokens report --by=epic --period=month
-
-# Set budgets
-ai-trackdown tokens budget --epic=EPIC-001 --limit=50000
+# Use examples/token-tracking/ for reporting templates
+# Customize budget tracking patterns for your workflow
 ```
 
 ### AI Context Optimization
 
-ai-trackdown optimizes context for AI agents:
-- Automatic context markers in tasks
-- Smart token budgeting
-- Efficient context generation
-- Agent-specific permissions
+The framework optimizes context for AI agents through:
+- Context markers in task templates
+- Token budgeting patterns
+- Efficient context generation templates
+- Agent-specific permission examples
 
 ## 🔄 Integrations
 
 ### GitHub Issues
 
 ```bash
-# Setup GitHub sync
-ai-trackdown sync setup github --repo=org/repo --token=your-token
-
-# Sync operations
-ai-trackdown sync github --full
-ai-trackdown sync github --since=1h
+# Follow GitHub integration patterns in examples/integrations/github/
+# Use webhook templates for bidirectional sync
+# Configure .ai-trackdown/sync/github.json using provided templates
 ```
 
 ### Jira
 
 ```bash
-# Setup Jira sync
-ai-trackdown sync setup jira --url=https://company.atlassian.net --project=PROJ
-
-# Sync operations
-ai-trackdown sync jira --full
+# Follow Jira integration patterns in examples/integrations/jira/
+# Use API mapping templates for field synchronization
+# Configure .ai-trackdown/sync/jira.json using provided templates
 ```
 
 ### Linear
 
 ```bash
-# Setup Linear sync
-ai-trackdown sync setup linear --team=engineering --token=your-token
-
-# Sync operations
-ai-trackdown sync linear --full
+# Follow Linear integration patterns in examples/integrations/linear/
+# Use GraphQL templates for API integration
+# Configure .ai-trackdown/sync/linear.json using provided templates
 ```
 
-## 🛠️ Development
+## 🛠️ Framework Development
 
 ### Prerequisites
 
-- Node.js 18.0.0 or higher
-- npm or yarn
-- Git
+- Git for version control
+- Text editor for markdown editing
+- Basic understanding of YAML and markdown
 
-### Setup
+### Contributing to Templates
 
 ```bash
 git clone https://github.com/ai-trackdown/ai-trackdown.git
 cd ai-trackdown
-npm install
-npm run dev
+# Edit templates in templates/ directory
+# Add examples in examples/ directory
+# Update documentation as needed
 ```
 
-### Testing
+### Template Validation
 
 ```bash
-npm test                    # Run all tests
-npm run test:watch         # Run tests in watch mode
-npm run test:coverage      # Run tests with coverage
+# Validate YAML frontmatter in templates
+# Check markdown formatting
+# Ensure example consistency
+# Test template copying workflows
 ```
 
-### Building
+### Documentation
 
 ```bash
-npm run build              # Build for production
-npm run lint               # Run linting
+# Update docs/ directory with new patterns
+# Add integration examples
+# Maintain template documentation
 ```
 
 ## 📚 Comprehensive Documentation
 
 ### 🚀 Getting Started
-- **[Getting Started Guide](docs/getting-started.md)** - Complete 5-minute setup tutorial with examples
-- **[FAQ](docs/faq.md)** - Answers to common questions about ai-trackdown's revolutionary approach
+- **[Getting Started Guide](docs/getting-started.md)** - Complete template setup tutorial with examples
+- **[FAQ](docs/faq.md)** - Answers to common questions about ai-trackdown's revolutionary framework approach
 
-### 🏗️ Technical Deep Dive  
-- **[Architecture Guide](docs/architecture.md)** - System design, AI integration patterns, and scaling strategies
-- **[API Reference](docs/api-reference.md)** - Complete CLI command reference with examples
-- **[Configuration Guide](docs/configuration.md)** - Advanced configuration options and team setups
+### 🏗️ Framework Deep Dive  
+- **[Architecture Guide](docs/architecture.md)** - Framework design, AI integration patterns, and scaling strategies
+- **[Template Reference](docs/template-reference.md)** - Complete template structure reference with examples
+- **[Configuration Guide](docs/configuration.md)** - Advanced configuration templates and team setups
 
 ### 🔄 Platform Integration
-- **[Integration Guide](docs/integrations.md)** - Setup GitHub, Jira, Linear sync with field mapping examples
+- **[Integration Guide](docs/integrations.md)** - GitHub, Jira, Linear integration patterns with field mapping examples
 - **[Best Practices](docs/best-practices.md)** - Proven strategies for AI-human collaboration workflows
 
 ### 💡 Examples and Templates
-- **[Basic Setup Example](examples/basic-setup/)** - Small team starter configuration
-- **[Enterprise Integration](examples/enterprise-integration/)** - Large organization setup with multi-team coordination
-- **[Sample Tasks](examples/sample-tasks/)** - Real-world epic, issue, and task examples
-- **[Configuration Templates](examples/configs/)** - Ready-to-use config files for different scenarios
+- **[Basic Setup Example](examples/basic-setup/)** - Small team starter template configuration
+- **[Enterprise Integration](examples/enterprise-integration/)** - Large organization template setup with multi-team coordination
+- **[Sample Tasks](examples/sample-tasks/)** - Real-world epic, issue, and task template examples
+- **[Configuration Templates](examples/configs/)** - Ready-to-use config file templates for different scenarios
 
 ## 🤝 Contributing
 
@@ -390,35 +387,35 @@ We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) f
 
 1. Fork the repository
 2. Create a feature branch
-3. Make your changes
-4. Add tests if applicable
+3. Add or improve templates
+4. Update documentation and examples
 5. Submit a pull request
 
 ## 📋 Roadmap
 
-### Phase 1: Core System ✅
-- [x] Basic file structure and CLI
-- [x] Git hooks implementation
-- [x] Markdown parsing and validation
-- [x] Simple status management
+### Phase 1: Framework Foundation ✅
+- [x] Basic template structure and documentation
+- [x] Git workflow patterns
+- [x] Markdown template formats
+- [x] Configuration templates
 
-### Phase 2: AI Integration 🚧
-- [x] llms.txt generation
-- [x] Token tracking system
-- [x] AI context markers
-- [ ] Claude/GPT optimization
+### Phase 2: AI Integration Templates 🚧
+- [x] llms.txt template patterns
+- [x] Token tracking templates
+- [x] AI context marker templates
+- [ ] Advanced AI optimization patterns
 
-### Phase 3: Sync Capabilities 📋
-- [ ] GitHub Issues bidirectional sync
-- [ ] Jira integration with webhooks
-- [ ] Linear API integration
-- [ ] Conflict resolution system
+### Phase 3: Integration Patterns 📋
+- [ ] GitHub Issues integration templates
+- [ ] Jira webhook pattern templates
+- [ ] Linear API integration patterns
+- [ ] Conflict resolution workflow templates
 
-### Phase 4: Advanced Features 📋
-- [ ] Web UI (optional)
-- [ ] Analytics dashboard
-- [ ] Multi-project support
-- [ ] Plugin system
+### Phase 4: Tooling Development 📋
+- [ ] CLI implementation (separate project)
+- [ ] Web UI templates (optional)
+- [ ] Analytics template patterns
+- [ ] Multi-project template structures
 
 ## 📄 License
 
@@ -432,10 +429,10 @@ MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 💬 Support
 
-- [GitHub Issues](https://github.com/ai-trackdown/ai-trackdown/issues)
-- [Discussions](https://github.com/ai-trackdown/ai-trackdown/discussions)
-- [Documentation](https://ai-trackdown.github.io/ai-trackdown/)
+- [GitHub Issues](https://github.com/ai-trackdown/ai-trackdown/issues) - Bug reports and feature requests
+- [Discussions](https://github.com/ai-trackdown/ai-trackdown/discussions) - Community discussions and template sharing
+- [Documentation](https://ai-trackdown.github.io/ai-trackdown/) - Complete framework documentation
 
 ---
 
-**Made with ❤️ for human-AI collaborative development**
+**Made with ❤️ for human-AI collaborative development - A documentation framework for the AI era**

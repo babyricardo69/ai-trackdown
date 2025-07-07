@@ -1,6 +1,6 @@
 # Basic Setup Example
 
-This example demonstrates a minimal ai-trackdown setup for a small development team starting their first AI-enhanced project.
+This example demonstrates a minimal AI Trackdown setup for a small development team starting their first AI-enhanced project using manual documentation workflows.
 
 ## Project Context
 
@@ -12,17 +12,18 @@ This example demonstrates a minimal ai-trackdown setup for a small development t
 
 ## Setup Steps
 
-### 1. Initialize Project
+### 1. Setup Project Structure
 
 ```bash
 cd todo-app
-ai-trackdown init
+mkdir -p tasks/epics tasks/issues tasks/tasks docs
 ```
 
-### 2. Configure Basic Settings
+### 2. Create Configuration Template
 
-`.ai-trackdown/config.yaml`:
+Copy from `templates/config-examples.md` and create `TASKTRACK.md`:
 ```yaml
+# Simple Todo App Configuration
 version: 1
 project:
   name: "Simple Todo App"
@@ -37,20 +38,11 @@ ai:
         model: "claude-3.5-sonnet"
         cost_per_1k_input: 0.003
         cost_per_1k_output: 0.015
-        
-git:
-  hooks:
-    auto_install: true
-    commit_parsing: true
 ```
 
 ### 3. Create First Epic
 
-```bash
-ai-trackdown create epic "Core Todo Functionality"
-```
-
-Creates `tasks/epics/EPIC-001-core-todo-functionality.md`:
+Use the epic template from `templates/epic-template.md` to create `tasks/epics/EPIC-001-core-todo-functionality.md`:
 ```markdown
 ---
 id: EPIC-001
@@ -87,19 +79,14 @@ Build the essential features needed for a functional todo application.
 
 ### 4. Break Down into Issues
 
-```bash
-ai-trackdown create issue "Todo CRUD operations" --epic=EPIC-001
-ai-trackdown create issue "User interface design" --epic=EPIC-001
-ai-trackdown create issue "Data persistence" --epic=EPIC-001
-```
+Using the issue template from `templates/issue-template.md`, create individual issue files:
+- `tasks/issues/ISSUE-001-todo-crud-operations.md`
+- `tasks/issues/ISSUE-002-user-interface-design.md`
+- `tasks/issues/ISSUE-003-data-persistence.md`
 
-### 5. Generate AI Context
+### 5. Create AI Context Documentation
 
-```bash
-ai-trackdown generate llms-txt
-```
-
-Creates `/llms.txt`:
+Use `templates/llms-txt-examples.md` to create `/llms.txt`:
 ```txt
 # Simple Todo App
 # Generated: 2025-01-07T15:00:00Z
@@ -120,21 +107,18 @@ EPIC-001: Core Todo Functionality (just started)
 - ISSUE-002: User interface design (todo)
 - ISSUE-003: Data persistence (todo)
 
-## Quick Commands
-View open work: `ai-trackdown list --status=open`
-Check progress: `ai-trackdown status EPIC-001`
-Track tokens: `ai-trackdown tokens add ISSUE-001 --agent=claude --count=XXX`
+## Quick Reference
+View open work: Check status fields in task files
+Check progress: Review epic and issue completion status  
+Track tokens: Update token usage in task frontmatter
 ```
 
 ## File Structure
 
-After setup, your project structure looks like:
+After setup using templates, your project structure looks like:
 
 ```
 todo-app/
-├── .ai-trackdown/
-│   ├── config.yaml
-│   └── llms.txt
 ├── tasks/
 │   ├── epics/
 │   │   └── EPIC-001-core-todo-functionality.md
@@ -143,6 +127,8 @@ todo-app/
 │   │   ├── ISSUE-002-user-interface-design.md
 │   │   └── ISSUE-003-data-persistence.md
 │   └── tasks/
+├── docs/
+│   └── llms.txt
 ├── src/
 │   ├── components/
 │   ├── pages/
@@ -154,16 +140,9 @@ todo-app/
 
 ### Developer Day 1: Start CRUD Implementation
 
-```bash
-# Check current work
-ai-trackdown status
-
-# Start working on CRUD operations
-ai-trackdown update ISSUE-001 --status=in-progress --assignee=@alice
-
-# Track AI assistance
-ai-trackdown tokens add ISSUE-001 --agent=claude --count=456 --purpose="API design"
-```
+1. Check current work by reviewing task status in `tasks/issues/ISSUE-001-todo-crud-operations.md`
+2. Update the file to change status from `todo` to `in-progress` and add assignee
+3. Track AI assistance by updating token usage in the task frontmatter
 
 ### AI Agent Interaction
 
@@ -173,35 +152,33 @@ When Alice asks Claude for help:
 Context for AI Agent:
 - Working on ISSUE-001: Todo CRUD operations
 - React frontend, Node.js backend
-- See /llms.txt for full project context
+- See /docs/llms.txt for full project context
 - Budget: 3000 tokens for implementation
 ```
 
-Claude gets instant project understanding from `/llms.txt` and can provide targeted help.
+Claude gets instant project understanding from `/docs/llms.txt` and can provide targeted help.
 
 ### End of Day: Update Progress
 
+1. Commit work with task reference:
 ```bash
-# Commit work with task reference
 git add .
 git commit -m "feat(ISSUE-001): implement todo creation API
 
 Token-Usage: claude=456
 AI-Context: REST API design and implementation"
-
-# ai-trackdown automatically updates task status via git hooks
-# Check updated status
-ai-trackdown status ISSUE-001
 ```
+
+2. Manually update task status in `ISSUE-001-todo-crud-operations.md`
+3. Review updated progress by checking task files
 
 ## Token Budget Tracking
 
 ### Weekly Review
 
-```bash
-# Check token usage
-ai-trackdown tokens report --period=week
+Review token usage by checking task files and updating your budget tracking spreadsheet or document:
 
+```
 Token Usage Report (Week 1)
 ===========================
 EPIC-001: 1,234 tokens (24.7% of budget)
@@ -220,30 +197,30 @@ Efficiency: Good (high-value AI interactions)
 ## Key Learnings
 
 ### What Works Well
-- **Simple Setup**: 5-minute initialization gets team productive
-- **AI Context**: `/llms.txt` eliminates repeated explanations
-- **Token Awareness**: Budget tracking prevents cost surprises
+- **Simple Setup**: Template-based initialization gets team productive quickly
+- **AI Context**: `/docs/llms.txt` eliminates repeated explanations
+- **Token Awareness**: Manual budget tracking prevents cost surprises
 - **Git Integration**: Natural workflow with existing tools
 
 ### Best Practices Discovered
 - Keep AI context blocks concise but specific
-- Track token usage immediately after AI interactions
+- Track token usage immediately after AI interactions in task files
 - Use conventional commit messages with task references
 - Regular budget reviews prevent overruns
 
 ### Team Feedback
-> "The markdown files are so much easier to read than Jira tickets. And seeing AI costs in real-time helps us optimize our prompts." - Alice, Frontend Developer
+> "The markdown files are so much easier to read than Jira tickets. And manually tracking AI costs helps us optimize our prompts." - Alice, Frontend Developer
 
 > "Having tasks next to code in git is perfect. No more context switching between tools." - Bob, Backend Developer
 
-> "Token tracking showed us that Claude is more cost-effective for architecture discussions than GPT-4." - Carol, Team Lead
+> "Manual token tracking showed us that Claude is more cost-effective for architecture discussions than GPT-4." - Carol, Team Lead
 
 ## Next Steps
 
 This basic setup provides the foundation for:
-1. **Adding Integrations**: Connect GitHub Issues or other tools
-2. **Advanced Workflows**: Custom templates and automation
-3. **Team Scaling**: Role-based permissions and workflows
-4. **Analytics**: Advanced token optimization and reporting
+1. **Adding Integrations**: Manually sync with GitHub Issues or other tools
+2. **Advanced Workflows**: Custom templates and documentation patterns
+3. **Team Scaling**: Role-based file organization and workflows
+4. **Analytics**: Manual token optimization and reporting
 
-The simple todo app example shows how ai-trackdown transforms development workflow with minimal setup overhead while providing immediate AI cost visibility and optimization.
+The simple todo app example shows how AI Trackdown transforms development workflow with minimal setup overhead while providing immediate AI cost visibility and optimization through manual documentation practices.

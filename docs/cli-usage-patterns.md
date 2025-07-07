@@ -1,7 +1,7 @@
-# ai-trackdown CLI Usage Patterns
+# AI-Trackdown Manual Workflow Patterns
 
 **Version:** 1.0  
-**Status:** Specification  
+**Status:** Workflow Specification  
 **Last Updated:** January 2025
 
 ## Table of Contents
@@ -11,7 +11,7 @@
 3. [Team Collaboration Scenarios](#team-collaboration-scenarios)
 4. [Token Management Workflows](#token-management-workflows)
 5. [Integration Sync Patterns](#integration-sync-patterns)
-6. [Advanced Usage Scenarios](#advanced-usage-scenarios)
+6. [Advanced Manual Scenarios](#advanced-manual-scenarios)
 
 ---
 
@@ -23,530 +23,666 @@
 
 ```bash
 # Check what I worked on yesterday
-ai-trackdown list --assignee=@me --updated-after=yesterday
+grep -l "assignee: @me" tasks/**/*.md | xargs grep -l "updated: $(date -d yesterday +%Y-%m-%d)"
 
 # Show my current active tasks
-ai-trackdown list --assignee=@me --status=in-progress
+grep -l "assignee: @me" tasks/**/*.md | xargs grep -l "status: in-progress"
 
-# Quick status overview
-ai-trackdown show ISSUE-042 --format=json | jq '.status,.title'
+# Quick status check for specific task
+head -20 tasks/issues/ISSUE-042-fix-auth-bug.md | grep -E "(status|title)"
 
 # Check if any tasks are blocked
-ai-trackdown list --assignee=@me --status=blocked
+grep -l "assignee: @me" tasks/**/*.md | xargs grep -l "status: blocked"
 ```
 
-**Expected Output:**
-```
-Tasks updated yesterday:
-ISSUE-042  issue  Fix authentication bug    done       @johndoe  auth,bugfix
-TASK-031   task   Update login form         in-review  @johndoe  frontend
-
-Currently in progress:
-ISSUE-045  issue  Implement rate limiting   in-progress @johndoe  security,api
-
-No blocked tasks found.
+**Manual Review Process:**
+```bash
+# Create standup notes
+echo "## Daily Standup - $(date +%Y-%m-%d)" > standup-notes.md
+echo "" >> standup-notes.md
+echo "### Yesterday:" >> standup-notes.md
+grep -l "assignee: @me" tasks/**/*.md | while read file; do
+    if grep -q "updated: $(date -d yesterday +%Y-%m-%d)" "$file"; then
+        echo "- $(basename "$file" .md)" >> standup-notes.md
+    fi
+done
+echo "" >> standup-notes.md
+echo "### Today:" >> standup-notes.md
+grep -l "status: in-progress" tasks/**/*.md | while read file; do
+    if grep -q "assignee: @me" "$file"; then
+        echo "- $(basename "$file" .md)" >> standup-notes.md
+    fi
+done
 ```
 
 ### Starting New Work
 
-**Scenario:** Developer beginning work on a new task
+**Scenario:** Developer picking up a new task from the backlog
 
 ```bash
-# Find available tasks assigned to me
-ai-trackdown list --assignee=@me --status=open
+# Review available tasks
+grep -l "status: todo" tasks/**/*.md | head -5
 
-# Get detailed context for a task
-ai-trackdown show ISSUE-045 --include-related --include-tokens
+# Check task details manually
+cat tasks/issues/ISSUE-045-implement-rate-limiting.md
 
-# Check if there are any dependencies
-ai-trackdown show ISSUE-045 | grep -A5 "Related Tasks"
-
-# Update status to indicate work started
-ai-trackdown update ISSUE-045 --status=in-progress --comment="Starting implementation"
-
-# Generate AI context for coding assistance
-ai-trackdown context ISSUE-045 --for=claude --include-related
+# Update status to start work
+vim tasks/issues/ISSUE-045-implement-rate-limiting.md
+# Change: status: todo → status: in-progress
+# Update: updated timestamp
+# Add: progress notes
 ```
 
-### Commit and Task Updates
+**Task Assignment Workflow:**
+```yaml
+# Update task frontmatter
+---
+id: ISSUE-045
+status: in-progress  # Changed from todo
+assignee: "@johndoe"
+updated: "2025-01-07T09:30:00Z"  # Updated timestamp
+---
 
-**Scenario:** Developer completing work and updating task status
-
-```bash
-# Commit with task reference (auto-updates via git hook)
-git commit -m "feat(ISSUE-045): Add rate limiting middleware
-
-- Implement token bucket algorithm
-- Add configuration options
-- Include comprehensive tests"
-
-# Manual status update if needed
-ai-trackdown update ISSUE-045 --status=in-review --comment="Ready for code review"
-
-# Record token usage from AI assistance
-ai-trackdown tokens add ISSUE-045 --agent=claude --count=1250 --purpose="Code review and optimization"
-
-# Check if epic budget is still healthy
-ai-trackdown tokens budget check EPIC-003
+# Add progress section to markdown body
+## Progress Updates
+- 2025-01-07 09:30: Started analysis and research
+- Goal: Complete initial implementation by EOD
 ```
 
-### End of Day Wrap-up
+### End of Day Workflow
 
-**Scenario:** Developer wrapping up work for the day
+**Scenario:** Developer wrapping up work and updating task status
 
 ```bash
-# Update status of current work
-ai-trackdown update ISSUE-045 --status=in-progress --comment="Completed middleware implementation, working on tests tomorrow"
+# Review today's work
+grep -l "assignee: @me" tasks/**/*.md | xargs grep -l "updated: $(date +%Y-%m-%d)"
 
-# Check token usage for the day
-ai-trackdown tokens report --period=today --by=task
+# Update task status and progress
+vim tasks/issues/ISSUE-045-implement-rate-limiting.md
 
-# Sync with external platforms
-ai-trackdown sync all
+# Record any AI assistance used
+# Update token usage in frontmatter
 
-# Preview what I'll work on tomorrow
-ai-trackdown list --assignee=@me --status=open --sort=priority --reverse
+# Commit work with conventional commit message
+git add .
+git commit -m "feat(ISSUE-045): implement basic rate limiting middleware
+
+- Add Redis-based rate limiter
+- Configure per-route limits
+- Add rate limit headers
+
+Token-Usage: claude=892,gpt4=234"
+```
+
+**Status Update Template:**
+```yaml
+# In task frontmatter - update these fields:
+status: in-progress  # or in-review if ready
+updated: "2025-01-07T17:30:00Z"
+token_usage:
+  total: 1126
+  by_agent:
+    claude: 892
+    gpt4: 234
+  sessions:
+    - date: "2025-01-07T14:00:00Z"
+      agent: claude
+      count: 892
+      purpose: "Implementation guidance"
+    - date: "2025-01-07T16:15:00Z"
+      agent: gpt4  
+      count: 234
+      purpose: "Code review"
 ```
 
 ---
 
 ## AI Agent Interaction Patterns
 
-### Claude Assistant Task Analysis
+### Context Preparation for AI Agents
 
-**Scenario:** Claude analyzing a complex task and suggesting breakdown
+**Scenario:** Preparing comprehensive context for AI assistance
 
 ```bash
-# Claude gets task context
-ai-trackdown context EPIC-003 --for=claude --include-related --max-tokens=4000
+# Generate context for specific epic
+cat tasks/epics/EPIC-003-api-security.md > context.md
+echo "" >> context.md
+echo "## Related Issues" >> context.md
+grep -l "epic: EPIC-003" tasks/issues/*.md | while read file; do
+    echo "" >> context.md
+    cat "$file" >> context.md
+done
 
-# Claude analyzes and suggests subtasks
-ai-trackdown analyze EPIC-003 --suggest-tasks
-
-# Claude records its token usage
-ai-trackdown tokens add EPIC-003 --agent=claude --count=3247 --purpose="Epic analysis and task breakdown"
-
-# Claude creates suggested subtasks
-ai-trackdown create issue "Design API rate limiting strategy" --epic=EPIC-003 --labels=architecture,api
-ai-trackdown create issue "Implement rate limiting middleware" --epic=EPIC-003 --labels=implementation,backend
-ai-trackdown create issue "Add rate limiting configuration" --epic=EPIC-003 --labels=configuration,devops
+# Include relevant files mentioned in AI_CONTEXT blocks
+grep -A 5 "AI_CONTEXT_START" tasks/**/*.md | grep -E "Files:|Dependencies:" >> context.md
 ```
 
-### GPT-4 Code Generation Workflow
-
-**Scenario:** GPT-4 assisting with code implementation
-
-```bash
-# Developer requests AI assistance for specific task
-ai-trackdown show TASK-124 --format=json > task_context.json
-
-# GPT-4 analyzes task requirements
-ai-trackdown analyze TASK-124 --estimate-tokens --risk-analysis
-
-# Record planning tokens
-ai-trackdown tokens add TASK-124 --agent=gpt4 --count=892 --purpose="Code planning and architecture review"
-
-# After implementation assistance
-ai-trackdown tokens add TASK-124 --agent=gpt4 --count=2156 --purpose="Code generation and debugging"
-
-# Update task with AI-generated content markers
-ai-trackdown update TASK-124 --add-labels=ai-assisted --comment="Implementation completed with GPT-4 assistance"
+**AI Context Maintenance:**
+```markdown
+# Update AI_CONTEXT blocks in task files
+## AI Context
+<!-- AI_CONTEXT_START -->
+Rate limiting implementation for API security epic.
+Key files: src/middleware/rateLimiter.js, config/redis.js
+Dependencies: redis, express-rate-limit
+Security requirements: Per-user limits, Redis clustering support
+Current status: Basic implementation complete, need testing
+<!-- AI_CONTEXT_END -->
 ```
 
-### Multi-Agent Collaboration
+### Token Usage Tracking
 
-**Scenario:** Multiple AI agents working on related tasks
+**Scenario:** AI agent self-reporting token usage
 
 ```bash
-# Claude analyzes requirements
-ai-trackdown context ISSUE-067 --for=claude
-ai-trackdown tokens add ISSUE-067 --agent=claude --count=1534 --purpose="Requirements analysis"
+# AI agent script to update token usage
+#!/bin/bash
+TASK_FILE="$1"
+AGENT_NAME="$2" 
+TOKEN_COUNT="$3"
+PURPOSE="$4"
 
-# GPT-4 handles implementation
-ai-trackdown context ISSUE-067 --for=gpt4 --include-related
-ai-trackdown tokens add ISSUE-067 --agent=gpt4 --count=2847 --purpose="Code implementation"
-
-# Copilot assists with testing
-ai-trackdown tokens add ISSUE-067 --agent=copilot --count=756 --purpose="Test generation"
-
-# Check total token usage across agents
-ai-trackdown show ISSUE-067 --include-tokens
+# Read current frontmatter
+python -c "
+import yaml, sys
+with open('$TASK_FILE') as f:
+    content = f.read()
+    parts = content.split('---')
+    frontmatter = yaml.safe_load(parts[1])
+    
+    # Update token usage
+    if 'token_usage' not in frontmatter:
+        frontmatter['token_usage'] = {'total': 0, 'by_agent': {}, 'sessions': []}
+    
+    frontmatter['token_usage']['total'] += $TOKEN_COUNT
+    frontmatter['token_usage']['by_agent']['$AGENT_NAME'] = \
+        frontmatter['token_usage']['by_agent'].get('$AGENT_NAME', 0) + $TOKEN_COUNT
+    
+    frontmatter['token_usage']['sessions'].append({
+        'date': '$(date -u +%Y-%m-%dT%H:%M:%SZ)',
+        'agent': '$AGENT_NAME',
+        'count': $TOKEN_COUNT,
+        'purpose': '$PURPOSE'
+    })
+    
+    # Write back to file
+    with open('$TASK_FILE', 'w') as f:
+        f.write('---\n')
+        f.write(yaml.dump(frontmatter))
+        f.write('---\n')
+        f.write('---'.join(parts[2:]))
+"
 ```
 
-### AI Context Optimization
+### AI-Driven Task Breakdown
 
-**Scenario:** Optimizing AI context for token efficiency
+**Scenario:** Using AI to help break down complex issues
 
 ```bash
-# Generate minimal context for quick queries
-ai-trackdown context TASK-089 --for=claude --max-tokens=1000
+# Prepare context for AI task breakdown
+cat tasks/issues/ISSUE-067-complex-feature.md > breakdown-context.txt
+echo "" >> breakdown-context.txt
+echo "## Related Technical Context" >> breakdown-context.txt
+grep -A 10 "Dependencies" tasks/issues/ISSUE-067-complex-feature.md >> breakdown-context.txt
 
-# Generate comprehensive context for complex analysis
-ai-trackdown context EPIC-002 --for=claude --include-related --depth=3
+# After AI analysis, create sub-tasks manually
+cp .ai-trackdown/templates/task.md tasks/tasks/TASK-089-implement-auth-layer.md
+cp .ai-trackdown/templates/task.md tasks/tasks/TASK-090-setup-data-models.md
+cp .ai-trackdown/templates/task.md tasks/tasks/TASK-091-create-api-endpoints.md
 
-# Check context size before sending to AI
-ai-trackdown generate context ISSUE-045 --dry-run | wc -w
-
-# Generate project-wide AI context
-ai-trackdown generate llms-txt --include-closed=false
+# Link tasks to parent issue
+vim tasks/tasks/TASK-089-implement-auth-layer.md
+# Set: issue: ISSUE-067
 ```
 
 ---
 
 ## Team Collaboration Scenarios
 
-### Sprint Planning Meeting
+### Sprint Planning Session
 
-**Scenario:** Team planning next sprint iteration
+**Scenario:** Team planning new sprint with task estimation
 
 ```bash
-# Team lead reviews epic progress
-ai-trackdown list --type=epic --status=in-progress
+# Gather all open issues for sprint planning
+grep -l "status: todo" tasks/issues/*.md > sprint-candidates.txt
 
-# Check story point allocation
-ai-trackdown list --epic=EPIC-003 --format=json | jq '[.[] | {id, estimate}] | add'
+# Create sprint planning document
+echo "# Sprint Planning - $(date +%Y-%m-%d)" > sprint-plan.md
+echo "" >> sprint-plan.md
+echo "## Backlog Items" >> sprint-plan.md
 
-# Review token budget usage across epics
-ai-trackdown tokens report --by=epic --include-costs
+# Add issue summaries
+while read file; do
+    echo "" >> sprint-plan.md
+    echo "### $(basename "$file" .md)" >> sprint-plan.md
+    grep -E "title:|estimate:|assignee:" "$file" >> sprint-plan.md
+done < sprint-candidates.txt
+```
 
-# Identify tasks ready for assignment
-ai-trackdown list --status=open --assignee=@unassigned
+**Estimation Workflow:**
+```bash
+# Team reviews and updates estimates
+for file in $(cat sprint-candidates.txt); do
+    echo "Reviewing: $file"
+    vim "$file"  # Update estimate field
+    echo "Updated estimate for $(basename "$file")"
+done
+
+# Calculate sprint capacity
+python -c "
+import yaml, glob
+total_points = 0
+for file in open('sprint-candidates.txt').read().strip().split('\n'):
+    if file:
+        with open(file) as f:
+            content = f.read()
+            if '---' in content:
+                data = yaml.safe_load(content.split('---')[1])
+                total_points += data.get('estimate', 0)
+print(f'Total story points: {total_points}')
+"
 ```
 
 ### Code Review Process
 
-**Scenario:** Team conducting code reviews with AI assistance
+**Scenario:** Reviewing code and updating task status
 
 ```bash
-# Reviewer gets context for the task being reviewed
-ai-trackdown show ISSUE-042 --include-activity --include-related
+# Check tasks ready for review
+grep -l "status: in-review" tasks/**/*.md
 
-# AI provides code review assistance
-ai-trackdown analyze ISSUE-042 --risk-analysis
-ai-trackdown tokens add ISSUE-042 --agent=claude --count=1823 --purpose="Code review analysis"
+# Review specific task
+git log --oneline --grep="ISSUE-045"  # Find related commits
+git show <commit-hash>  # Review the implementation
 
-# Update task status after review
-ai-trackdown update ISSUE-042 --status=done --comment="Code review passed, merged to main"
-
-# Record review completion
-ai-trackdown update ISSUE-042 --add-labels=reviewed --assignee=@original-dev
+# Update task after review
+vim tasks/issues/ISSUE-045-implement-rate-limiting.md
+# Add review comments in Progress Updates section
+# Update status if approved: in-review → done
 ```
 
-### Cross-team Dependencies
-
-**Scenario:** Managing dependencies between teams
-
-```bash
-# Frontend team checks backend API readiness
-ai-trackdown list --labels=api --status=done --epic=EPIC-002
-
-# Backend team updates API completion status
-ai-trackdown update ISSUE-089 --status=done --comment="API endpoints completed and documented"
-
-# Frontend team gets unblocked
-ai-trackdown update ISSUE-091 --status=open --comment="Unblocked by completion of ISSUE-089"
-
-# Check cascade effects
-ai-trackdown list --labels=depends-on-api --status=blocked
+**Review Documentation Pattern:**
+```markdown
+## Progress Updates
+- 2025-01-07 09:30: Started implementation
+- 2025-01-07 17:30: Implementation complete, ready for review
+- 2025-01-08 10:15: Code review by @teamlead
+  - ✅ Implementation looks solid
+  - ✅ Tests are comprehensive
+  - ⚠️ Minor: Add error handling for Redis connection failures
+- 2025-01-08 14:00: Addressed review comments
+- 2025-01-08 14:30: Approved and merged
 ```
 
-### Knowledge Sharing Session
+### Epic Progress Tracking
 
-**Scenario:** Team sharing knowledge and updating documentation
+**Scenario:** Team tracking epic progress across multiple issues
 
 ```bash
-# Identify tasks with significant AI context
-ai-trackdown list --has-ai-context --epic=EPIC-001
+# Epic progress calculation
+epic_id="EPIC-003"
+echo "Progress for $epic_id:"
 
-# Extract learnings from completed tasks
-ai-trackdown list --status=done --updated-after="last week" --format=markdown
+# Count total and completed issues
+total_issues=$(grep -l "epic: $epic_id" tasks/issues/*.md | wc -l)
+done_issues=$(grep -l "epic: $epic_id" tasks/issues/*.md | xargs grep -l "status: done" | wc -l)
 
-# Update task documentation based on learnings
-ai-trackdown update ISSUE-023 --comment="Added architectural decisions and lessons learned to task description"
+echo "Issues: $done_issues / $total_issues completed"
+echo "Progress: $(( done_issues * 100 / total_issues ))%"
 
-# Generate project knowledge export
-ai-trackdown export markdown --include-tokens --include-activity
+# Token usage for epic
+echo "Token usage:"
+grep -l "epic: $epic_id" tasks/issues/*.md | while read file; do
+    python -c "
+import yaml
+with open('$file') as f:
+    content = f.read()
+    if '---' in content:
+        data = yaml.safe_load(content.split('---')[1])
+        usage = data.get('token_usage', {}).get('total', 0)
+        if usage > 0:
+            print(f'  {data[\"id\"]}: {usage} tokens')
+"
+done
 ```
 
 ---
 
 ## Token Management Workflows
 
-### Project Budget Planning
+### Budget Monitoring
 
-**Scenario:** Project manager setting up token budgets for new epic
+**Scenario:** Monitoring token budget usage across projects
 
 ```bash
-# Set initial epic budget
-ai-trackdown tokens budget set EPIC-004 100000
+# Daily token usage report
+echo "# Token Usage Report - $(date +%Y-%m-%d)" > token-report.md
+echo "" >> token-report.md
 
-# Configure budget alerts
-ai-trackdown tokens budget alert 0.8  # Alert at 80% usage
-
-# Estimate token requirements for epic
-ai-trackdown analyze EPIC-004 --estimate-tokens
-
-# Check overall project token allocation
-ai-trackdown tokens report --by=epic --include-costs --budget-warnings
+# Calculate usage by epic
+for epic_file in tasks/epics/*.md; do
+    epic_id=$(grep "^id:" "$epic_file" | cut -d: -f2 | tr -d ' ')
+    epic_title=$(grep "^title:" "$epic_file" | cut -d: -f2 | tr -d ' ')
+    
+    echo "## $epic_id: $epic_title" >> token-report.md
+    
+    # Sum tokens from all issues in epic
+    total_tokens=0
+    grep -l "epic: $epic_id" tasks/issues/*.md | while read issue_file; do
+        tokens=$(python -c "
+import yaml
+with open('$issue_file') as f:
+    content = f.read()
+    if '---' in content:
+        data = yaml.safe_load(content.split('---')[1])
+        print(data.get('token_usage', {}).get('total', 0))
+" 2>/dev/null || echo 0)
+        total_tokens=$((total_tokens + tokens))
+    done
+    
+    echo "- Total tokens: $total_tokens" >> token-report.md
+done
 ```
 
-### Weekly Token Review
+### Cost Analysis
 
-**Scenario:** Weekly review of token usage and costs
+**Scenario:** Analyzing AI costs by agent and purpose
 
 ```bash
-# Generate weekly token report
-ai-trackdown tokens report --period=week --by=agent --include-costs
+# Cost analysis script
+python -c "
+import yaml, glob
+from collections import defaultdict
 
-# Check budget status for all epics
-ai-trackdown tokens budget check --all
+costs = {
+    'claude': 0.000003,  # per token
+    'gpt4': 0.00003,
+    'gpt3': 0.000002
+}
 
-# Identify high token usage tasks
-ai-trackdown tokens report --period=week --sort=usage --reverse --limit=10
+usage_by_agent = defaultdict(int)
+usage_by_purpose = defaultdict(int)
+total_cost = 0
 
-# Export token data for finance
-ai-trackdown tokens report --period=month --format=csv --include-costs > monthly_ai_costs.csv
+for file in glob.glob('tasks/**/*.md', recursive=True):
+    with open(file) as f:
+        content = f.read()
+        if '---' in content:
+            try:
+                data = yaml.safe_load(content.split('---')[1])
+                token_usage = data.get('token_usage', {})
+                
+                # By agent
+                for agent, count in token_usage.get('by_agent', {}).items():
+                    usage_by_agent[agent] += count
+                    if agent in costs:
+                        total_cost += count * costs[agent]
+                
+                # By purpose
+                for session in token_usage.get('sessions', []):
+                    purpose = session.get('purpose', 'unknown')
+                    count = session.get('count', 0)
+                    usage_by_purpose[purpose] += count
+            except:
+                pass
+
+print('=== Token Usage Analysis ===')
+print(f'Total estimated cost: \${total_cost:.2f}')
+print()
+print('Usage by Agent:')
+for agent, count in sorted(usage_by_agent.items()):
+    cost = count * costs.get(agent, 0)
+    print(f'  {agent}: {count:,} tokens (\${cost:.2f})')
+print()
+print('Usage by Purpose:')
+for purpose, count in sorted(usage_by_purpose.items(), key=lambda x: x[1], reverse=True):
+    print(f'  {purpose}: {count:,} tokens')
+"
 ```
 
-### Token Optimization Analysis
+### Budget Alerts
 
-**Scenario:** Analyzing and optimizing token usage patterns
-
-```bash
-# Identify tasks with unexpectedly high token usage
-ai-trackdown list --format=json | jq '.[] | select(.token_usage.total > 5000) | {id, title, tokens: .token_usage.total}'
-
-# Analyze token efficiency by agent
-ai-trackdown tokens report --by=agent --period=month
-
-# Check token usage trends
-ai-trackdown tokens report --since="3 months ago" --by=week
-
-# Identify optimization opportunities
-ai-trackdown analyze --token-optimization --epic=EPIC-001
-```
-
-### Cost Tracking and Billing
-
-**Scenario:** Tracking costs for client billing or department allocation
+**Scenario:** Setting up budget monitoring and alerts
 
 ```bash
-# Generate cost report by epic (for client billing)
-ai-trackdown tokens report --by=epic --include-costs --period=month --format=json
+# Budget monitoring script
+#!/bin/bash
+ALERT_THRESHOLD=0.8
 
-# Track costs by team member
-ai-trackdown tokens report --by=assignee --include-costs --period=quarter
-
-# Export detailed cost breakdown
-ai-trackdown export json --include-tokens --include-costs --period=month > billing_details.json
-
-# Check against budget allocations
-ai-trackdown tokens budget check --all --format=json | jq '.[] | {epic, budget, used, percentage, status}'
+for epic_file in tasks/epics/*.md; do
+    # Extract budget and current usage
+    budget=$(grep "token_budget:" "$epic_file" | cut -d: -f2 | tr -d ' ')
+    epic_id=$(grep "^id:" "$epic_file" | cut -d: -f2 | tr -d ' ')
+    
+    if [ -n "$budget" ] && [ "$budget" -gt 0 ]; then
+        # Calculate current usage
+        current_usage=0
+        grep -l "epic: $epic_id" tasks/issues/*.md | while read issue_file; do
+            usage=$(python -c "
+import yaml
+with open('$issue_file') as f:
+    content = f.read()
+    if '---' in content:
+        data = yaml.safe_load(content.split('---')[1])
+        print(data.get('token_usage', {}).get('total', 0))
+" 2>/dev/null || echo 0)
+            current_usage=$((current_usage + usage))
+        done
+        
+        # Check if over threshold
+        threshold_tokens=$((budget * 80 / 100))  # 80% threshold
+        if [ "$current_usage" -gt "$threshold_tokens" ]; then
+            echo "⚠️  ALERT: $epic_id approaching budget limit"
+            echo "   Usage: $current_usage / $budget tokens ($(( current_usage * 100 / budget ))%)"
+        fi
+    fi
+done
 ```
 
 ---
 
 ## Integration Sync Patterns
 
-### GitHub Issues Synchronization
+### Manual GitHub Sync
 
-**Scenario:** Setting up and maintaining GitHub Issues sync
+**Scenario:** Synchronizing AI-Trackdown issues with GitHub Issues
 
 ```bash
-# Initial configuration
-ai-trackdown config set sync.github.repo "myorg/myproject"
-ai-trackdown config set sync.github.enabled true
+# Export issues to GitHub-compatible format
+python -c "
+import yaml, glob, json
 
-# Test connection
-ai-trackdown sync github --dry-run
+github_issues = []
+for file in glob.glob('tasks/issues/*.md'):
+    with open(file) as f:
+        content = f.read()
+        if '---' in content:
+            data = yaml.safe_load(content.split('---')[1])
+            body = '---'.join(content.split('---')[2:]).strip()
+            
+            # Format for GitHub
+            issue = {
+                'title': data.get('title'),
+                'body': body,
+                'labels': data.get('labels', []),
+                'assignees': [data.get('assignee', '').replace('@', '')] if data.get('assignee') else [],
+                'ai_trackdown_id': data.get('id')
+            }
+            github_issues.append(issue)
 
-# Perform initial full sync
-ai-trackdown sync github --full
+print(json.dumps(github_issues, indent=2))
+" > github-export.json
 
-# Daily incremental sync
-ai-trackdown sync github --since=1d
-
-# Check sync status
-ai-trackdown sync status github
+# Use GitHub CLI to create issues
+cat github-export.json | jq -r '.[] | @json' | while read issue; do
+    echo "$issue" | jq -r '"Creating: " + .title'
+    # gh issue create --title "$(echo "$issue" | jq -r .title)" --body "$(echo "$issue" | jq -r .body)"
+done
 ```
 
-### Jira Integration Workflow
+### Jira Integration Pattern
 
-**Scenario:** Bidirectional sync with Jira for enterprise workflow
+**Scenario:** Syncing with Jira using REST API
 
 ```bash
-# Configure Jira integration
-ai-trackdown config set sync.jira.url "https://company.atlassian.net"
-ai-trackdown config set sync.jira.project "PROJ"
+# Prepare Jira export
+python -c "
+import yaml, glob, json
 
-# Import existing Jira issues
-ai-trackdown sync jira --direction=pull --full
+jira_issues = []
+for file in glob.glob('tasks/issues/*.md'):
+    with open(file) as f:
+        content = f.read()
+        if '---' in content:
+            data = yaml.safe_load(content.split('---')[1])
+            body = '---'.join(content.split('---')[2:]).strip()
+            
+            # Format for Jira
+            issue = {
+                'fields': {
+                    'project': {'key': 'PROJ'},
+                    'summary': data.get('title'),
+                    'description': body,
+                    'issuetype': {'name': 'Story'},
+                    'priority': {'name': data.get('priority', 'Medium').title()},
+                    'labels': data.get('labels', [])
+                },
+                'ai_trackdown_id': data.get('id')
+            }
+            jira_issues.append(issue)
 
-# Regular bidirectional sync
-ai-trackdown sync jira --direction=both
+print(json.dumps(jira_issues, indent=2))
+" > jira-export.json
 
-# Handle sync conflicts
-ai-trackdown sync jira --resolve-conflicts=prompt
+# Manual sync with Jira (using curl or Jira CLI)
+# curl -X POST -H "Content-Type: application/json" -d @issue.json "$JIRA_URL/rest/api/2/issue/"
 ```
 
-### Multi-Platform Sync Strategy
+### Bidirectional Sync Tracking
 
-**Scenario:** Managing sync across multiple platforms
+**Scenario:** Maintaining sync state between systems
 
-```bash
-# Check all platform sync status
-ai-trackdown sync status
-
-# Sync priority order: local -> GitHub -> Jira -> Linear
-ai-trackdown sync github --direction=push
-ai-trackdown sync jira --direction=push  
-ai-trackdown sync linear --direction=push
-
-# Verify sync consistency
-ai-trackdown validate --sync-consistency
-
-# Rollback if sync issues detected
-ai-trackdown sync github --rollback-last
-```
-
-### Conflict Resolution Patterns
-
-**Scenario:** Handling and resolving sync conflicts
-
-```bash
-# Detect conflicts
-ai-trackdown sync github --dry-run
-
-# Interactive conflict resolution
-ai-trackdown sync github --resolve-conflicts=prompt
-
-# Batch resolution strategies
-ai-trackdown sync github --resolve-conflicts=local   # Prefer local
-ai-trackdown sync github --resolve-conflicts=remote  # Prefer remote
-
-# Manual conflict resolution
-ai-trackdown show ISSUE-042 --conflicts
-ai-trackdown update ISSUE-042 --resolve-conflict=use-local
+```yaml
+# Add sync tracking to issue frontmatter
+sync:
+  github: 1234      # GitHub issue number
+  jira: "PROJ-567"  # Jira ticket key
+  last_sync: "2025-01-07T14:30:00Z"
+  sync_status: "synced"  # synced, pending, conflict
 ```
 
 ---
 
-## Advanced Usage Scenarios
+## Advanced Manual Scenarios
 
-### Automated CI/CD Integration
+### Bulk Operations
 
-**Scenario:** Integration with CI/CD pipelines
+**Scenario:** Mass updating tasks for sprint transitions
 
 ```bash
-# Pre-commit validation
-ai-trackdown validate --strict --type=all
+# Move all completed tasks to archive
+mkdir -p archive/tasks/issues/$(date +%Y-%m)
+grep -l "status: done" tasks/issues/*.md | while read file; do
+    mv "$file" "archive/tasks/issues/$(date +%Y-%m)/"
+done
 
-# Post-commit task updates
-ai-trackdown parse-commit "$COMMIT_MESSAGE"
+# Bulk assignee updates
+find tasks/issues/ -name "*.md" -exec grep -l "assignee: @old-dev" {} \; | \
+while read file; do
+    sed -i 's/assignee: "@old-dev"/assignee: "@new-dev"/' "$file"
+    sed -i "s/updated: .*/updated: \"$(date -u +%Y-%m-%dT%H:%M:%SZ)\"/" "$file"
+done
 
-# Pre-deployment checks
-ai-trackdown list --status=in-progress --epic=EPIC-003 --exit-if-found
-
-# Post-deployment updates
-ai-trackdown update EPIC-003 --add-labels=deployed --comment="Deployed to production"
+# Sprint rollover - update epic target dates
+find tasks/epics/ -name "*.md" | while read file; do
+    if grep -q "target_date: 2025-01-15" "$file"; then
+        sed -i 's/target_date: "2025-01-15"/target_date: "2025-01-29"/' "$file"
+    fi
+done
 ```
 
-### Bulk Operations and Migrations
+### Template Customization
 
-**Scenario:** Bulk updates and data migrations
+**Scenario:** Creating project-specific templates
 
 ```bash
-# Bulk status updates
-ai-trackdown list --epic=EPIC-001 --status=open --format=json | \
-  jq -r '.[].id' | \
-  xargs -I {} ai-trackdown update {} --status=in-progress
+# Create security review template
+cp .ai-trackdown/templates/issue.md .ai-trackdown/templates/security-review.md
 
-# Mass label updates
-ai-trackdown list --assignee=@olddev --format=json | \
-  jq -r '.[].id' | \
-  xargs -I {} ai-trackdown update {} --assignee=@newdev
+# Customize template
+cat >> .ai-trackdown/templates/security-review.md << 'EOF'
 
-# Migration from old system
-csv_file="old_system_export.csv"
-ai-trackdown import csv "$csv_file" --mapping="custom_mapping.yaml"
+## Security Checklist
+- [ ] Input validation review
+- [ ] Authentication/authorization check
+- [ ] Data encryption verification
+- [ ] Audit logging implementation
+- [ ] Penetration testing completed
 
-# Archive completed epics
-ai-trackdown list --type=epic --status=done --created-before="6 months ago" | \
-  ai-trackdown archive
+## Security Tools Used
+- [ ] SAST scan completed
+- [ ] DAST scan completed
+- [ ] Dependency vulnerability scan
+- [ ] Manual code review
+
+## Compliance Requirements
+- [ ] OWASP Top 10 addressed
+- [ ] Company security standards met
+- [ ] Privacy requirements validated
+EOF
+
+# Use custom template
+cp .ai-trackdown/templates/security-review.md tasks/issues/ISSUE-078-auth-security-review.md
+vim tasks/issues/ISSUE-078-auth-security-review.md
 ```
 
-### Custom Reporting and Analytics
+### Complex Reporting
 
-**Scenario:** Custom analytics and reporting
+**Scenario:** Generating comprehensive project reports
 
 ```bash
+# Project health report
+#!/bin/bash
+echo "# Project Health Report - $(date +%Y-%m-%d)" > health-report.md
+echo "" >> health-report.md
+
+# Epic summaries
+echo "## Epic Progress" >> health-report.md
+for epic_file in tasks/epics/*.md; do
+    epic_id=$(grep "^id:" "$epic_file" | cut -d: -f2 | tr -d ' ')
+    epic_title=$(grep "^title:" "$epic_file" | cut -d: -f2- | sed 's/^[[:space:]]*//')
+    
+    total_issues=$(grep -l "epic: $epic_id" tasks/issues/*.md | wc -l)
+    done_issues=$(grep -l "epic: $epic_id" tasks/issues/*.md | xargs grep -l "status: done" 2>/dev/null | wc -l)
+    
+    if [ "$total_issues" -gt 0 ]; then
+        progress=$(( done_issues * 100 / total_issues ))
+        echo "- **$epic_id**: $epic_title ($done_issues/$total_issues - $progress%)" >> health-report.md
+    fi
+done
+
 # Velocity tracking
-ai-trackdown list --status=done --updated-after="last month" --format=json | \
-  jq '[.[] | .estimate] | add'
+echo "" >> health-report.md
+echo "## Team Velocity" >> health-report.md
+echo "- Completed this week: $(find tasks/ -name "*.md" -exec grep -l "status: done" {} \; | xargs grep -l "updated: $(date +%Y-%m-%d)" | wc -l)" >> health-report.md
 
-# Burndown data
-ai-trackdown list --epic=EPIC-003 --format=json | \
-  jq 'group_by(.status) | map({status: .[0].status, count: length})'
-
-# Token efficiency analysis
-ai-trackdown tokens report --period=month --format=json | \
-  jq '.by_task | map(select(.tokens_per_story_point)) | sort_by(.tokens_per_story_point)'
-
-# Custom dashboard data
-ai-trackdown list --format=json > tasks.json
-ai-trackdown tokens report --format=json > tokens.json
-# Process with custom analytics script
-python analytics_dashboard.py tasks.json tokens.json
+# Token usage summary  
+echo "" >> health-report.md
+echo "## Token Usage Summary" >> health-report.md
+python -c "
+import yaml, glob
+total = 0
+for file in glob.glob('tasks/**/*.md', recursive=True):
+    with open(file) as f:
+        content = f.read()
+        if '---' in content:
+            try:
+                data = yaml.safe_load(content.split('---')[1])
+                total += data.get('token_usage', {}).get('total', 0)
+            except: pass
+print(f'- Total tokens used: {total:,}')
+"
 ```
 
-### Multi-Project Management
-
-**Scenario:** Managing multiple projects with shared resources
-
-```bash
-# Switch between projects
-export AITASKTRACK_CONFIG="/path/to/project-a/.ai-trackdown/config.yaml"
-ai-trackdown list --type=epic
-
-export AITASKTRACK_CONFIG="/path/to/project-b/.ai-trackdown/config.yaml"
-ai-trackdown list --type=epic
-
-# Cross-project reporting
-ai-trackdown tokens report --all-projects --by=assignee --period=week
-
-# Shared resource allocation
-ai-trackdown list --assignee=@shared-dev --all-projects --format=json | \
-  jq 'group_by(.project) | map({project: .[0].project, tasks: length})'
-```
-
-### Emergency Response Patterns
-
-**Scenario:** Handling production issues and urgent tasks
-
-```bash
-# Create urgent issue
-ai-trackdown create issue "Production API down" \
-  --priority=critical \
-  --labels=production,urgent \
-  --assignee=@oncall-dev
-
-# Track incident response
-ai-trackdown create epic "Incident Response - API Outage" \
-  --owner=@incident-commander \
-  --target-date="today"
-
-# Real-time status updates
-ai-trackdown update ISSUE-999 --status=investigating --comment="$(date): Checking logs"
-ai-trackdown update ISSUE-999 --status=identified --comment="$(date): Found root cause in rate limiter"
-ai-trackdown update ISSUE-999 --status=fixing --comment="$(date): Deploying hotfix"
-ai-trackdown update ISSUE-999 --status=resolved --comment="$(date): Fix deployed, monitoring"
-
-# Post-incident analysis
-ai-trackdown create issue "Post-incident review - API outage" \
-  --epic=EPIC-999 \
-  --labels=postmortem,process-improvement
-```
-
----
-
-These usage patterns demonstrate real-world scenarios for ai-trackdown CLI usage, covering everything from daily development workflows to complex enterprise integration patterns. Each pattern includes practical command sequences and expected outcomes to guide implementation and testing.
+This comprehensive guide provides manual workflow patterns for effectively using AI-Trackdown as a documentation framework without relying on CLI automation.

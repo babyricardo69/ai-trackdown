@@ -1,29 +1,30 @@
-# Minimal ai-trackdown Configuration
+# Minimal AI Trackdown Configuration Template
 # Perfect for individual developers or small teams getting started
+# Copy this template to your TASKTRACK.md file and customize
 
 version: 1
 project:
   name: "My Project"
   id_prefix: "PROJ"
 
-# Basic AI token tracking
+# Manual AI token tracking configuration
 ai:
   token_tracking:
-    enabled: true
+    manual_tracking: true
     providers:
       claude:
         model: "claude-3.5-sonnet"
         cost_per_1k_input: 0.003
         cost_per_1k_output: 0.015
 
-# Auto-generate llms.txt for AI context
+# Manual llms.txt management
 ai:
   llms_txt:
-    auto_generate: true
-    update_frequency: "on_change"
+    location: "docs/llms.txt"
+    update_workflow: "manual_update_after_task_changes"
 
-# Basic git integration
+# Git workflow integration
 git:
-  hooks:
-    auto_install: true
-    commit_parsing: true
+  commit_conventions:
+    task_references: true
+    token_usage_in_commits: true

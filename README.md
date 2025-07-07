@@ -58,6 +58,30 @@ cd your-project
 
 This framework provides documentation patterns and templates - no installation required.
 
+## 🤖 AI Agent Setup
+
+### For AI Agents Working with This Framework
+
+If you're an AI agent helping with AI Track Down implementation, read the complete setup instructions in:
+
+**[AI-AGENT-PROMPT.md](AI-AGENT-PROMPT.md)** - Complete system prompt and workflow guide
+
+This file contains:
+- Complete framework context and structure
+- Task creation and updating workflows  
+- Token tracking guidelines and best practices
+- AI-optimized templates and patterns
+- Integration with development workflows
+
+**Quick AI Agent Workflow:**
+1. Read `AI-AGENT-PROMPT.md` for complete context
+2. Copy templates from `/templates/` directory for new tasks
+3. Update task status and token usage in YAML frontmatter
+4. Use AI context markers for technical implementation details
+5. Update project dashboard in `AI-TRACKDOWN.md`
+
+This framework is optimized for AI-human collaboration with built-in token tracking and context management.
+
 ## 🏁 Quick Start
 
 ### 1. Set Up Your Project Structure

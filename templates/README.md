@@ -17,7 +17,7 @@ ai-trackdown is a pure markdown-based methodology that provides:
 - **`task-template.md`** - Template for granular implementation tasks
 - **`issue-template.md`** - Template for development issues and user stories
 - **`epic-template.md`** - Template for high-level project initiatives
-- **`TASKTRACK-template.md`** - Project overview dashboard template
+- **`AI-TRACKDOWN-template.md`** - Project overview dashboard template
 
 ### Documentation Templates
 - **`directory-structure.md`** - Complete guide to organizing ai-trackdown projects
@@ -38,7 +38,7 @@ cd my-project
 cp /path/to/ai-trackdown/templates/* templates/
 
 # Create initial project dashboard
-cp templates/TASKTRACK-template.md TASKTRACK.md
+cp templates/AI-TRACKDOWN-template.md AI-TRACKDOWN.md
 ```
 
 ### 3. Create Your First Epic

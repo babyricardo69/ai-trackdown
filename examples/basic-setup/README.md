@@ -21,7 +21,7 @@ mkdir -p tasks/epics tasks/issues tasks/tasks docs
 
 ### 2. Create Configuration Template
 
-Copy from `templates/config-examples.md` and create `TASKTRACK.md`:
+Copy from `templates/config-examples.md` and create `AI-TRACKDOWN.md`:
 ```yaml
 # Simple Todo App Configuration
 version: 1
@@ -133,7 +133,7 @@ todo-app/
 │   ├── components/
 │   ├── pages/
 │   └── utils/
-└── TASKTRACK.md
+└── AI-TRACKDOWN.md
 ```
 
 ## Daily Workflow

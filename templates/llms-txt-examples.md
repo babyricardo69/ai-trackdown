@@ -31,7 +31,7 @@ Completed items: [count]
 /tasks/issues/: Development issues and user stories
 /tasks/tasks/: Granular implementation tasks
 /docs/: Project documentation and AI context
-/TASKTRACK.md: Main project dashboard
+/AI-TRACKDOWN.md: Main project dashboard
 
 ## Recent Activity
 - [Recent completion or milestone]
@@ -50,7 +50,7 @@ Primary AI Agents: [list of agents in use]
 
 ## Quick Navigation
 View all open work: /tasks/
-Project status: /TASKTRACK.md
+Project status: /AI-TRACKDOWN.md
 Full AI context: /docs/llms-full.txt
 
 ## External Systems

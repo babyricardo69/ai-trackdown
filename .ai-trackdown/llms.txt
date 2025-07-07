@@ -1,16 +1,16 @@
-# AI-TaskTrack Project Index
+# AI Track Down Project Index
 # Generated: 2025-01-07T15:00:00Z
 # Format: llms.txt v1.0
 
 ## Project Overview
-AI-TaskTrack: Lightweight AI-native task management system
+AI Track Down: Lightweight AI-native task management system
 Active epics: 0
 Open issues: 0
 Completed tasks: 0
 
 ## Key Files
 /templates/: File templates for epics, issues, and tasks
-/.aitasktrack/config.yaml: Project configuration
+/.ai-trackdown/config.yaml: Project configuration
 /docs/: Complete documentation
 /README.md: Project overview and getting started
 
@@ -18,10 +18,10 @@ Completed tasks: 0
 Project setup and initial documentation
 
 ## Quick Commands
-Initialize project: `aitasktrack init`
-Create epic: `aitasktrack create epic "Epic Title"`
-Create issue: `aitasktrack create issue "Issue Title" --epic=EPIC-001`
-Generate llms.txt: `aitasktrack generate llms-txt`
+Initialize project: `ai-trackdown init`
+Create epic: `ai-trackdown create epic "Epic Title"`
+Create issue: `ai-trackdown create issue "Issue Title" --epic=EPIC-001`
+Generate llms.txt: `ai-trackdown generate llms-txt`
 
 ## Integration Status
 GitHub: Not configured

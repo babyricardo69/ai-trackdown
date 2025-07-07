@@ -1,6 +1,6 @@
 version: 1
 project:
-  name: "AI-TaskTrack Framework"
+  name: "AI Track Down Framework"
   id_prefix: "ATT"
   description: "Lightweight AI-native task management system"
   

@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to ai-trackdown will be documented in this file.
+All notable changes to AI Track Down will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
@@ -50,8 +50,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Documentation Highlights
 - Revolutionary positioning as AI-native task management framework
 - Zero-friction onboarding with clear templates and examples
-- Self-dogfooding approach using ai-trackdown for its own development
-- Complete rebranding from AI-TaskTrack to ai-trackdown for consistency
+- Self-dogfooding approach using AI Track Down for its own development
+- Complete rebranding from TaskTrack to AI Track Down for consistency
 
 ---
 
@@ -83,7 +83,7 @@ When breaking changes are introduced, detailed migration instructions will be pr
 
 ## Contributors
 
-Thank you to all contributors who have helped shape ai-trackdown! 
+Thank you to all contributors who have helped shape AI Track Down! 
 
 ### Core Team
 - Development team members will be listed here as the project grows

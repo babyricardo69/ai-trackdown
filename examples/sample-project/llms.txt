@@ -1,4 +1,4 @@
-# AI Trackdown Project Index
+# AI Track Down Project Index
 # Generated: 2025-01-07T17:15:00Z
 # Format: llms.txt v1.0
 
@@ -18,7 +18,7 @@ Total token usage: 18,547 (24.7% of budget)
 /tasks/epics/ - High-level project epics and strategic initiatives
 /tasks/issues/ - Active development issues and feature requests  
 /tasks/tasks/ - Granular implementation tasks and bug fixes
-/TASKTRACK.md - Real-time project status dashboard
+/AI-TRACKDOWN.md - Real-time project status dashboard
 /.ai-trackdown/config.yaml - System configuration and settings
 
 ## Recent Activity (Last 7 Days)

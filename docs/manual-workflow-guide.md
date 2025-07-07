@@ -32,7 +32,7 @@ your-project/
 ├── docs/
 │   ├── llms.txt             # AI index file
 │   └── llms-full.txt        # Complete context file
-└── TASKTRACK.md             # Project dashboard
+└── AI-TRACKDOWN.md          # Project dashboard
 ```
 
 ### 2. Configure Your Project
@@ -315,7 +315,7 @@ While ai-trackdown can automate status updates via git hooks, you can manually i
 ### Manual Dashboard Updates
 
 #### Daily Updates
-Update `TASKTRACK.md` with:
+Update `AI-TRACKDOWN.md` with:
 - Current sprint progress
 - Active issue status
 - Recent completions
@@ -443,7 +443,7 @@ Generate weekly summaries:
 **Solution:** Regular link verification and updates
 
 #### Outdated Dashboard
-**Problem:** TASKTRACK.md doesn't reflect current state
+**Problem:** AI-TRACKDOWN.md doesn't reflect current state
 **Solution:** Automated or scheduled dashboard updates
 
 ### Process Improvements

@@ -198,7 +198,7 @@ project-root/
 │   ├── project-guide.md           # Project documentation
 │   └── api-specs/                 # API specifications
 │
-├── TASKTRACK.md                    # Project dashboard
+├── AI-TRACKDOWN.md                 # Project dashboard
 ├── README.md                       # Project overview
 └── CHANGELOG.md                    # Change history
 ```

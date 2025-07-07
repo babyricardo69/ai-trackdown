@@ -1,15 +1,15 @@
-# ShopFlow E-commerce Platform Enhancement - AI Trackdown Project Index
+# ShopFlow E-commerce Platform Enhancement - AI Track Down Project Index
 # Generated: 2025-01-07T16:30:00Z
 # Format: llms.txt v1.0
 
 ## Project Overview
-ShopFlow E-commerce Platform Enhancement using AI Trackdown methodology
+ShopFlow E-commerce Platform Enhancement using AI Track Down methodology
 Active development: Mobile-first redesign, modern authentication, AI recommendations
 Team size: 12 developers, 3 AI agents (Claude, GPT-4, Copilot)
 Duration: January 1 - March 15, 2025 (11 weeks)
 
 ## Key Files & Structure
-/TASKTRACK.md: Project dashboard with status, metrics, team activity
+/AI-TRACKDOWN.md: Project dashboard with status, metrics, team activity
 /tasks/epics/: 3 major epics with business value and technical details
 /tasks/issues/: 7 active issues across different development phases
 /tasks/tasks/: 15+ granular tasks showing implementation progress
@@ -90,19 +90,19 @@ Team Velocity: 23 story points completed, 37 remaining
 ## Quick Commands
 ```bash
 # View current sprint items
-ai-trackdown list --sprint=current --status=active
+AI Track Down list --sprint=current --status=active
 
 # Check token usage by epic
-ai-trackdown tokens report --by=epic --period=week
+AI Track Down tokens report --by=epic --period=week
 
 # Generate AI context for active work
-ai-trackdown context --active-issues --for=claude
+AI Track Down context --active-issues --for=claude
 
 # Sync with all external systems
-ai-trackdown sync --all --validate
+AI Track Down sync --all --validate
 
 # Create new task in current epic
-ai-trackdown create task "Description" --epic=EPIC-001 --estimate=3
+AI Track Down create task "Description" --epic=EPIC-001 --estimate=3
 ```
 
 ## Emergency Contacts & Escalation

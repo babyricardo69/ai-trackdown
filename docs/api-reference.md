@@ -37,7 +37,7 @@ integrations:
 ### Status and Information
 
 #### Project Status Dashboard
-Maintain project status in TASKTRACK.md using this structure:
+Maintain project status in AI-TRACKDOWN.md using this structure:
 
 ```markdown
 # Project Status Dashboard
@@ -383,7 +383,7 @@ Current focus: OAuth2 implementation
 /tasks/epics/: Project epics and major features
 /tasks/issues/: Development issues and requirements
 /tasks/tasks/: Implementation tasks and subtasks
-/TASKTRACK.md: Project status dashboard
+/AI-TRACKDOWN.md: Project status dashboard
 
 ## Current Priorities
 1. EPIC-001: User Authentication (in-progress, 70% complete)
@@ -646,7 +646,7 @@ cp .ai-trackdown/templates/issue.md tasks/issues/ISSUE-004-stripe-integration.md
 cp .ai-trackdown/templates/issue.md tasks/issues/ISSUE-005-payment-ui.md
 
 # Update project dashboard
-vim TASKTRACK.md
+vim AI-TRACKDOWN.md
 ```
 
 ### Weekly Reporting
@@ -662,7 +662,7 @@ print(f'Weekly token usage: {total}')
 "
 
 # Update project status
-vim TASKTRACK.md
+vim AI-TRACKDOWN.md
 
 # Export for external reporting
 python export_script.py > weekly-report.json

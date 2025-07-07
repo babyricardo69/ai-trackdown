@@ -17,7 +17,7 @@ This document outlines manual processes for creating, updating, and managing tas
    - Copy epic-template.md to `templates/`
    - Copy issue-template.md to `templates/`
    - Copy task-template.md to `templates/`
-   - Copy TASKTRACK-template.md to root as `TASKTRACK.md`
+   - Copy AI-TRACKDOWN-template.md to root as `AI-TRACKDOWN.md`
 
 3. **Create Configuration**
    Create `.ai-trackdown/config.yaml`:
@@ -391,7 +391,7 @@ grep -A 10 "Acceptance Criteria" tasks/issues/*.md
 
 ### Project Dashboard Updates
 
-1. **Update TASKTRACK.md Weekly**
+1. **Update AI-TRACKDOWN.md Weekly**
    - Refresh active epics section
    - Update team workload
    - Add recent activity

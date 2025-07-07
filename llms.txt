@@ -1,9 +1,9 @@
-# ai-trackdown Framework - Project Index
+# AI Track Down Framework - Project Index
 # Generated: 2025-01-07T15:30:00Z
 # Format: llms.txt v1.0
 
 ## Project Overview
-ai-trackdown Framework - Lightweight AI-native task management system
+AI Track Down Framework - Lightweight AI-native task management system
 Status: Active Development (Ready for Release)
 Documentation-only project focused on markdown-based task management
 
@@ -12,7 +12,7 @@ Documentation-only project focused on markdown-based task management
 /templates/: Complete markdown template library  
 /examples/: Realistic project demonstrations
 /.ai-trackdown/: Framework configuration
-/TASKTRACK.md: Project dashboard and status
+/AI-TRACKDOWN.md: Project dashboard and status
 
 ## Current Focus
 - Core documentation framework: COMPLETED ✅
@@ -34,7 +34,7 @@ Create new task: Copy from /templates/task-template.md
 View examples: Check /examples/complete-project/
 
 ## Documentation Files
-- ai-tasktrack-design-doc.md: Complete system specification
+- AI Track Down-design-doc.md: Complete system specification
 - README.md: Project overview and getting started
 - templates/: Ready-to-use markdown templates
 - examples/: Full project demonstrations

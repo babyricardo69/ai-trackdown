@@ -1,6 +1,6 @@
-# ai-trackdown Framework - Project Dashboard
+# AI Track Down Framework - Project Dashboard
 
-**Project**: ai-trackdown Framework  
+**Project**: AI Track Down Framework  
 **Status**: Active Development  
 **Timeline**: January 2025  
 **Team**: Claude PM Assistant + Research Agents
@@ -10,13 +10,13 @@
 ## 🎯 Current Sprint Status
 
 ### Sprint Goal
-Complete foundational documentation and template framework for ai-trackdown open-source release.
+Complete foundational documentation and template framework for AI Track Down open-source release.
 
 ### Completion Status
 - ✅ **Core Documentation**: Comprehensive OSS documentation with rationale
 - ✅ **Template Framework**: Complete markdown templates for all task types
 - ✅ **Example Project**: Full demonstration project with realistic scenarios
-- 🔄 **Self-Implementation**: Applying ai-trackdown to own project management
+- 🔄 **Self-Implementation**: Applying AI Track Down to own project management
 
 ---
 

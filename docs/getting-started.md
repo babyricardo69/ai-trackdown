@@ -55,7 +55,7 @@ my-ai-project/
 │   └── tasks/               # Granular implementation tasks
 ├── docs/
 │   └── llms-full.txt        # Complete project context
-└── TASKTRACK.md             # Project overview dashboard
+└── AI-TRACKDOWN.md             # Project overview dashboard
 ```
 
 ### Step 3: Create Your First Epic
@@ -164,7 +164,7 @@ vim .ai-trackdown/llms.txt
 AI-Trackdown introduces **token economics** to development through manual tracking:
 
 ```yaml
-# Track costs per epic/issue/task in TASKTRACK.md
+# Track costs per epic/issue/task in AI-TRACKDOWN.md
 Token Usage Report (This Week)
 ============================
 EPIC-001 (Auth System): 12,847 tokens ($0.39) - 25.7% of budget
@@ -310,7 +310,7 @@ Current focus: OAuth2 implementation
 /tasks/epics/: Project epics and major features
 /tasks/issues/: Development issues and requirements
 /tasks/tasks/: Implementation tasks and subtasks
-/TASKTRACK.md: Project status dashboard
+/AI-TRACKDOWN.md: Project status dashboard
 
 ## Current Priorities
 1. EPIC-001: User Authentication (in-progress, 70% complete)
@@ -430,8 +430,8 @@ grep -r "token_usage:" tasks/ | sort
 Monitor project status through dashboard files:
 
 ```bash
-# Review project status in TASKTRACK.md
-cat TASKTRACK.md
+# Review project status in AI-TRACKDOWN.md
+cat AI-TRACKDOWN.md
 
 # Check epic progress manually
 grep -A 10 "EPIC-001" tasks/epics/*.md

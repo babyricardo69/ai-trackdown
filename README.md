@@ -1,11 +1,11 @@
-# ai-trackdown
+# AI Track Down
 
 > **Revolutionary markdown-based task management framework for the AI development era**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Documentation](https://img.shields.io/badge/docs-framework-blue.svg)](https://github.com/ai-trackdown/ai-trackdown)
 
-## 🚨 Why AI-Trackdown is the issue management system for the ai orchestrated development era
+## 🚨 Why AI Track Down is the issue management system for the ai orchestrated development era
 
 **The Problem**: Current task management systems were designed for human-only workflows. In the AI development era, we face:
 
@@ -15,7 +15,7 @@
 - **Vendor Lock-in**: Proprietary systems that trap your project data
 - **AI Accessibility**: Traditional systems are opaque to AI agents, requiring complex integrations
 
-**The Solution**: ai-trackdown is the first task management framework designed from the ground up for human-AI collaborative development:
+**The Solution**: AI Track Down is the first task management framework designed from the ground up for human-AI collaborative development:
 
 ✅ **Native AI Context**: Built-in llms.txt support means AI agents understand your project instantly  
 ✅ **Token Economics**: Track and optimize AI costs at every level (task/epic/project)  
@@ -23,7 +23,7 @@
 ✅ **Zero Lock-in**: Pure markdown files you can read, edit, and migrate anywhere  
 ✅ **AI-First Design**: Optimized for minimal token consumption and maximum AI efficiency  
 
-ai-trackdown isn't just another task manager - it's the missing documentation framework for AI-enhanced development teams.
+AI Track Down isn't just another task manager - it's the missing documentation framework for AI-enhanced development teams.
 
 > **📋 Documentation Framework**: This project provides templates, examples, and documentation patterns. Working CLI tools are being developed separately.
 
@@ -80,7 +80,7 @@ your-project/
 │   ├── epics/
 │   ├── issues/
 │   └── tasks/
-└── TASKTRACK.md
+└── AI-TRACKDOWN.md
 ```
 
 ### 2. Create Your First Epic
@@ -205,7 +205,7 @@ project-root/
 │       └── TASK-002-implement-oauth.md
 ├── docs/
 │   └── llms-full.txt            # Complete task context template
-└── TASKTRACK.md                 # Project task overview template
+└── AI-TRACKDOWN.md                 # Project task overview template
 ```
 
 ### Task File Format
@@ -362,7 +362,7 @@ cd ai-trackdown
 
 ### 🚀 Getting Started
 - **[Getting Started Guide](docs/getting-started.md)** - Complete template setup tutorial with examples
-- **[FAQ](docs/faq.md)** - Answers to common questions about ai-trackdown's revolutionary framework approach
+- **[FAQ](docs/faq.md)** - Answers to common questions about AI Track Down's revolutionary framework approach
 
 ### 🏗️ Framework Deep Dive  
 - **[Architecture Guide](docs/architecture.md)** - Framework design, AI integration patterns, and scaling strategies

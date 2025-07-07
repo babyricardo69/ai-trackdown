@@ -1,4 +1,4 @@
-# AI-Trackdown Framework Specification
+# AI Track Down Framework Specification
 
 **Version:** 1.0  
 **Status:** Framework Specification  
@@ -19,7 +19,7 @@
 
 ## Overview
 
-AI-Trackdown is a documentation framework for managing AI-native task tracking through markdown files and YAML frontmatter. It provides standardized templates, configurations, and manual workflows for team collaboration.
+AI Track Down is a documentation framework for managing AI-native task tracking through markdown files and YAML frontmatter. It provides standardized templates, configurations, and manual workflows for team collaboration.
 
 ### Design Principles
 
@@ -44,7 +44,7 @@ project/
 │   └── tasks/               # Granular implementation tasks
 ├── docs/
 │   └── llms-full.txt        # Complete project context
-└── TASKTRACK.md             # Project dashboard
+└── AI-TRACKDOWN.md          # Project dashboard
 ```
 
 ---
@@ -56,10 +56,10 @@ project/
 #### Template Installation
 ```bash
 # Copy framework templates to your project
-cp -r /path/to/ai-trackdown/templates/* .ai-trackdown/templates/
+cp -r /path/to/AI-Track-Down/templates/* .ai-trackdown/templates/
 
 # Download from repository
-wget https://github.com/your-org/ai-trackdown/archive/templates.zip
+wget https://github.com/your-org/AI-Track-Down/archive/templates.zip
 unzip templates.zip -d .ai-trackdown/templates/
 
 # Create directory structure
@@ -335,7 +335,7 @@ tasks/
 docs/                        # Optional: Documentation
 └── llms-full.txt           # Optional: Full context file
 
-TASKTRACK.md                 # Required: Project dashboard
+AI-TRACKDOWN.md              # Required: Project dashboard
 ```
 
 ---
@@ -716,4 +716,4 @@ print(f'Weekly by agent: {weekly_usage}')
 "
 ```
 
-This framework specification provides comprehensive guidance for implementing AI-Trackdown as a documentation framework with manual workflows, templates, and configuration-driven approaches rather than CLI automation.
+This framework specification provides comprehensive guidance for implementing AI Track Down as a documentation framework with manual workflows, templates, and configuration-driven approaches rather than CLI automation.

@@ -1,6 +1,6 @@
-# Contributing to ai-trackdown
+# Contributing to AI Track Down
 
-Thank you for your interest in contributing to ai-trackdown! This document provides guidelines and information for contributors.
+Thank you for your interest in contributing to AI Track Down! This document provides guidelines and information for contributors.
 
 ## 🚀 Getting Started
 
@@ -44,7 +44,7 @@ Before creating an issue, please:
 1. **Search existing issues** to avoid duplicates
 2. **Use the issue templates** provided
 3. **Include detailed information**:
-   - ai-trackdown version
+   - AI Track Down version
    - Node.js version
    - Operating system
    - Steps to reproduce
@@ -119,7 +119,7 @@ test(parser): add markdown parsing edge cases
 ## 🏗️ Project Structure
 
 ```
-ai-trackdown/
+AI-Track-Down/
 ├── bin/                    # CLI executables
 │   └── ai-trackdown.js
 ├── src/                    # Source code
@@ -396,4 +396,4 @@ Before your first contribution:
 
 ---
 
-**Thank you for contributing to ai-trackdown! Your involvement helps make task management better for both humans and AI agents.**
+**Thank you for contributing to AI Track Down! Your involvement helps make task management better for both humans and AI agents.**

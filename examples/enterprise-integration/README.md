@@ -49,7 +49,7 @@ This example demonstrates AI Trackdown in a large enterprise environment with mu
 
 ### Enterprise-Grade Configuration Template
 
-`TASKTRACK.md` configuration section (based on templates from `templates/config-examples.md`):
+`AI-TRACKDOWN.md` configuration section (based on templates from `templates/config-examples.md`):
 ```yaml
 version: 1
 project:

@@ -1,4 +1,4 @@
-# ai-trackdown: Design Document
+# AI Track Down: Design Document
 ## Lightweight AI-Native Task Management System
 
 **Version:** 1.0  
@@ -10,7 +10,7 @@
 
 ## Executive Summary
 
-ai-trackdown is a lightweight, git-native task management system designed from the ground up to support both human developers and AI agents. It combines the simplicity of markdown-based task tracking with native support for the llms.txt standard, comprehensive token tracking, and bidirectional synchronization with major task management platforms.
+AI Track Down is a lightweight, git-native task management system designed from the ground up to support both human developers and AI agents. It combines the simplicity of markdown-based task tracking with native support for the llms.txt standard, comprehensive token tracking, and bidirectional synchronization with major task management platforms.
 
 ### Key Features
 - Pure markdown/text storage using GitHub Flavored Markdown (GFM)
@@ -36,7 +36,7 @@ ai-trackdown is a lightweight, git-native task management system designed from t
 
 ```
 project-root/
-├── .ai-trackdown/
+├── .AI Track Down/
 │   ├── config.yaml              # System configuration
 │   ├── sync/                    # Sync state and mappings
 │   │   ├── github.json
@@ -55,7 +55,7 @@ project-root/
 │       └── TASK-002-implement-oauth.md
 ├── docs/
 │   └── llms-full.txt            # Complete task context
-└── TASKTRACK.md                 # Project task overview
+└── AI-TRACKDOWN.md              # Project task overview
 ```
 
 ---
@@ -167,7 +167,7 @@ Complete authentication and authorization system supporting multiple auth method
 
 ### `/llms.txt` (Index File)
 ```txt
-# ai-trackdown Project Index
+# AI Track Down Project Index
 # Generated: 2025-01-07T15:00:00Z
 # Format: llms.txt v1.0
 
@@ -181,7 +181,7 @@ Completed tasks: 145
 /tasks/epics/: High-level project epics
 /tasks/issues/: Active development issues
 /tasks/tasks/: Granular implementation tasks
-/TASKTRACK.md: Project status dashboard
+/AI-TRACKDOWN.md: Project status dashboard
 
 ## Current Focus
 - EPIC-001: User Authentication (70% complete)
@@ -189,9 +189,9 @@ Completed tasks: 145
 - ISSUE-007: API rate limiting (blocked)
 
 ## Quick Commands
-View all open issues: `ai-trackdown list --status=open`
-Check token usage: `ai-trackdown tokens --this-week`
-Sync with GitHub: `ai-trackdown sync github`
+View all open issues: `AI Track Down list --status=open`
+Check token usage: `AI Track Down tokens --this-week`
+Sync with GitHub: `AI Track Down sync github`
 
 ## Integration Status
 GitHub: Synced (2025-01-07T14:55:00Z)
@@ -201,7 +201,7 @@ Linear: Pending
 
 ### `/docs/llms-full.txt` (Complete Context)
 ```txt
-# ai-trackdown Complete Context
+# AI Track Down Complete Context
 # Generated: 2025-01-07T15:00:00Z
 
 ## Active Work Items
@@ -246,8 +246,8 @@ Tests: tests/auth/
 # Format: "fix(ISSUE-001): Implement login form"
 # Updates status based on keywords: fix/close/resolve -> done
 
-ai-trackdown parse-commit "$1"
-ai-trackdown generate-llms-txt
+AI Track Down parse-commit "$1"
+AI Track Down generate-llms-txt
 ```
 
 #### `pre-push`
@@ -255,8 +255,8 @@ ai-trackdown generate-llms-txt
 #!/bin/bash
 # Sync with external systems before push
 
-ai-trackdown sync --all
-ai-trackdown validate-tokens --warn-threshold=1000
+AI Track Down sync --all
+AI Track Down validate-tokens --warn-threshold=1000
 ```
 
 ### Branch Naming Convention
@@ -280,7 +280,7 @@ epic/EPIC-003-payment-system
 ### GitHub Issues Integration
 
 ```yaml
-# .ai-trackdown/sync/github.yaml
+# .AI Track Down/sync/github.yaml
 mapping:
   issue:
     title: title
@@ -303,7 +303,7 @@ sync_rules:
 ### Jira Integration
 
 ```yaml
-# .ai-trackdown/sync/jira.yaml
+# .AI Track Down/sync/jira.yaml
 mapping:
   issue:
     summary: title
@@ -316,7 +316,7 @@ mapping:
     labels: labels
     
 webhook:
-  url: https://your-domain.com/ai-trackdown/webhook/jira
+  url: https://your-domain.com/AI Track Down/webhook/jira
   secret: ${JIRA_WEBHOOK_SECRET}
 ```
 
@@ -353,7 +353,7 @@ token_tracking:
 
 ```bash
 # Weekly token usage report
-$ ai-trackdown tokens report --period=week
+$ AI Track Down tokens report --period=week
 
 Token Usage Report (2025-01-01 to 2025-01-07)
 ============================================
@@ -382,34 +382,34 @@ Top Token Consumers:
 
 ```bash
 # Initialize new project
-ai-trackdown init
+AI Track Down init
 
 # Create items
-ai-trackdown create epic "Payment Integration"
-ai-trackdown create issue "Implement Stripe webhook" --epic=EPIC-002
-ai-trackdown create task "Add webhook endpoint" --issue=ISSUE-010
+AI Track Down create epic "Payment Integration"
+AI Track Down create issue "Implement Stripe webhook" --epic=EPIC-002
+AI Track Down create task "Add webhook endpoint" --issue=ISSUE-010
 
 # List and filter
-ai-trackdown list --type=issue --status=open --assignee=@me
-ai-trackdown list --epic=EPIC-001 --has-ai-context
+AI Track Down list --type=issue --status=open --assignee=@me
+AI Track Down list --epic=EPIC-001 --has-ai-context
 
 # Update status
-ai-trackdown update ISSUE-001 --status=in-review
-ai-trackdown close TASK-042 --comment="Fixed in commit abc123"
+AI Track Down update ISSUE-001 --status=in-review
+AI Track Down close TASK-042 --comment="Fixed in commit abc123"
 
 # Token tracking
-ai-trackdown tokens add ISSUE-001 --agent=claude --count=892
-ai-trackdown tokens report --by=epic --period=month
+AI Track Down tokens add ISSUE-001 --agent=claude --count=892
+AI Track Down tokens report --by=epic --period=month
 
 # Sync operations
-ai-trackdown sync github --full
-ai-trackdown sync jira --since=1h
-ai-trackdown sync status
+AI Track Down sync github --full
+AI Track Down sync jira --since=1h
+AI Track Down sync status
 
 # AI operations
-ai-trackdown generate llms-txt
-ai-trackdown analyze ISSUE-001 --suggest-tasks
-ai-trackdown context EPIC-001 --for=claude
+AI Track Down generate llms-txt
+AI Track Down analyze ISSUE-001 --suggest-tasks
+AI Track Down context EPIC-001 --for=claude
 ```
 
 ---
@@ -466,7 +466,7 @@ ai-trackdown context EPIC-001 --for=claude
 
 ## Example Configurations
 
-### Minimal `.ai-trackdown/config.yaml`
+### Minimal `.AI Track Down/config.yaml`
 ```yaml
 version: 1
 project:
@@ -555,4 +555,4 @@ git:
 
 ## Conclusion
 
-ai-trackdown bridges the gap between traditional task management and AI-native development workflows. By leveraging git's distributed nature, markdown's simplicity, and modern AI standards, it provides a future-proof foundation for human-AI collaborative development while maintaining compatibility with existing tools and workflows.
+AI Track Down bridges the gap between traditional task management and AI-native development workflows. By leveraging git's distributed nature, markdown's simplicity, and modern AI standards, it provides a future-proof foundation for human-AI collaborative development while maintaining compatibility with existing tools and workflows.

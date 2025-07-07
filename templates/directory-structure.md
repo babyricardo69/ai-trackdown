@@ -39,7 +39,7 @@ project-root/
 │   ├── epic-template.md
 │   ├── issue-template.md
 │   └── task-template.md
-└── TASKTRACK.md                 # Project overview dashboard
+└── AI-TRACKDOWN.md                 # Project overview dashboard
 ```
 
 ---
@@ -81,7 +81,7 @@ The main task hierarchy organized by scope:
 - **`llms-full.txt`**: Complete project context for AI agents
 - **Additional docs**: Project-specific documentation
 
-### `TASKTRACK.md` - Project Dashboard
+### `AI-TRACKDOWN.md` - Project Dashboard
 
 Main project overview and status dashboard accessible from the root.
 
@@ -274,7 +274,7 @@ grep -l "sprint-12" tasks/**/*.md
    - Verify epic progress tracking
 
 2. **Weekly Updates**
-   - Update TASKTRACK.md dashboard
+   - Update AI-TRACKDOWN.md dashboard
    - Regenerate llms.txt index
    - Sync with external systems
 

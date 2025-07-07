@@ -1,12 +1,12 @@
 # Frequently Asked Questions
 
-This FAQ addresses common questions about ai-trackdown, its revolutionary approach to task management, and practical implementation details.
+This FAQ addresses common questions about AI Track Down, its revolutionary approach to task management, and practical implementation details.
 
 ## 🤔 General Questions
 
-### Q: What makes ai-trackdown different from other task management tools?
+### Q: What makes AI Track Down different from other task management tools?
 
-**A:** ai-trackdown is the first task management system designed specifically for the AI development era. Unlike traditional tools built for human-only workflows, ai-trackdown treats AI agents as first-class citizens:
+**A:** AI Track Down is the first task management system designed specifically for the AI development era. Unlike traditional tools built for human-only workflows, AI Track Down treats AI agents as first-class citizens:
 
 - **Native AI Context**: Built-in llms.txt support means AI agents understand your project instantly
 - **Token Economics**: Track and optimize AI costs at every level (task/epic/project)
@@ -14,7 +14,7 @@ This FAQ addresses common questions about ai-trackdown, its revolutionary approa
 - **Zero Lock-in**: Pure markdown files you can read, edit, and migrate anywhere
 - **AI-Optimized**: Structured for minimal token consumption and maximum AI efficiency
 
-Traditional tools require complex APIs and integrations for AI agents to understand project context. ai-trackdown makes your project instantly readable by any AI agent through the llms.txt standard.
+Traditional tools require complex APIs and integrations for AI agents to understand project context. AI Track Down makes your project instantly readable by any AI agent through the llms.txt standard.
 
 ### Q: Why markdown files instead of a database?
 
@@ -29,9 +29,9 @@ Traditional tools require complex APIs and integrations for AI agents to underst
 
 A database adds complexity, requires special tools, and creates vendor lock-in. Markdown is the universal interface between humans, AI agents, and development tools.
 
-### Q: How does ai-trackdown handle scale? Can it manage thousands of tasks?
+### Q: How does AI Track Down handle scale? Can it manage thousands of tasks?
 
-**A:** ai-trackdown is designed for scale through smart architecture:
+**A:** AI Track Down is designed for scale through smart architecture:
 
 - **Lazy Loading**: Only loads task files when needed
 - **Intelligent Indexing**: Maintains searchable cache for fast queries
@@ -47,9 +47,9 @@ A database adds complexity, requires special tools, and creates vendor lock-in. 
 
 The file-based approach actually scales better than databases for development teams because it leverages git's proven distributed architecture.
 
-### Q: Is ai-trackdown suitable for non-technical teams?
+### Q: Is AI Track Down suitable for non-technical teams?
 
-**A:** ai-trackdown is designed for development teams but can be adapted for other technical workflows:
+**A:** AI Track Down is designed for development teams but can be adapted for other technical workflows:
 
 **Best Fit:**
 - Software development teams using AI assistants
@@ -66,7 +66,7 @@ The markdown-first approach requires comfort with text files and basic git conce
 
 ## 🚀 Getting Started
 
-### Q: How long does it take to set up ai-trackdown?
+### Q: How long does it take to set up AI Track Down?
 
 **A:** Initial setup is designed to be quick:
 
@@ -76,35 +76,35 @@ The markdown-first approach requires comfort with text files and basic git conce
 
 **Quick Start:**
 ```bash
-npm install -g ai-trackdown
+npm install -g AI Track Down
 cd your-project
-ai-trackdown init
-ai-trackdown create epic "Your First Epic"
+AI Track Down init
+AI Track Down create epic "Your First Epic"
 ```
 
 The goal is zero-friction adoption that works with your existing workflows.
 
 ### Q: Can I migrate from existing task management tools?
 
-**A:** Yes! ai-trackdown provides migration tools for common platforms:
+**A:** Yes! AI Track Down provides migration tools for common platforms:
 
 **Supported Migrations:**
-- GitHub Issues → ai-trackdown (full migration)
-- Jira → ai-trackdown (issues, epics, custom fields)
-- Linear → ai-trackdown (issues, projects, cycles)
-- Trello → ai-trackdown (cards, lists, boards)
-- CSV/Excel → ai-trackdown (custom mapping)
+- GitHub Issues → AI Track Down (full migration)
+- Jira → AI Track Down (issues, epics, custom fields)
+- Linear → AI Track Down (issues, projects, cycles)
+- Trello → AI Track Down (cards, lists, boards)
+- CSV/Excel → AI Track Down (custom mapping)
 
 **Migration Process:**
 ```bash
 # Example: GitHub Issues migration
-ai-trackdown migrate github --repo=org/repo --include-closed=false
+AI Track Down migrate github --repo=org/repo --include-closed=false
 
 # Example: Jira migration  
-ai-trackdown migrate jira --project=PROJ --map-sprints-to-epics
+AI Track Down migrate jira --project=PROJ --map-sprints-to-epics
 
 # Preview before migration
-ai-trackdown migrate preview jira --project=PROJ --output=migration-plan.md
+AI Track Down migrate preview jira --project=PROJ --output=migration-plan.md
 ```
 
 **What Gets Migrated:**
@@ -138,9 +138,9 @@ ai-trackdown migrate preview jira --project=PROJ --output=migration-plan.md
 
 ## 🤖 AI Integration
 
-### Q: Which AI models and providers does ai-trackdown support?
+### Q: Which AI models and providers does AI Track Down support?
 
-**A:** ai-trackdown is designed to work with any AI provider:
+**A:** AI Track Down is designed to work with any AI provider:
 
 **Tested Providers:**
 - **Anthropic**: Claude 3.5 Sonnet, Claude 3 Haiku
@@ -161,7 +161,7 @@ token_providers:
     api_endpoint: "https://api.yourprovider.com"
 ```
 
-The llms.txt standard works with any text-capable AI model, making ai-trackdown provider-agnostic.
+The llms.txt standard works with any text-capable AI model, making AI Track Down provider-agnostic.
 
 ### Q: How does token tracking work?
 
@@ -175,16 +175,16 @@ The llms.txt standard works with any text-capable AI model, making ai-trackdown 
 **Manual Tracking:**
 ```bash
 # Track token usage for specific work
-ai-trackdown tokens add ISSUE-001 --agent=claude --count=1247 --purpose="code review"
+AI Track Down tokens add ISSUE-001 --agent=claude --count=1247 --purpose="code review"
 
 # Set budget alerts
-ai-trackdown tokens budget --epic=EPIC-001 --limit=50000 --alert-threshold=0.8
+AI Track Down tokens budget --epic=EPIC-001 --limit=50000 --alert-threshold=0.8
 ```
 
 **Reporting:**
 ```bash
 # Weekly cost analysis
-ai-trackdown tokens report --period=week --by=epic
+AI Track Down tokens report --period=week --by=epic
 
 Token Usage Report (This Week)
 ============================
@@ -225,8 +225,8 @@ OAuth2 integration (70% complete)
 Next: Two-factor authentication
 
 ## Quick Commands
-View open tasks: ai-trackdown list --status=open
-Check progress: ai-trackdown status EPIC-001
+View open tasks: AI Track Down list --status=open
+Check progress: AI Track Down status EPIC-001
 ```
 
 **Benefits:**
@@ -239,24 +239,24 @@ Check progress: ai-trackdown status EPIC-001
 
 ### Q: How do I optimize AI token usage?
 
-**A:** ai-trackdown provides several optimization strategies:
+**A:** AI Track Down provides several optimization strategies:
 
 **1. Smart Context Generation**
 ```bash
 # Generate minimal context for simple tasks
-ai-trackdown context TASK-001 --minimal
+AI Track Down context TASK-001 --minimal
 
 # Generate deep context for complex work
-ai-trackdown context EPIC-001 --depth=3 --include-dependencies
+AI Track Down context EPIC-001 --depth=3 --include-dependencies
 ```
 
 **2. Budget Management**
 ```bash
 # Set realistic budgets
-ai-trackdown tokens budget --epic=EPIC-001 --limit=25000
+AI Track Down tokens budget --epic=EPIC-001 --limit=25000
 
 # Monitor utilization
-ai-trackdown tokens usage --epic=EPIC-001 --trend
+AI Track Down tokens usage --epic=EPIC-001 --trend
 ```
 
 **3. AI Agent Specialization**
@@ -287,7 +287,7 @@ Current issue: PKCE flow implementation
 
 ### Q: How does bidirectional sync work with GitHub/Jira/Linear?
 
-**A:** Bidirectional sync keeps ai-trackdown and external systems in harmony:
+**A:** Bidirectional sync keeps AI Track Down and external systems in harmony:
 
 **Sync Strategy:**
 1. **Local First**: Your markdown files are the source of truth
@@ -298,13 +298,13 @@ Current issue: PKCE flow implementation
 **Example Workflow:**
 ```bash
 # Initial setup
-ai-trackdown sync setup github --repo=org/repo
+AI Track Down sync setup github --repo=org/repo
 
 # Regular sync (automatic or manual)
-ai-trackdown sync github --incremental
+AI Track Down sync github --incremental
 
 # Conflict resolution when needed
-ai-trackdown sync resolve github --interactive
+AI Track Down sync resolve github --interactive
 ```
 
 **What Syncs:**
@@ -316,13 +316,13 @@ ai-trackdown sync resolve github --interactive
 
 **What Doesn't Sync:**
 - AI context blocks (kept local)
-- Token usage data (ai-trackdown specific)  
+- Token usage data (AI Track Down specific)  
 - Internal markdown formatting
 - Git-specific metadata
 
 ### Q: What happens when there are sync conflicts?
 
-**A:** ai-trackdown handles conflicts gracefully:
+**A:** AI Track Down handles conflicts gracefully:
 
 **Conflict Resolution Strategy:**
 ```yaml
@@ -334,7 +334,7 @@ conflict_resolution:
 ```
 
 **When Conflicts Occur:**
-1. **Detection**: ai-trackdown identifies conflicting changes
+1. **Detection**: AI Track Down identifies conflicting changes
 2. **Preservation**: Creates `.conflict` files with both versions
 3. **Resolution**: Applies configured strategy (usually last-write-wins)
 4. **Notification**: Alerts team to review conflicts
@@ -342,10 +342,10 @@ conflict_resolution:
 **Manual Resolution:**
 ```bash
 # View conflicts
-ai-trackdown sync conflicts --platform=github
+AI Track Down sync conflicts --platform=github
 
 # Interactive resolution
-ai-trackdown sync resolve --interactive
+AI Track Down sync resolve --interactive
 
 # Review conflict files
 ls tasks/issues/*.conflict
@@ -358,11 +358,11 @@ ls tasks/issues/*.conflict
 
 ### Q: Can I sync with multiple platforms simultaneously?
 
-**A:** Yes! ai-trackdown supports multi-platform synchronization:
+**A:** Yes! AI Track Down supports multi-platform synchronization:
 
 **Configuration:**
 ```yaml
-# .ai-trackdown/config.yaml
+# .AI Track Down/config.yaml
 sync:
   github:
     enabled: true
@@ -378,20 +378,20 @@ sync:
 **Orchestrated Sync:**
 ```bash
 # Sync all platforms
-ai-trackdown sync --all
+AI Track Down sync --all
 
 # Sync in priority order  
-ai-trackdown sync --platforms=github,jira,linear --sequential
+AI Track Down sync --platforms=github,jira,linear --sequential
 
 # Parallel sync (faster, may cause conflicts)
-ai-trackdown sync --platforms=github,jira --parallel
+AI Track Down sync --platforms=github,jira --parallel
 ```
 
 **Conflict Priorities:**
 ```yaml
 # Resolve multi-platform conflicts by priority
 platform_priority:
-  - local      # ai-trackdown always wins
+  - local      # AI Track Down always wins
   - github     # Primary development platform
   - jira       # Project management
   - linear     # Secondary tracking
@@ -401,19 +401,19 @@ platform_priority:
 
 ### Q: How should I organize my task files?
 
-**A:** ai-trackdown provides a flexible but recommended structure:
+**A:** AI Track Down provides a flexible but recommended structure:
 
 **Standard Structure:**
 ```
 project-root/
-├── .ai-trackdown/           # Configuration and metadata
+├── .AI Track Down/           # Configuration and metadata
 ├── tasks/
 │   ├── epics/             # High-level project goals
 │   ├── issues/            # Development issues/features  
 │   └── tasks/             # Granular implementation tasks
 ├── docs/
 │   └── llms-full.txt      # Complete AI context
-└── TASKTRACK.md           # Project overview
+└── AI-TRACKDOWN.md        # Project overview
 ```
 
 **Scaling Options:**
@@ -442,7 +442,7 @@ tasks/
 
 ### Q: What's the difference between epics, issues, and tasks?
 
-**A:** ai-trackdown uses a three-level hierarchy for organizing work:
+**A:** AI Track Down uses a three-level hierarchy for organizing work:
 
 **Epics (High-Level Goals)**
 - Business objectives or major features
@@ -481,16 +481,16 @@ EPIC-001: User Authentication System
 
 ### Q: Can I customize the file format or templates?
 
-**A:** Yes! ai-trackdown supports extensive customization:
+**A:** Yes! AI Track Down supports extensive customization:
 
 **Custom Templates:**
 ```bash
 # Create custom templates
-ai-trackdown template create issue security-review
-ai-trackdown template create task frontend-component
+AI Track Down template create issue security-review
+AI Track Down template create task frontend-component
 
 # Use custom templates
-ai-trackdown create issue "Security audit" --template=security-review
+AI Track Down create issue "Security audit" --template=security-review
 ```
 
 **Template Structure:**
@@ -535,7 +535,7 @@ Compliance: {{compliance_requirements}}
 
 **Custom Fields:**
 ```yaml
-# .ai-trackdown/config.yaml
+# .AI Track Down/config.yaml
 custom_fields:
   security_level:
     type: select
@@ -553,9 +553,9 @@ custom_fields:
 
 ## 🛠️ Development and Customization
 
-### Q: Can I extend ai-trackdown with plugins?
+### Q: Can I extend AI Track Down with plugins?
 
-**A:** ai-trackdown supports a plugin architecture for extensions:
+**A:** AI Track Down supports a plugin architecture for extensions:
 
 **Plugin Types:**
 - **Sync Providers**: Add new integration platforms
@@ -583,21 +583,21 @@ class SlackNotificationPlugin {
 **Plugin Installation:**
 ```bash
 # Install community plugins
-ai-trackdown plugin install slack-notifications
+AI Track Down plugin install slack-notifications
 
 # Develop custom plugins
-ai-trackdown plugin create my-custom-plugin --template=notification
+AI Track Down plugin create my-custom-plugin --template=notification
 ```
 
-### Q: How do I contribute to ai-trackdown development?
+### Q: How do I contribute to AI Track Down development?
 
 **A:** We welcome contributions! See our [Contributing Guide](../CONTRIBUTING.md) for details:
 
 **Quick Start:**
 ```bash
 # Fork and clone the repository
-git clone https://github.com/your-username/ai-trackdown.git
-cd ai-trackdown
+git clone https://github.com/your-username/AI Track Down.git
+cd AI Track Down
 npm install
 npm test
 ```
@@ -615,7 +615,7 @@ npm test
 3. Implement changes with tests
 4. Submit pull request with detailed description
 
-### Q: What's the ai-trackdown roadmap?
+### Q: What's the AI Track Down roadmap?
 
 **A:** Our development roadmap focuses on AI-native capabilities:
 
@@ -651,39 +651,39 @@ npm test
 
 ## 🔧 Troubleshooting
 
-### Q: ai-trackdown commands are not working. What should I check?
+### Q: AI Track Down commands are not working. What should I check?
 
 **A:** Follow this troubleshooting checklist:
 
 **1. Installation Issues:**
 ```bash
 # Check installation
-which ai-trackdown
-ai-trackdown --version
+which AI Track Down
+AI Track Down --version
 
 # Reinstall if needed
-npm uninstall -g ai-trackdown
-npm install -g ai-trackdown
+npm uninstall -g AI Track Down
+npm install -g AI Track Down
 ```
 
 **2. Project Setup:**
 ```bash
 # Verify project initialization
-ls .ai-trackdown/
-cat .ai-trackdown/config.yaml
+ls .AI Track Down/
+cat .AI Track Down/config.yaml
 
 # Re-initialize if needed
-ai-trackdown init --force
+AI Track Down init --force
 ```
 
 **3. File Permissions:**
 ```bash
 # Check file permissions
-ls -la .ai-trackdown/
+ls -la .AI Track Down/
 ls -la tasks/
 
 # Fix permissions if needed
-chmod -R 755 .ai-trackdown/
+chmod -R 755 .AI Track Down/
 chmod -R 644 tasks/
 ```
 
@@ -695,7 +695,7 @@ git log --oneline -5
 
 # Verify git hooks
 ls -la .git/hooks/
-ai-trackdown hooks status
+AI Track Down hooks status
 ```
 
 ### Q: Sync is failing with external systems. How do I debug?
@@ -705,27 +705,27 @@ ai-trackdown hooks status
 **1. Test Authentication:**
 ```bash
 # Test credentials
-ai-trackdown sync test github --auth-only
-ai-trackdown sync test jira --verbose
+AI Track Down sync test github --auth-only
+AI Track Down sync test jira --verbose
 
 # Refresh credentials
-ai-trackdown sync refresh-auth github
+AI Track Down sync refresh-auth github
 ```
 
 **2. Check Sync Status:**
 ```bash
 # Detailed sync status
-ai-trackdown sync status --verbose --all-platforms
+AI Track Down sync status --verbose --all-platforms
 
 # View sync history
-ai-trackdown sync history github --limit=10 --errors-only
+AI Track Down sync history github --limit=10 --errors-only
 ```
 
 **3. Debug Mode:**
 ```bash
 # Enable debug logging
-export AITASKTRACK_DEBUG=true
-ai-trackdown sync github --verbose 2>&1 | tee sync-debug.log
+export AI_TRACKDOWN_DEBUG=true
+AI Track Down sync github --verbose 2>&1 | tee sync-debug.log
 ```
 
 **4. Common Issues:**
@@ -741,40 +741,40 @@ ai-trackdown sync github --verbose 2>&1 | tee sync-debug.log
 **1. Verify Configuration:**
 ```bash
 # Check token provider configuration
-ai-trackdown config get ai.token_tracking
-ai-trackdown tokens providers --list
+AI Track Down config get ai.token_tracking
+AI Track Down tokens providers --list
 ```
 
 **2. Audit Token Data:**
 ```bash
 # Review token usage
-ai-trackdown tokens audit --detailed --period=month
+AI Track Down tokens audit --detailed --period=month
 
 # Check for missing attribution
-ai-trackdown tokens unattributed --fix-suggestions
+AI Track Down tokens unattributed --fix-suggestions
 ```
 
 **3. Calibrate Costs:**
 ```bash
 # Update provider pricing
-ai-trackdown config set ai.providers.claude.cost_per_1k_input=0.003
+AI Track Down config set ai.providers.claude.cost_per_1k_input=0.003
 
 # Recalculate costs
-ai-trackdown tokens recalculate --all --period=month
+AI Track Down tokens recalculate --all --period=month
 ```
 
 **4. Manual Corrections:**
 ```bash
 # Correct token usage
-ai-trackdown tokens correct ISSUE-001 --agent=claude --count=1500 --reason="API tracking failed"
+AI Track Down tokens correct ISSUE-001 --agent=claude --count=1500 --reason="API tracking failed"
 
 # Bulk corrections
-ai-trackdown tokens import corrections.csv
+AI Track Down tokens import corrections.csv
 ```
 
 ## 📚 Learning and Resources
 
-### Q: Where can I learn more about ai-trackdown?
+### Q: Where can I learn more about AI Track Down?
 
 **A:** Comprehensive learning resources:
 
@@ -793,7 +793,7 @@ ai-trackdown tokens import corrections.csv
 - **GitHub Issues** - Bug reports and feature requests
 - **Documentation Site** - Searchable guides and references
 
-### Q: How do I stay updated with ai-trackdown developments?
+### Q: How do I stay updated with AI Track Down developments?
 
 **A:** Stay connected with the community:
 
@@ -805,18 +805,18 @@ ai-trackdown tokens import corrections.csv
 **Update Process:**
 ```bash
 # Check for updates
-ai-trackdown update --check
+AI Track Down update --check
 
 # Update to latest version
-npm update -g ai-trackdown
+npm update -g AI Track Down
 
 # Review breaking changes
-ai-trackdown migrate --check --from-version=1.0.0
+AI Track Down migrate --check --from-version=1.0.0
 ```
 
-### Q: Can I get commercial support for ai-trackdown?
+### Q: Can I get commercial support for AI Track Down?
 
-**A:** ai-trackdown is open source with community support:
+**A:** AI Track Down is open source with community support:
 
 **Community Support:**
 - GitHub Issues for bug reports
@@ -825,7 +825,7 @@ ai-trackdown migrate --check --from-version=1.0.0
 - Community-contributed plugins
 
 **Professional Services:**
-While ai-trackdown itself is free and open source, professional services may be available through community partners for:
+While AI Track Down itself is free and open source, professional services may be available through community partners for:
 - Enterprise setup and training
 - Custom integrations and plugins
 - Workflow consulting and optimization

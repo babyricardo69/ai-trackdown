@@ -62,6 +62,99 @@ token_usage:
 This framework is documentation-only - use manual file editing and template copying rather than CLI commands.
 ```
 
+## Essential Documentation Reading for AI Agents
+
+### Required Reading Order
+Before working with any project using AI Track Down, read these files in order:
+
+1. **AI-TRACKDOWN.md** (Project Dashboard)
+   - Current project status and active work
+   - Sprint goals and completion metrics
+   - Token usage and budget status
+   - Key achievements and blockers
+
+2. **README.md** (Framework Overview)
+   - Project context and revolutionary positioning
+   - Key features and value proposition
+   - Getting started workflows and examples
+   - Integration capabilities and roadmap
+
+3. **llms.txt** (Project Index)
+   - Quick project overview and structure
+   - Active work items and priorities
+   - Quick commands and workflows
+   - Documentation file locations
+
+4. **docs/llms-full.txt** (if available)
+   - Complete project context and history
+   - Detailed task relationships and dependencies
+   - Full technical context and implementation notes
+
+### Framework Documentation Structure
+
+#### Core Documentation (/docs/)
+- **getting-started.md** - Complete setup and onboarding guide
+- **architecture.md** - System design and technical architecture
+- **best-practices.md** - Proven strategies and team workflows
+- **api-reference.md** - Template usage and configuration reference
+- **integrations.md** - Third-party platform integration patterns
+
+#### Templates (/templates/)
+- **AI-TRACKDOWN-template.md** - Project dashboard template
+- **epic-template.md** - High-level initiative template
+- **issue-template.md** - Specific problem/feature template
+- **task-template.md** - Implementation step template
+- **llms-txt-examples.md** - AI context file examples
+
+#### Examples (/examples/)
+- **basic-setup/** - Small team starter configuration
+- **enterprise-integration/** - Large organization examples
+- **complete-project/** - Full realistic project demonstration
+- **sample-project/** - Simple project walkthrough
+
+### Best Practices Reading Protocol
+
+#### Before Starting Any Work
+1. **Read Project Context**: Start with AI-TRACKDOWN.md to understand current state
+2. **Review Active Tasks**: Check /tasks/ directory for ongoing work and dependencies
+3. **Understand Framework**: Read relevant /docs/ files for methodology
+4. **Check Examples**: Review /examples/ for similar project patterns
+5. **Follow Templates**: Use appropriate templates from /templates/ directory
+
+#### During Work Sessions
+1. **Update Token Usage**: Track all AI work in task frontmatter
+2. **Follow AI Context Patterns**: Use established markers and documentation
+3. **Maintain Relationships**: Keep epic/issue/task hierarchy intact
+4. **Reference Documentation**: Link to relevant docs in task descriptions
+
+#### When Creating New Tasks
+1. **Copy Correct Template**: Use /templates/ directory for consistency
+2. **Follow Naming Conventions**: Use established ID patterns (EPIC-001, etc.)
+3. **Include AI Context**: Add implementation details in context markers
+4. **Set Proper Relationships**: Link to parent epics/issues appropriately
+
+### Documentation Best Practices for AI Agents
+
+#### Reading Strategy
+- **Scan First**: Quick overview of structure and key sections
+- **Deep Dive**: Focus on sections relevant to current work
+- **Cross-Reference**: Link related documents and examples
+- **Update Context**: Note changes and new insights in task descriptions
+
+#### Context Building
+- **Start Broad**: Project overview and goals from AI-TRACKDOWN.md
+- **Narrow Focus**: Specific task context from individual files
+- **Technical Details**: Implementation notes from AI context markers
+- **Relationships**: Dependencies and connections between tasks
+
+#### Workflow Integration
+- **Document Reading**: Always read project docs before starting work
+- **Template Usage**: Follow established patterns from /templates/
+- **Example Reference**: Use /examples/ for real-world patterns
+- **Best Practice Application**: Apply /docs/best-practices.md guidelines
+
+This documentation reading protocol ensures AI agents understand project context, follow established patterns, and maintain consistency with team workflows.
+
 ## Quick Reference
 
 ### Task Creation Workflow

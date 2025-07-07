@@ -1,0 +1,158 @@
+{
+  "last_sync": "2025-01-07T15:00:00Z",
+  "sync_status": "success",
+  "project_key": "PLATFORM",
+  "project_url": "https://shopflow.atlassian.net",
+  "sync_direction": "bidirectional",
+  "items_synced": {
+    "epics": 3,
+    "stories": 7,
+    "tasks": 12
+  },
+  "mappings": {
+    "EPIC-001": {
+      "jira_key": "PLATFORM-100",
+      "jira_id": "10150",
+      "issue_type": "Epic",
+      "status": "In Progress",
+      "assignee": "alex.developer",
+      "epic_name": "Modern Authentication System",
+      "last_updated": "2025-01-07T15:45:00Z",
+      "custom_fields": {
+        "epic_budget": 40000,
+        "token_usage": 22847
+      }
+    },
+    "EPIC-002": {
+      "jira_key": "PLATFORM-101",
+      "jira_id": "10151",
+      "issue_type": "Epic",
+      "status": "In Progress",
+      "assignee": "ui.team",
+      "epic_name": "Mobile-First UI Redesign",
+      "last_updated": "2025-01-07T14:20:00Z",
+      "custom_fields": {
+        "epic_budget": 60000,
+        "token_usage": 18234
+      }
+    },
+    "EPIC-003": {
+      "jira_key": "PLATFORM-102",
+      "jira_id": "10152",
+      "issue_type": "Epic",
+      "status": "To Do",
+      "assignee": "ml.team",
+      "epic_name": "AI-Powered Product Recommendation Engine",
+      "last_updated": "2025-01-07T13:10:00Z",
+      "custom_fields": {
+        "epic_budget": 80000,
+        "token_usage": 8120
+      }
+    },
+    "ISSUE-001": {
+      "jira_key": "PLATFORM-123",
+      "jira_id": "10175",
+      "issue_type": "Story",
+      "status": "Done",
+      "assignee": "alex.developer",
+      "epic_link": "PLATFORM-100",
+      "story_points": 8,
+      "last_updated": "2025-01-05T16:30:00Z"
+    },
+    "ISSUE-003": {
+      "jira_key": "PLATFORM-145",
+      "jira_id": "10197",
+      "issue_type": "Story",
+      "status": "In Progress",
+      "assignee": "alex.developer",
+      "epic_link": "PLATFORM-100",
+      "story_points": 13,
+      "last_updated": "2025-01-07T15:20:00Z"
+    },
+    "ISSUE-004": {
+      "jira_key": "PLATFORM-167",
+      "jira_id": "10219",
+      "issue_type": "Story",
+      "status": "Blocked",
+      "assignee": "security.team",
+      "epic_link": "PLATFORM-100",
+      "story_points": 21,
+      "blocked_reason": "Security audit approval pending",
+      "last_updated": "2025-01-07T09:30:00Z"
+    },
+    "ISSUE-009": {
+      "jira_key": "PLATFORM-156",
+      "jira_id": "10208",
+      "issue_type": "Story",
+      "status": "In Review",
+      "assignee": "frontend.lead",
+      "epic_link": "PLATFORM-101",
+      "story_points": 8,
+      "last_updated": "2025-01-07T16:45:00Z"
+    },
+    "TASK-001": {
+      "jira_key": "PLATFORM-134",
+      "jira_id": "10186",
+      "issue_type": "Task",
+      "status": "Done",
+      "assignee": "alex.developer",
+      "parent_link": "PLATFORM-123",
+      "story_points": 3,
+      "last_updated": "2025-01-02T17:45:00Z"
+    },
+    "TASK-008": {
+      "jira_key": "PLATFORM-189",
+      "jira_id": "10241",
+      "issue_type": "Task",
+      "status": "In Progress",
+      "assignee": "frontend.dev",
+      "parent_link": "PLATFORM-156",
+      "story_points": 5,
+      "progress": 70,
+      "last_updated": "2025-01-07T16:20:00Z"
+    },
+    "TASK-015": {
+      "jira_key": "PLATFORM-203",
+      "jira_id": "10255",
+      "issue_type": "Task",
+      "status": "To Do",
+      "assignee": "alex.developer",
+      "parent_link": "PLATFORM-145",
+      "story_points": 5,
+      "last_updated": "2025-01-07T10:15:00Z"
+    }
+  },
+  "sync_config": {
+    "auto_sync": true,
+    "sync_interval": "30m",
+    "webhook_enabled": true,
+    "field_mappings": {
+      "title": "summary",
+      "description": "description",
+      "status": "status.name",
+      "assignee": "assignee.emailAddress",
+      "epic": "customfield_10014",
+      "story_points": "customfield_10016",
+      "token_usage": "customfield_10002",
+      "epic_budget": "customfield_10001"
+    },
+    "status_mappings": {
+      "open": "To Do",
+      "in-progress": "In Progress", 
+      "in-review": "In Review",
+      "blocked": "Blocked",
+      "done": "Done"
+    }
+  },
+  "sync_errors": [],
+  "webhook_events": {
+    "last_received": "2025-01-07T14:45:00Z",
+    "events_processed": 23,
+    "events_failed": 0
+  },
+  "api_usage": {
+    "requests_made": 47,
+    "rate_limit_remaining": 8953,
+    "rate_limit_reset": "2025-01-07T16:00:00Z"
+  }
+}

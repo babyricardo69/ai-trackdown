@@ -1,0 +1,32 @@
+# AI-TaskTrack Project Index
+# Generated: 2025-01-07T15:00:00Z
+# Format: llms.txt v1.0
+
+## Project Overview
+AI-TaskTrack: Lightweight AI-native task management system
+Active epics: 0
+Open issues: 0
+Completed tasks: 0
+
+## Key Files
+/templates/: File templates for epics, issues, and tasks
+/.aitasktrack/config.yaml: Project configuration
+/docs/: Complete documentation
+/README.md: Project overview and getting started
+
+## Current Focus
+Project setup and initial documentation
+
+## Quick Commands
+Initialize project: `aitasktrack init`
+Create epic: `aitasktrack create epic "Epic Title"`
+Create issue: `aitasktrack create issue "Issue Title" --epic=EPIC-001`
+Generate llms.txt: `aitasktrack generate llms-txt`
+
+## Integration Status
+GitHub: Not configured
+Jira: Not configured
+Linear: Not configured
+
+## Token Budget
+No active tracking (development phase)

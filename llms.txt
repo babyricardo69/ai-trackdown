@@ -1,0 +1,46 @@
+# ai-trackdown Framework - Project Index
+# Generated: 2025-01-07T15:30:00Z
+# Format: llms.txt v1.0
+
+## Project Overview
+ai-trackdown Framework - Lightweight AI-native task management system
+Status: Active Development (Ready for Release)
+Documentation-only project focused on markdown-based task management
+
+## Project Structure
+/docs/: Core design documentation and architecture
+/templates/: Complete markdown template library  
+/examples/: Realistic project demonstrations
+/.ai-trackdown/: Framework configuration
+/TASKTRACK.md: Project dashboard and status
+
+## Current Focus
+- Core documentation framework: COMPLETED ✅
+- Template library creation: COMPLETED ✅  
+- Example project demonstration: COMPLETED ✅
+- Self-implementation: IN PROGRESS 🔄
+
+## Key Features
+- Pure markdown/text storage using GitHub Flavored Markdown
+- Native llms.txt standard for AI discoverability
+- Git-native with automatic state management
+- Token usage tracking at task/epic/project levels
+- Zero external dependencies for core functionality
+
+## Quick Commands (Manual Process)
+Create new epic: Copy from /templates/epic-template.md
+Create new issue: Copy from /templates/issue-template.md  
+Create new task: Copy from /templates/task-template.md
+View examples: Check /examples/complete-project/
+
+## Documentation Files
+- ai-tasktrack-design-doc.md: Complete system specification
+- README.md: Project overview and getting started
+- templates/: Ready-to-use markdown templates
+- examples/: Full project demonstrations
+
+## Token Budget
+Total: 50,000 tokens
+Used: ~12,000 tokens (24%)
+Primary Agent: Claude PM Assistant
+Focus: Documentation and template creation

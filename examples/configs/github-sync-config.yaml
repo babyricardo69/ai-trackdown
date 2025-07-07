@@ -1,0 +1,94 @@
+# ai-trackdown Configuration with GitHub Issues Sync
+# For teams using GitHub as their primary development platform
+
+version: 1
+project:
+  name: "GitHub Integrated Project"
+  id_prefix: "GH"
+  default_epic_budget: 25000
+
+# GitHub Issues integration
+sync:
+  github:
+    enabled: true
+    repo: "your-org/your-repo"
+    auth_method: "token"
+    
+    # Field mapping
+    mapping:
+      issue:
+        title: title
+        body: |
+          ${description}
+          
+          ## Acceptance Criteria
+          ${acceptance_criteria}
+          
+          ## AI Context
+          ${ai_context}
+        labels: labels
+        assignee: 
+          transform: strip_at
+        milestone: epic.github_milestone
+    
+    # Sync rules
+    sync_rules:
+      directions: ["push", "pull"]
+      include_types: ["issue", "task"]
+      exclude_labels: ["no-sync"]
+      auto_sync: true
+      sync_interval: "15m"
+
+# Enhanced AI configuration for development teams
+ai:
+  token_tracking:
+    enabled: true
+    require_agent_id: true
+    budget_alerts: true
+    
+  providers:
+    claude:
+      model: "claude-3.5-sonnet"
+      cost_per_1k_input: 0.003
+      cost_per_1k_output: 0.015
+      
+    gpt4:
+      model: "gpt-4-turbo"
+      cost_per_1k_input: 0.01
+      cost_per_1k_output: 0.03
+      
+    copilot:
+      model: "github-copilot"
+      cost_per_1k_input: 0.002
+      cost_per_1k_output: 0.004
+
+  agents:
+    claude:
+      max_tokens_per_task: 5000
+      allowed_operations: ["read", "comment", "update"]
+    
+    gpt4:
+      max_tokens_per_task: 4000
+      allowed_operations: ["read", "comment"]
+
+# Git workflow integration
+git:
+  hooks:
+    auto_install: true
+    commit_parsing: true
+    branch_protection: false
+  
+  patterns:
+    commit_task_ref: "\\b(EPIC|ISSUE|TASK)-\\d+\\b"
+    status_keywords:
+      in_progress: ["start", "begin", "wip"]
+      in_review: ["review", "pr", "merge"]
+      done: ["fix", "close", "resolve", "complete"]
+
+# Workflow automation
+automation:
+  rules:
+    - trigger: "commit"
+      pattern: "fix\\((.+)\\):"
+      action: "update_status"
+      status: "in-review"

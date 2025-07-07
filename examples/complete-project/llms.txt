@@ -1,0 +1,124 @@
+# ShopFlow E-commerce Platform Enhancement - ai-trackdown Project Index
+# Generated: 2025-01-07T16:30:00Z
+# Format: llms.txt v1.0
+
+## Project Overview
+ShopFlow E-commerce Platform Enhancement using ai-trackdown methodology
+Active development: Mobile-first redesign, modern authentication, AI recommendations
+Team size: 12 developers, 3 AI agents (Claude, GPT-4, Copilot)
+Duration: January 1 - March 15, 2025 (11 weeks)
+
+## Key Files & Structure
+/TASKTRACK.md: Project dashboard with status, metrics, team activity
+/tasks/epics/: 3 major epics with business value and technical details
+/tasks/issues/: 7 active issues across different development phases
+/tasks/tasks/: 15+ granular tasks showing implementation progress
+/docs/llms-full.txt: Complete context for AI agents
+
+## Current Sprint Status (Sprint 3: Jan 7-20, 2025)
+Active Issues: 3 in-progress, 1 in-review, 1 blocked
+Token Usage: 49,201 tokens used (27.3% of budget)
+Burn Rate: 7,000 tokens/week (on track for 180k total budget)
+Team Velocity: 23 story points completed, 37 remaining
+
+## Epic Progress Summary
+**EPIC-001: Modern Authentication System** (65% complete)
+- Status: In-progress, JWT service completed, OAuth integration 70% done
+- Token Budget: 40,000 | Used: 22,847 | Remaining: 17,153
+- Key Issues: ISSUE-001 ✅ done, ISSUE-003 🔄 in-progress, ISSUE-004 🚫 blocked
+
+**EPIC-002: Mobile-First UI Redesign** (40% complete) 
+- Status: In-progress, design system 60% done, navigation in review
+- Token Budget: 60,000 | Used: 18,234 | Remaining: 41,766
+- Key Issues: ISSUE-008 🔄 in-progress, ISSUE-009 👀 in-review
+
+**EPIC-003: AI Recommendation Engine** (15% complete)
+- Status: Planning phase, architecture designed, data pipeline next
+- Token Budget: 80,000 | Used: 8,120 | Remaining: 71,880
+- Key Issues: All in planning/design phase
+
+## Current Focus Areas
+1. **Authentication**: OAuth 2.0 integration with Google/GitHub/Microsoft
+2. **Mobile UI**: Responsive component library and navigation system
+3. **AI Planning**: Recommendation engine architecture and data pipeline
+4. **Security**: Two-factor authentication (blocked on security audit)
+
+## AI Agent Activity
+**Claude (28 interactions, 28,456 tokens)**: 
+- Primary: Architecture analysis, code generation, security review
+- Recent: OAuth integration guidance, mobile component implementation
+- Strengths: System design, TypeScript interfaces, security patterns
+
+**GPT-4 (15 interactions, 12,837 tokens)**:
+- Primary: Technical decisions, performance analysis, compliance review
+- Recent: Mobile UX patterns, OAuth security validation
+- Strengths: Best practices, architecture review, technical writing
+
+**Copilot (156 suggestions, 6,000 tokens)**:
+- Primary: Code completion, syntax suggestions, test generation
+- Recent: React component boilerplate, CSS property suggestions
+- Strengths: Rapid development, code quality, testing support
+
+## Integration Status
+**External Systems:**
+- GitHub Issues: ✅ Synced (last: 2025-01-07T15:30:00Z)
+- Jira Project: ✅ Synced (last: 2025-01-07T15:00:00Z)  
+- Linear Team: ⚠️ Partial sync (auth issues)
+
+**CI/CD Pipeline:**
+- Main branch: Protected, requires 2 reviews + AI agent validation
+- Feature branches: Auto-delete after merge, 87% test coverage
+- Deployment: Staging auto-deploy, production requires approval
+
+## Recent Activity (Last 24 Hours)
+- ISSUE-003: OAuth integration progress, Microsoft provider 90% complete
+- ISSUE-009: Mobile navigation completed, pending UX/accessibility review
+- TASK-008: Responsive card component 70% done, product cards implemented
+- Security: Two-factor auth still blocked pending corporate security audit
+
+## Risk Assessment
+**High Priority Risks:**
+1. Security audit delay affecting two-factor authentication timeline
+2. Mobile design system complexity potentially impacting delivery
+3. AI recommendation model performance uncertain with current approach
+
+**Mitigation Status:**
+- Security: Parallel OAuth development continuing, escalation to CSO
+- Mobile: Phased component delivery, core components completed first
+- AI: Baseline model established, performance benchmarking in progress
+
+## Quick Commands
+```bash
+# View current sprint items
+ai-trackdown list --sprint=current --status=active
+
+# Check token usage by epic
+ai-trackdown tokens report --by=epic --period=week
+
+# Generate AI context for active work
+ai-trackdown context --active-issues --for=claude
+
+# Sync with all external systems
+ai-trackdown sync --all --validate
+
+# Create new task in current epic
+ai-trackdown create task "Description" --epic=EPIC-001 --estimate=3
+```
+
+## Emergency Contacts & Escalation
+- **Project Lead**: @sarah-chen (Slack: @sarah.chen, urgent: +1-555-0123)
+- **Technical Lead**: @alex-dev (Slack: @alex.developer, urgent: +1-555-0124)
+- **DevOps/Security**: @ops-team (Slack: @devops-emergency, 24/7 on-call)
+- **AI/ML Specialist**: @ml-team (Slack: @ml.engineering, work hours)
+
+## For AI Agents: Key Context
+**Current Priority**: Complete EPIC-001 authentication system and EPIC-002 mobile components
+**Technical Stack**: React 18 + TypeScript, Node.js + Express, PostgreSQL + Redis, AWS infrastructure
+**Code Quality**: >90% test coverage required, ESLint + Prettier enforced, security-first approach
+**Token Efficiency**: Optimize for cost, prefer incremental development, reuse patterns
+**Documentation**: Maintain inline code comments, update API docs, track architectural decisions
+
+---
+*Last Updated: 2025-01-07T16:30:00Z*
+*Next Auto-Update: 2025-01-08T09:00:00Z*
+*Manual Update Trigger: Any epic status change, major blocker resolution, sprint completion*

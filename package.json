@@ -1,0 +1,66 @@
+{
+  "name": "aitasktrack",
+  "version": "1.0.0",
+  "description": "Lightweight AI-native task management system with git integration and llms.txt support",
+  "main": "src/index.js",
+  "bin": {
+    "aitasktrack": "./bin/aitasktrack.js"
+  },
+  "scripts": {
+    "test": "jest",
+    "lint": "eslint src/",
+    "build": "rollup -c",
+    "dev": "nodemon src/index.js",
+    "install-hooks": "node scripts/install-hooks.js"
+  },
+  "keywords": [
+    "task-management",
+    "ai-native",
+    "git-integration",
+    "llms-txt",
+    "markdown",
+    "project-management",
+    "agile",
+    "development-workflow"
+  ],
+  "author": "AI-TaskTrack Contributors",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ai-tasktrack/aitasktrack"
+  },
+  "bugs": {
+    "url": "https://github.com/ai-tasktrack/aitasktrack/issues"
+  },
+  "homepage": "https://github.com/ai-tasktrack/aitasktrack#readme",
+  "dependencies": {
+    "commander": "^11.1.0",
+    "yaml": "^2.3.4",
+    "gray-matter": "^4.0.3",
+    "marked": "^12.0.0",
+    "inquirer": "^9.2.15",
+    "chalk": "^5.3.0",
+    "ora": "^8.0.1",
+    "axios": "^1.6.7",
+    "node-cron": "^3.0.3"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "eslint": "^8.56.0",
+    "nodemon": "^3.0.3",
+    "rollup": "^4.9.6",
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-commonjs": "^25.0.7"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "files": [
+    "bin/",
+    "src/",
+    "templates/",
+    "docs/",
+    "README.md",
+    "LICENSE"
+  ]
+}

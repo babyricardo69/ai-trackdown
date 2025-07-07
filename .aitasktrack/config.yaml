@@ -1,0 +1,28 @@
+version: 1
+project:
+  name: "AI-TaskTrack Framework"
+  id_prefix: "ATT"
+  description: "Lightweight AI-native task management system"
+  
+token_tracking:
+  enabled: true
+  providers:
+    - name: claude
+      model: claude-sonnet-4
+      cost_per_1k_input: 0.003
+      cost_per_1k_output: 0.015
+  
+  budgets:
+    project_total: 50000
+    epic_default: 15000
+    alert_threshold: 0.8
+
+ai:
+  llms_txt:
+    auto_generate: true
+    include_closed: false
+    context_depth: 2
+    
+formats:
+  date: "YYYY-MM-DDTHH:mm:ssZ"
+  id_pattern: "{type}-{number:03d}"

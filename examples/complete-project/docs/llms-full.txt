@@ -1,0 +1,492 @@
+# ShopFlow E-commerce Platform Enhancement - Complete AI Context
+# Generated: 2025-01-07T16:30:00Z
+# Token Budget: 180,000 total | Used: 49,201 (27.3%) | Remaining: 130,799
+
+## Project Mission & Business Context
+
+ShopFlow is modernizing its e-commerce platform to compete with industry leaders through:
+1. **Mobile-First Experience**: 73% of traffic is mobile, conversion rate needs improvement from 2.3% to 4.5%
+2. **Enterprise Security**: SOC 2 Type II compliance required for enterprise customers
+3. **AI-Powered Personalization**: Recommendation engine to drive $45M incremental revenue
+4. **Developer Velocity**: 50% faster feature development through design system
+
+**Business Impact Targets:**
+- Q1 2025: $2.3M additional revenue from mobile improvements
+- Q2 2025: $8.5M from AI recommendations  
+- Annual: $45M total incremental revenue
+- Cost Savings: 40% reduction in auth-related support tickets
+
+## Epic Deep Dive & Technical Context
+
+### EPIC-001: Modern Authentication System (65% Complete, In-Progress)
+
+**Business Value**: Eliminate session fixation vulnerabilities, achieve SOC 2 compliance, improve performance by 67%
+
+**Technical Architecture:**
+- **JWT Service**: RS256 asymmetric signing, 15-minute access tokens, Redis blacklist
+- **OAuth 2.0**: PKCE flow for Google/GitHub/Microsoft, token rotation security
+- **Session Management**: Stateless design for microservices scalability
+- **Security Features**: Rate limiting (5 attempts/15min), audit logging, token encryption
+
+**Current Status:**
+- ✅ **ISSUE-001: JWT Service** - Completed (TASK-001 middleware, 97.5% test coverage)
+- 🔄 **ISSUE-003: OAuth Integration** - 70% complete (Google ✅, GitHub ✅, Microsoft 90%)
+- 🚫 **ISSUE-004: Two-Factor Auth** - Blocked (security audit pending, expected 2025-01-12)
+
+**Code Context:**
+```
+src/auth/jwt.service.ts - JWT generation, validation, refresh (completed)
+src/auth/jwt.middleware.ts - Express middleware, role-based auth (completed)  
+src/auth/oauth.service.ts - OAuth provider abstraction (in-progress)
+src/auth/oauth.controller.ts - OAuth endpoints, PKCE flow (in-progress)
+src/auth/2fa/ - Two-factor authentication (blocked, architecture ready)
+```
+
+**Token Usage Analysis:**
+- Planning & Architecture: 8,934 tokens (Claude security analysis, GPT-4 compliance review)
+- Implementation: 6,247 tokens (JWT service, OAuth integration)
+- Security Review: 4,123 tokens (penetration testing, vulnerability assessment)
+- Testing: 2,156 tokens (unit tests, integration scenarios)
+- Documentation: 1,387 tokens (API docs, security compliance)
+
+**AI Agent Contributions:**
+- **Claude (12,892 tokens)**: JWT architecture, PKCE implementation, error handling patterns
+- **GPT-4 (6,247 tokens)**: Security best practices, OAuth provider comparison, compliance analysis
+- **Copilot (3,708 tokens)**: Code completion, TypeScript interfaces, test boilerplate
+
+**Critical Dependencies:**
+- Security audit approval for 2FA (blocking ISSUE-004)
+- Redis cluster provisioning for session management
+- Legal review of OAuth provider agreements
+
+### EPIC-002: Mobile-First UI Redesign (40% Complete, In-Progress)
+
+**Business Value**: Increase mobile conversion 2.3% → 4.5%, achieve PageSpeed >90, reduce bounce rate to <45%
+
+**Technical Architecture:**
+- **Design System**: 45+ responsive components, atomic design methodology
+- **Component Library**: React 18 + TypeScript, Styled Components, Storybook documentation
+- **Performance**: Code splitting, lazy loading, <2MB bundle target, 60fps animations
+- **Accessibility**: WCAG 2.1 AA compliance, screen reader optimization, keyboard navigation
+
+**Current Status:**
+- ✅ **Design Token System** - Completed (color, typography, spacing tokens in JSON/CSS)
+- 🔄 **ISSUE-008: Core Components** - 60% complete (Button, Input, Card ✅, Navigation in progress)
+- 👀 **ISSUE-009: Mobile Navigation** - In Review (UX approval pending, accessibility review scheduled)
+
+**Component Progress:**
+```
+✅ Button Component: 100% (all variants, responsive, accessible)
+✅ Input Field: 100% (validation, error states, mobile optimization)  
+✅ Card Component: 100% (elevated, outlined, filled variants)
+✅ Modal Component: 100% (mobile-first, touch gestures, focus trapping)
+🔄 Navigation: 90% (hamburger menu, bottom tabs, breadcrumbs - UX review)
+📋 Form Components: 0% (planned for Sprint 4)
+📋 Table Component: 0% (mobile responsive design needed)
+📋 Pagination: 0% (mobile touch optimization planned)
+```
+
+**Code Context:**
+```
+src/design-system/tokens/ - Design tokens (colors, spacing, typography)
+src/design-system/components/ - Reusable component library
+src/components/mobile/ - Mobile-specific navigation and layouts
+stories/ - Storybook documentation and examples
+__tests__/components/ - Component test suites (React Testing Library)
+```
+
+**Token Usage Analysis:**
+- Component Development: 8,934 tokens (49% - React component generation, TypeScript interfaces)
+- Design System Architecture: 4,123 tokens (23% - atomic design patterns, responsive strategies)
+- Responsive Design: 2,847 tokens (16% - mobile-first CSS, breakpoint optimization)
+- Performance Optimization: 1,456 tokens (8% - bundle analysis, animation performance)
+- Accessibility: 874 tokens (5% - WCAG compliance, screen reader testing)
+
+**AI Agent Contributions:**
+- **Claude (9,456 tokens)**: Component architecture, React hooks, styled-components CSS, responsive patterns
+- **GPT-4 (5,847 tokens)**: Design system structure, mobile UX patterns, performance optimization
+- **Copilot (2,931 tokens)**: CSS property suggestions, React boilerplate, test scaffolding
+
+**Performance Metrics:**
+```
+Current Mobile PageSpeed: 67/100 (target: >90)
+First Contentful Paint: 3.2s (target: <2.5s)
+Bundle Size: 3.8MB (target: <2MB)
+Component Test Coverage: 92.6% (target: >95%)
+```
+
+### EPIC-003: AI Recommendation Engine (15% Complete, Planning)
+
+**Business Value**: Generate $8.5M Q1 revenue, increase session duration 35%, improve cross-sell rate 15% → 28%
+
+**Technical Architecture:**
+- **ML Pipeline**: Kafka ingestion, Spark processing, ClickHouse analytics, Redis serving
+- **Model Stack**: Collaborative filtering + content-based + LLM integration
+- **Infrastructure**: Kubernetes ML platform, AWS SageMaker, TensorFlow Serving
+- **Data**: 10M events/day, 500k products, 2M active users, real-time feature updates
+
+**Current Status:**
+- 🔄 **Architecture & Planning** - 90% complete (data pipeline design, model selection)
+- 📋 **ISSUE-015: Data Pipeline** - Planning (Kafka cluster provisioning in progress)
+- 📋 **ISSUE-016: User Behavior Model** - Planning (schema design, privacy review needed)
+- 📋 **ISSUE-017: Collaborative Filtering** - Open (matrix factorization approach selected)
+
+**ML Model Strategy:**
+```yaml
+Baseline Performance Targets:
+  Collaborative Filtering: >15% precision@10 (vs 3.2% random)
+  Content-Based: >18% precision@10 (cold-start optimization)
+  LLM Integration: >25% CTR improvement (GPT-4 contextual descriptions)
+  Hybrid Ensemble: >22% precision@10 (combined approach)
+
+Infrastructure Requirements:
+  Inference Latency: <100ms P95
+  Model Training: 6-8 hours weekly retraining
+  Throughput: 10k predictions/second
+  Availability: 99.9% uptime
+```
+
+**Code Context:**
+```
+ml/models/ - ML model implementations (collaborative, content, LLM)
+ml/pipeline/ - Data processing (Kafka, Spark, feature engineering)
+ml/serving/ - Real-time inference (TensorFlow Serving, API gateway)
+api/recommendations/ - Recommendation API endpoints
+frontend/recommendations/ - Recommendation UI components
+```
+
+**Token Usage Analysis:**
+- Research & Architecture: 4,892 tokens (60% - ML system design, algorithm comparison)
+- Data Pipeline Design: 1,892 tokens (23% - Kafka/Spark architecture, feature engineering)  
+- Model Selection: 892 tokens (11% - collaborative vs content-based analysis)
+- Infrastructure Planning: 534 tokens (7% - Kubernetes ML platform, serving architecture)
+
+**AI Agent Contributions:**
+- **Claude (4,892 tokens)**: ML architecture, feature engineering, recommendation algorithms
+- **GPT-4 (2,456 tokens)**: Algorithm comparison, performance benchmarking, A/B testing
+- **Copilot (772 tokens)**: Python ML code snippets, SQL queries, config templates
+
+**Dependencies & Blockers:**
+- ML platform provisioning (Kubernetes cluster setup in progress)
+- Data privacy review (GDPR/CCPA compliance for user behavior data)
+- Infrastructure costs (GPU instances for model training)
+
+## Current Sprint Deep Dive (Sprint 3: Jan 7-20, 2025)
+
+### Active Work Items & Developer Assignment
+
+**@alex-dev (Backend Lead, 40h/week)**:
+- ISSUE-003: OAuth Integration (70% → 100% target by 2025-01-10)
+  - Microsoft OAuth provider completion (4h remaining)
+  - Token refresh implementation (TASK-015, 5h estimated)
+  - Integration testing with all providers (3h)
+- ISSUE-001: JWT Service maintenance and optimization
+  - Performance monitoring and Redis optimization
+
+**@frontend-lead (UI/UX Lead, 40h/week)**:
+- ISSUE-009: Mobile Navigation (90% → 100% target by 2025-01-08)
+  - UX review completion (pending @ux-team approval)
+  - Accessibility review (pending @accessibility-expert)
+  - Final implementation tweaks (2h remaining)
+
+**@frontend-dev (Component Developer, 40h/week)**:
+- TASK-008: Card Component (70% → 100% target by 2025-01-09)
+  - Product card completion (6h remaining)
+  - Profile card implementation (8h remaining)
+  - Loading skeleton states (4h remaining)
+
+**@security-team (Security Specialist, 20h/week)**:
+- ISSUE-004: Two-Factor Authentication (blocked → in-progress target by 2025-01-12)
+  - Security audit preparation and presentation
+  - Implementation planning post-approval
+
+**@ml-team (AI/ML Lead, 30h/week)**:
+- EPIC-003: AI Recommendation Planning
+  - Data pipeline architecture finalization
+  - ML platform requirements and provisioning
+  - Privacy compliance documentation
+
+### Token Burn Rate Analysis
+
+**Weekly Token Usage Pattern:**
+```
+Week 1 (Jan 1-7): 12,847 tokens
+  - Epic planning and architecture: 8,934 tokens
+  - Implementation start: 3,913 tokens
+
+Week 2 (Jan 8-14): Projected 15,000 tokens
+  - Heavy implementation phase
+  - OAuth completion, mobile components
+  - AI architecture finalization
+
+Week 3 (Jan 15-21): Projected 12,000 tokens  
+  - Testing and optimization
+  - Security implementation (if unblocked)
+  - Integration testing
+
+Remaining Weeks: ~7,000 tokens/week average
+  - Sustainable development pace
+  - Focus on AI implementation and polish
+```
+
+**Token Efficiency Optimizations:**
+- **Code Reuse**: Established patterns reduce token needs for similar components
+- **Template Approaches**: Standardized architectures minimize repeated analysis
+- **Incremental Development**: Small, focused changes rather than large rewrites
+- **Context Caching**: Previous analysis available for follow-up questions
+
+### Risk Management & Mitigation
+
+**Critical Path Risks:**
+
+1. **Two-Factor Authentication Delay** (High Impact)
+   - Current Status: Blocked 3 days, security audit pending
+   - Business Impact: SOC 2 compliance timeline at risk
+   - Mitigation: Parallel OAuth development, executive escalation scheduled
+   - Timeline: Expected unblock 2025-01-12, implementation by 2025-01-20
+
+2. **Mobile Component Complexity** (Medium Impact)
+   - Current Status: 40% complete, navigation in review
+   - Business Impact: Q1 mobile conversion targets at risk
+   - Mitigation: Phased rollout, core components prioritized
+   - Timeline: MVP components by 2025-01-20, full system by 2025-02-15
+
+3. **AI Infrastructure Provisioning** (Medium Impact)
+   - Current Status: Platform setup 30% complete
+   - Business Impact: Recommendation engine timeline
+   - Mitigation: AWS pre-provisioning, alternative platforms evaluated
+   - Timeline: Platform ready by 2025-02-01, models by 2025-03-01
+
+**Token Budget Risks:**
+- Current burn rate sustainable at 7,000 tokens/week
+- EPIC-003 (AI) allocated 80,000 tokens - largest remaining budget
+- Mitigation: Optimize prompts, use smaller models for routine tasks
+
+## Technical Debt & Code Quality
+
+### Current Technical Debt Items
+
+**High Priority:**
+1. **Authentication Error Handling**: Need internationalization for user-facing messages
+2. **Mobile Performance**: Bundle size optimization required (3.8MB → <2MB target)
+3. **Test Coverage**: Mobile components at 92.6%, need 95%+ for production
+
+**Medium Priority:**
+1. **OAuth Token Validation**: Optimize Redis queries for blacklist checking
+2. **Component Documentation**: Storybook stories incomplete for new components
+3. **CSS Organization**: Styled-components optimization for build performance
+
+**Low Priority:**
+1. **TypeScript Types**: Enhanced types for better compile-time checking
+2. **Monitoring**: Enhanced metrics collection for authentication flows
+3. **Caching**: Permission caching to reduce database queries
+
+### Code Quality Metrics
+
+**Current Status:**
+```
+Test Coverage: 91.2% overall (target: >95%)
+  - Authentication: 97.5% ✅
+  - Mobile Components: 92.6% 🔄
+  - AI Pipeline: 0% (not implemented)
+
+Static Analysis:
+  - ESLint: 0 errors, 12 warnings
+  - TypeScript: 0 errors, 3 strict mode violations
+  - Security: 0 critical vulnerabilities
+  - Dependencies: 2 minor vulnerability updates pending
+
+Performance:
+  - API Response Time: 145ms avg (target: <200ms) ✅
+  - Frontend Bundle: 3.8MB (target: <2.5MB) 🔄
+  - Mobile PageSpeed: 67/100 (target: >90) 🔄
+```
+
+### Architecture Decisions Log
+
+**Recent Decisions (Last 30 Days):**
+
+1. **JWT vs Sessions** (2025-01-05, @alex-dev + Claude analysis)
+   - Decision: JWT with Redis blacklist
+   - Rationale: Stateless for microservices, better scalability
+   - Impact: All authentication endpoints, session storage eliminated
+   - Reversibility: High (can implement session fallback)
+
+2. **Mobile-First Design System** (2025-01-06, @ui-team + GPT-4 analysis)
+   - Decision: Custom design system vs Material UI
+   - Rationale: Brand consistency, performance optimization, flexibility
+   - Impact: All frontend components, development velocity
+   - Reversibility: Low (significant rework required)
+
+3. **AI Model Architecture** (2025-01-07, @ml-team + Claude analysis)
+   - Decision: Hybrid collaborative + content + LLM approach
+   - Rationale: Balance accuracy, cost, and cold-start performance
+   - Impact: All recommendation features, infrastructure costs
+   - Reversibility: Medium (model swapping possible)
+
+4. **OAuth Provider Selection** (2025-01-04, @security-team + GPT-4 analysis)
+   - Decision: Google, GitHub, Microsoft in Phase 1
+   - Rationale: Cover 85% of user preferences, enterprise requirements
+   - Impact: OAuth integration scope, user experience
+   - Reversibility: High (providers can be added/removed)
+
+## AI Agent Optimization Strategies
+
+### Token Efficiency Patterns
+
+**High-Efficiency Patterns (Reuse These):**
+1. **Incremental Architecture**: Start with interface design, then implementation
+2. **Pattern Recognition**: Reference previous similar implementations
+3. **Error-First Design**: Design error handling before happy path
+4. **Test-Driven Planning**: Define acceptance criteria before implementation
+
+**Token-Heavy Patterns (Use Sparingly):**
+1. **Full System Architecture**: Reserve for new epics or major rewrites
+2. **Comprehensive Analysis**: Only for critical security or performance reviews
+3. **Alternative Comparison**: Limit to 2-3 options maximum
+4. **Complete Code Generation**: Prefer guided implementation over full generation
+
+### Effective AI Prompting for This Project
+
+**Context-Rich Prompts:**
+```
+Good: "Implement OAuth token refresh for the ShopFlow authentication system 
+using the existing JWT service patterns. Focus on security and the Google 
+provider implementation that's already 90% complete."
+
+Poor: "Help me implement OAuth token refresh."
+```
+
+**Code-Specific Prompts:**
+```
+Good: "Review this React component for accessibility compliance with our 
+WCAG 2.1 AA standards. The component is part of our mobile-first design 
+system and needs to work with screen readers."
+
+Poor: "Make this component accessible."
+```
+
+**Architecture Prompts:**
+```
+Good: "Analyze the security implications of storing refresh tokens in our 
+existing encrypted PostgreSQL setup vs Redis cache, considering our SOC 2 
+compliance requirements and 100k concurrent user target."
+
+Poor: "Where should I store refresh tokens?"
+```
+
+### AI Agent Specialization
+
+**Claude (Primary Architecture & Implementation)**:
+- **Strengths**: System design, TypeScript, React patterns, security analysis
+- **Best For**: Component architecture, authentication flows, error handling
+- **Token Efficiency**: High - provides detailed, implementable solutions
+- **Usage Pattern**: Architecture → Implementation → Testing
+
+**GPT-4 (Technical Decisions & Standards)**:
+- **Strengths**: Best practices, performance analysis, compliance, comparisons
+- **Best For**: Technology selection, optimization strategies, standard compliance
+- **Token Efficiency**: Medium - thorough analysis but sometimes verbose
+- **Usage Pattern**: Research → Analysis → Recommendations
+
+**Copilot (Rapid Development)**:
+- **Strengths**: Code completion, syntax, testing boilerplate, pattern recognition
+- **Best For**: Implementation speed, refactoring, test generation
+- **Token Efficiency**: Very High - minimal tokens for maximum productivity
+- **Usage Pattern**: Real-time coding assistance
+
+## Project Communication & Coordination
+
+### Daily Standup Format
+```
+Team: ShopFlow Platform Enhancement
+Time: 9:00 AM Pacific, Monday-Friday
+Duration: 15 minutes max
+
+Format:
+1. Yesterday's Progress (2 min/person)
+   - Completed tasks and token usage
+   - Blockers resolved or escalated
+   
+2. Today's Plan (2 min/person)
+   - Priority tasks and estimated effort
+   - AI agent assistance needed
+   
+3. Blockers & Dependencies (5 min total)
+   - Current blockers and escalation status
+   - Cross-team dependencies
+   
+4. Token Budget Check (1 min)
+   - Weekly burn rate status
+   - Budget alerts or optimizations
+```
+
+### AI Agent Coordination
+
+**Morning AI Context Sync** (automated):
+- Generate updated llms.txt at 8:00 AM Pacific
+- Summarize overnight changes and priority shifts
+- Update token allocation and burn rate projections
+
+**AI Agent Handoffs**:
+- **Claude → GPT-4**: Architecture complete, need standards review
+- **GPT-4 → Claude**: Standards defined, need implementation
+- **Claude → Copilot**: Interface designed, need rapid development
+- **Any → Human**: Complex decisions, business context needed
+
+**Token Budget Monitoring**:
+- Daily: Automated burn rate calculation and alerts
+- Weekly: Team review of efficiency and optimization opportunities
+- Monthly: Strategic allocation review and epic budget adjustments
+
+### External Stakeholder Communication
+
+**Executive Summary (Weekly)**:
+- Business metrics: conversion rates, performance targets, revenue impact
+- Risk assessment: timeline, budget, technical challenges
+- Milestone tracking: epic completion, feature delivery, compliance status
+
+**Customer Communication**:
+- Feature availability timelines (no specific dates until 80% confidence)
+- Security improvements and compliance status
+- Performance improvements and mobile experience
+
+**Security & Compliance Updates**:
+- Regular security review status and audit progress
+- Compliance milestone tracking (SOC 2, GDPR, accessibility)
+- Risk mitigation status and escalation procedures
+
+---
+
+## For AI Agents: Optimization Guidelines
+
+**Context Efficiency:**
+- Reference this document for project background
+- Use established patterns from completed work
+- Focus on incremental improvements over rewrites
+- Optimize for team velocity and code quality
+
+**Token Conservation:**
+- Prefer guided implementation over full code generation
+- Build on existing patterns (JWT service, React components)
+- Use incremental development approach
+- Leverage Copilot for routine coding tasks
+
+**Quality Standards:**
+- >95% test coverage for all production code
+- WCAG 2.1 AA compliance for all user interfaces
+- Security-first approach for all authentication code
+- Mobile-first responsive design for all components
+
+**Technical Preferences:**
+- TypeScript for type safety and developer experience
+- React 18 with hooks and modern patterns
+- Styled-components for design system consistency
+- Jest + React Testing Library for comprehensive testing
+
+---
+
+*Complete Context Generated: 2025-01-07T16:30:00Z*
+*Next Scheduled Update: 2025-01-08T09:00:00Z*
+*Manual Update Triggers: Epic completion, major blocker resolution, security approval*
+*Token Budget Remaining: 130,799 of 180,000 (72.7% available for remaining work)*

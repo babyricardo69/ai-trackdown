@@ -1,0 +1,145 @@
+{
+  "last_sync": "2025-01-07T12:30:00Z",
+  "sync_status": "partial_failure",
+  "team_id": "platform-team",
+  "team_key": "PLAT",
+  "workspace_url": "https://linear.app/shopflow",
+  "sync_direction": "bidirectional",
+  "items_synced": {
+    "projects": 2,
+    "issues": 5,
+    "tasks": 3
+  },
+  "sync_errors": [
+    {
+      "item_id": "EPIC-003",
+      "error_type": "authentication_error",
+      "error_message": "API token expired or insufficient permissions",
+      "timestamp": "2025-01-07T12:28:00Z",
+      "retry_count": 3
+    },
+    {
+      "item_id": "ISSUE-004",
+      "error_type": "field_mapping_error",
+      "error_message": "Custom field 'token_usage' not found in Linear workspace",
+      "timestamp": "2025-01-07T12:29:00Z",
+      "retry_count": 1
+    }
+  ],
+  "mappings": {
+    "EPIC-001": {
+      "linear_id": "abc123",
+      "linear_identifier": "PLAT-15",
+      "type": "project",
+      "name": "Modern Authentication System",
+      "state": "started",
+      "lead": "alex-dev",
+      "target_date": "2025-01-31",
+      "last_updated": "2025-01-07T15:45:00Z",
+      "progress": 0.65
+    },
+    "EPIC-002": {
+      "linear_id": "def456", 
+      "linear_identifier": "PLAT-16",
+      "type": "project",
+      "name": "Mobile-First UI Redesign",
+      "state": "started",
+      "lead": "ui-team",
+      "target_date": "2025-02-28",
+      "last_updated": "2025-01-07T14:20:00Z",
+      "progress": 0.40
+    },
+    "ISSUE-001": {
+      "linear_id": "xyz789",
+      "linear_identifier": "PLAT-101",
+      "type": "issue",
+      "title": "JWT Service Implementation",
+      "state": "completed",
+      "assignee": "alex-dev",
+      "project": "abc123",
+      "priority": "high",
+      "estimate": 8,
+      "last_updated": "2025-01-05T16:30:00Z"
+    },
+    "ISSUE-003": {
+      "linear_id": "abc234",
+      "linear_identifier": "PLAT-103",
+      "type": "issue", 
+      "title": "OAuth 2.0 Provider Integration",
+      "state": "in_progress",
+      "assignee": "alex-dev",
+      "project": "abc123",
+      "priority": "high",
+      "estimate": 13,
+      "last_updated": "2025-01-07T15:20:00Z"
+    },
+    "ISSUE-009": {
+      "linear_id": "nav456",
+      "linear_identifier": "PLAT-109",
+      "type": "issue",
+      "title": "Mobile Navigation System", 
+      "state": "in_review",
+      "assignee": "frontend-lead",
+      "project": "def456",
+      "priority": "medium",
+      "estimate": 8,
+      "last_updated": "2025-01-07T16:45:00Z"
+    },
+    "TASK-001": {
+      "linear_id": "task123",
+      "linear_identifier": "PLAT-201",
+      "type": "issue",
+      "title": "JWT Middleware Implementation",
+      "state": "completed",
+      "assignee": "alex-dev",
+      "parent": "xyz789",
+      "priority": "medium",
+      "estimate": 3,
+      "last_updated": "2025-01-02T17:45:00Z"
+    }
+  },
+  "sync_config": {
+    "auto_sync": true,
+    "sync_interval": "20m",
+    "retry_failed_items": true,
+    "max_retry_attempts": 5,
+    "field_mappings": {
+      "title": "title",
+      "description": "description", 
+      "status": "state.name",
+      "assignee": "assignee.email",
+      "priority": "priority",
+      "estimate": "estimate",
+      "epic": "project.id"
+    },
+    "status_mappings": {
+      "open": "todo",
+      "in-progress": "in_progress",
+      "in-review": "in_review", 
+      "blocked": "blocked",
+      "done": "completed"
+    },
+    "priority_mappings": {
+      "low": 1,
+      "medium": 2,
+      "high": 3,
+      "critical": 4
+    }
+  },
+  "authentication": {
+    "token_status": "expired",
+    "token_expires_at": "2025-01-07T12:00:00Z",
+    "refresh_required": true,
+    "last_refresh_attempt": "2025-01-07T12:30:00Z",
+    "refresh_status": "failed"
+  },
+  "api_usage": {
+    "requests_made": 15,
+    "requests_failed": 7,
+    "rate_limit_remaining": 1847,
+    "rate_limit_reset": "2025-01-07T13:00:00Z"
+  },
+  "next_sync_attempt": "2025-01-07T17:00:00Z",
+  "escalation_required": true,
+  "escalation_reason": "API authentication issues require manual intervention"
+}

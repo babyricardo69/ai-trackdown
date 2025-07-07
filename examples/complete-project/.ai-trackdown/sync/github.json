@@ -1,0 +1,125 @@
+{
+  "last_sync": "2025-01-07T15:30:00Z",
+  "sync_status": "success",
+  "repository": "shopflow/platform-enhancement",
+  "sync_direction": "bidirectional",
+  "items_synced": {
+    "epics": 3,
+    "issues": 7,
+    "tasks": 12
+  },
+  "mappings": {
+    "EPIC-001": {
+      "github_milestone_id": 15,
+      "github_milestone_number": 3,
+      "title": "Modern Authentication System",
+      "state": "open",
+      "last_updated": "2025-01-07T15:45:00Z"
+    },
+    "EPIC-002": {
+      "github_milestone_id": 16,
+      "github_milestone_number": 4,
+      "title": "Mobile-First UI Redesign",
+      "state": "open",
+      "last_updated": "2025-01-07T14:20:00Z"
+    },
+    "EPIC-003": {
+      "github_milestone_id": 17,
+      "github_milestone_number": 5,
+      "title": "AI-Powered Product Recommendation Engine",
+      "state": "open",
+      "last_updated": "2025-01-07T13:10:00Z"
+    },
+    "ISSUE-001": {
+      "github_issue_id": 234,
+      "github_issue_number": 234,
+      "title": "JWT Service Implementation",
+      "state": "closed",
+      "assignee": "alex-dev",
+      "milestone": 3,
+      "labels": ["authentication", "backend", "jwt", "security"],
+      "last_updated": "2025-01-05T16:30:00Z"
+    },
+    "ISSUE-003": {
+      "github_issue_id": 267,
+      "github_issue_number": 267,
+      "title": "OAuth 2.0 Provider Integration",
+      "state": "open",
+      "assignee": "alex-dev",
+      "milestone": 3,
+      "labels": ["authentication", "oauth", "integration", "external-providers"],
+      "last_updated": "2025-01-07T15:20:00Z"
+    },
+    "ISSUE-004": {
+      "github_issue_id": 289,
+      "github_issue_number": 289,
+      "title": "Two-Factor Authentication Implementation",
+      "state": "open",
+      "assignee": "security-team",
+      "milestone": 3,
+      "labels": ["authentication", "security", "2fa", "compliance", "blocked"],
+      "last_updated": "2025-01-07T09:30:00Z"
+    },
+    "ISSUE-009": {
+      "github_issue_id": 298,
+      "github_issue_number": 298,
+      "title": "Mobile Navigation System",
+      "state": "open",
+      "assignee": "frontend-lead",
+      "milestone": 4,
+      "labels": ["mobile", "navigation", "frontend", "ux", "in-review"],
+      "last_updated": "2025-01-07T16:45:00Z"
+    },
+    "TASK-001": {
+      "github_issue_id": 445,
+      "github_issue_number": 445,
+      "title": "JWT Middleware Implementation",
+      "state": "closed",
+      "assignee": "alex-dev",
+      "milestone": 3,
+      "labels": ["middleware", "jwt", "authentication", "backend"],
+      "last_updated": "2025-01-02T17:45:00Z"
+    },
+    "TASK-008": {
+      "github_issue_id": 523,
+      "github_issue_number": 523,
+      "title": "Responsive Card Component Implementation",
+      "state": "open",
+      "assignee": "frontend-dev",
+      "milestone": 4,
+      "labels": ["frontend", "component", "responsive", "design-system"],
+      "last_updated": "2025-01-07T16:20:00Z"
+    },
+    "TASK-015": {
+      "github_issue_id": 678,
+      "github_issue_number": 678,
+      "title": "OAuth Token Refresh Implementation",
+      "state": "open",
+      "assignee": "alex-dev",
+      "milestone": 3,
+      "labels": ["oauth", "token-refresh", "authentication", "backend"],
+      "last_updated": "2025-01-07T10:15:00Z"
+    }
+  },
+  "sync_config": {
+    "auto_sync": true,
+    "sync_interval": "15m",
+    "sync_on_push": true,
+    "field_mappings": {
+      "title": "title",
+      "description": "body",
+      "status": "state",
+      "assignee": "assignees[0]",
+      "labels": "labels",
+      "epic": "milestone"
+    },
+    "label_prefix": "aitasktrack:",
+    "exclude_labels": ["no-sync", "internal"]
+  },
+  "sync_errors": [],
+  "rate_limit": {
+    "remaining": 4847,
+    "reset_at": "2025-01-07T16:30:00Z",
+    "limit": 5000
+  }
+}

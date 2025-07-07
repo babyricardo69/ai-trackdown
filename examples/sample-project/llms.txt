@@ -1,0 +1,79 @@
+# ai-trackdown Project Index
+# Generated: 2025-01-07T17:15:00Z
+# Format: llms.txt v1.0
+
+## Project Overview
+E-commerce Platform Development
+Active epics: 1
+Open issues: 5
+Completed tasks: 3
+Total token usage: 18,547 (24.7% of budget)
+
+## Current Focus
+- EPIC-001: User Authentication System (25% complete, in-progress)
+- ISSUE-002: Password reset implementation (critical, @bob)
+- TASK-006: Token generation (in-progress, high priority)
+
+## Key Files and Directories
+/tasks/epics/ - High-level project epics and strategic initiatives
+/tasks/issues/ - Active development issues and feature requests  
+/tasks/tasks/ - Granular implementation tasks and bug fixes
+/TASKTRACK.md - Real-time project status dashboard
+/.ai-trackdown/config.yaml - System configuration and settings
+
+## Recent Activity (Last 7 Days)
+- ISSUE-001: Core login flow completed ✅
+- ISSUE-002: Password reset implementation started 🔄
+- TASK-006: Token generation in progress 🔄
+- Token usage: 3,127 tokens this week
+- Security review completed for auth flows
+
+## Active Work Items
+
+### High Priority
+- ISSUE-002: Password reset system (5 pts, @bob, in-progress)
+  - Security-critical password recovery implementation
+  - Current: Token generation and Redis storage
+  - Next: Email delivery and frontend components
+
+### In Progress
+- TASK-006: Secure token generation (@bob)
+  - Cryptographically secure password reset tokens
+  - Redis-based storage with automatic expiration
+  - 75% complete, estimated completion: 2025-01-08
+
+### Blocked Items
+None currently blocked
+
+## Integration Status
+GitHub: Synced (2025-01-07T17:10:00Z) ✅
+Jira: Not configured
+Linear: Not configured
+Local only: 6 items
+
+## Quick Commands
+View open issues: grep -r "status: open" tasks/issues/
+Check token usage: grep -r "token_usage:" tasks/ | head -5
+List in-progress work: grep -r "status: in-progress" tasks/
+Generate full context: cat docs/llms-full.txt
+
+## Project Health
+🟢 On track for Q1 delivery
+🟡 Token usage trending higher than planned
+🟢 No critical blockers
+🟢 Security reviews passing
+
+## Team Status
+@alice: Leading epic architecture, available
+@bob: Implementing password reset, focused
+@charlie: Security review, available for consultation
+
+## Immediate Context
+Working on foundational authentication system for e-commerce platform. Critical path includes secure password reset, OAuth integration, and multi-factor authentication. Current sprint focused on password reset completion by 2025-01-08.
+
+Security is paramount - all authentication flows must pass security audit before deployment. Using industry best practices including OWASP guidelines and secure token handling.
+
+## Contact
+Project lead: @alice
+Current focus: Authentication security
+Next milestone: Password reset completion (2025-01-08)

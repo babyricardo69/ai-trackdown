@@ -8,89 +8,50 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-- Initial project structure and core functionality
-- CLI interface for task management
-- llms.txt standard support for AI integration
-- Token tracking system with cost analysis
-- Template system for epics, issues, and tasks
-- Git hooks for automatic task status updates
-- Configuration system with YAML support
+- Future features will be listed here
 
 ### Changed
-- N/A (initial release)
+- Future changes will be listed here
 
-### Deprecated
-- N/A (initial release)
-
-### Removed
-- N/A (initial release)
-
-### Fixed
-- N/A (initial release)
-
-### Security
-- N/A (initial release)
-
-## [1.0.0] - 2025-01-07
+## [0.1.0] - 2025-01-07
 
 ### Added
-- **Core Task Management**
-  - Create, read, update, and delete epics, issues, and tasks
-  - Markdown-based file storage with YAML frontmatter
-  - Hierarchical task organization (epics > issues > tasks)
-  - Status tracking and assignment management
-  - Label and tagging system
+- **Documentation Framework**
+  - Complete markdown-based task management documentation
+  - Comprehensive design specification and architecture guide
+  - Template library for epics, issues, and tasks with YAML frontmatter
+  - Example projects demonstrating real-world usage patterns
+  - Getting started guide and best practices documentation
 
-- **AI Integration**
-  - Native llms.txt standard implementation
-  - Automatic AI context generation
-  - Token usage tracking per task/epic/project
-  - Cost analysis and budget management
-  - AI agent permission system
+- **AI-Native Design**
+  - Native llms.txt standard implementation for AI discoverability
+  - Token usage tracking templates and examples
+  - AI context markers and optimization guidelines
+  - Documentation optimized for minimal token consumption
 
-- **CLI Interface**
-  - Complete command-line interface
-  - Interactive project initialization
-  - List, filter, and search functionality
-  - Bulk operations support
-  - Rich terminal output with colors and formatting
-
-- **Git Integration**
-  - Git hooks for automatic status updates
-  - Commit message parsing for task references
-  - Branch naming convention support
-  - Integration with git workflow
-
-- **File Templates**
+- **Template System**
   - Epic template with success metrics and token tracking
-  - Issue template with acceptance criteria and AI context
-  - Task template with implementation details
-  - Customizable template system
+  - Issue template with acceptance criteria and AI context sections  
+  - Task template with implementation details and relationships
+  - Configuration templates for different project scales
 
-- **Configuration System**
-  - YAML-based configuration
-  - Project-specific settings
-  - Integration credentials management
-  - Token tracking configuration
+- **Project Structure**
+  - Git-native file organization with intuitive directory structure
+  - YAML frontmatter specification for task metadata
+  - Example configurations for GitHub, Jira, and Linear integration
+  - Manual workflow guides for teams without CLI tools
 
-- **Documentation**
-  - Comprehensive README with examples
-  - Contributing guidelines
-  - API documentation
-  - Integration guides
+- **Comprehensive Examples**
+  - Complete sample project with realistic tasks and epics
+  - Enterprise integration examples and configuration
+  - Basic setup examples for small teams
+  - Configuration examples for different use cases
 
-### Technical Details
-- Node.js 18+ support
-- Zero external dependencies for core functionality
-- Git-native storage approach
-- Extensible plugin architecture
-- Cross-platform compatibility
-
-### Integration Support (Planned)
-- GitHub Issues bidirectional sync
-- Jira integration with webhooks
-- Linear API integration
-- Slack/Discord notifications
+### Documentation Highlights
+- Revolutionary positioning as AI-native task management framework
+- Zero-friction onboarding with clear templates and examples
+- Self-dogfooding approach using ai-trackdown for its own development
+- Complete rebranding from AI-TaskTrack to ai-trackdown for consistency
 
 ---
 

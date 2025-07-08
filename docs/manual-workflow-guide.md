@@ -8,6 +8,7 @@ This guide demonstrates how to use ai-trackdown as a pure documentation framewor
 - [Getting Started](#getting-started)
 - [File Naming Conventions](#file-naming-conventions)
 - [Task Lifecycle Management](#task-lifecycle-management)
+- [Pull Request Workflows](#pull-request-workflows)
 - [Status Management](#status-management)
 - [Token Tracking Workflows](#token-tracking-workflows)
 - [Team Collaboration](#team-collaboration)
@@ -117,6 +118,175 @@ Epic Planning → Issue Breakdown → Task Implementation → Review → Complet
 Manually update status fields in frontmatter:
 ```yaml
 status: todo → in-progress → in-review → done
+```
+
+## Pull Request Workflows
+
+The ai-trackdown framework includes a comprehensive GitHub-independent PR system for managing code changes and reviews within the markdown file structure.
+
+### PR File Organization
+
+PRs are organized in the `prs/` directory with status-based subdirectories:
+
+```
+prs/
+├── active/          # Open PRs awaiting review or merge
+├── merged/          # Completed PRs 
+└── reviews/         # PR review documentation
+```
+
+### Creating a Pull Request
+
+#### 1. Manual PR Creation
+```bash
+# Copy PR template
+cp templates/pr-template.md prs/active/PR-001-feature-name.md
+```
+
+#### 2. Fill PR Information
+Edit the frontmatter with required details:
+```yaml
+---
+pr_id: "PR-001"
+title: "Implement user authentication system"
+author: "@johndoe"
+reviewer: "@janedoe"
+status: "draft"
+target_branch: "main"
+source_branch: "feature/auth-system"
+linked_issues: ["ISSUE-001", "ISSUE-002"]
+linked_tasks: ["TASK-001", "TASK-002", "TASK-003"]
+files_changed: [
+  "src/auth/login.js",
+  "src/auth/middleware.js"
+]
+---
+```
+
+#### 3. Complete PR Description
+- Fill summary of changes
+- Detail implementation approach
+- List testing performed
+- Add screenshots if applicable
+- Update review checklist
+
+### PR Review Process
+
+#### 1. Create Review File
+```bash
+# Copy review template
+cp templates/pr-review-template.md prs/reviews/REV-001-feature-review.md
+```
+
+#### 2. Conduct Code Review
+- **Code Quality**: Style, organization, best practices
+- **Architecture**: Design patterns, separation of concerns
+- **Security**: Vulnerabilities, authentication, authorization
+- **Testing**: Coverage, quality, edge cases
+- **Documentation**: Comments, API docs, user guides
+
+#### 3. Document Review Decision
+Update review file with findings:
+```yaml
+decision: "approve" | "request-changes" | "comment"
+```
+
+### PR Status Lifecycle
+
+```mermaid
+stateDiagram-v2
+    [*] --> draft
+    draft --> ready: Complete info
+    ready --> in_review: Request review
+    in_review --> approved: Review passed
+    in_review --> changes_requested: Issues found
+    changes_requested --> ready: Changes applied
+    approved --> merged: Merge completed
+    ready --> closed: Cancel PR
+    merged --> [*]
+```
+
+### PR-Task Integration
+
+#### Linking PRs to Work Items
+PRs should be linked to their related tasks and issues:
+```yaml
+linked_issues: ["ISSUE-001"]
+linked_tasks: ["TASK-001", "TASK-002", "TASK-003"]
+```
+
+#### Task Status Updates
+When PR is merged, update linked task statuses:
+```yaml
+# In task files
+status: "completed"
+resolution: "merged-in-PR-001"
+completion_date: "2025-01-15"
+```
+
+### Quick PR Process
+
+For minor changes, use the quick PR template:
+```bash
+cp templates/pr-quick-template.md prs/active/PR-002-quick-fix.md
+```
+
+This streamlined template is perfect for:
+- Bug fixes
+- Documentation updates
+- Configuration changes
+- Code cleanup
+
+### Agent-Friendly PR Workflows
+
+The PR system is designed to work seamlessly with AI agents:
+
+#### Agent PR Creation
+- Agents can create PRs by copying templates
+- Auto-populate metadata from linked tasks
+- Generate summaries from code changes
+- Link related issues automatically
+
+#### Agent Reviews
+- Automated code quality checks
+- Security vulnerability scanning
+- Performance impact analysis
+- Test coverage validation
+
+### Git Integration
+
+PRs integrate naturally with git workflows:
+
+#### Branch Correlation
+```yaml
+source_branch: "feature/auth-system"
+target_branch: "main"
+commit_range: "abc123..def456"
+```
+
+#### Commit Messages
+Reference PRs in commit messages:
+```bash
+git commit -m "feat(auth): implement login system
+
+Implements user authentication with JWT tokens.
+Related to PR-001 and resolves ISSUE-001."
+```
+
+### PR Archival
+
+When PRs are completed:
+
+#### Successful Merge
+```bash
+# Update status and move to merged/
+mv prs/active/PR-001-feature.md prs/merged/
+```
+
+#### Closed Without Merge
+```bash
+# Update status to closed and move to merged/
+mv prs/active/PR-001-feature.md prs/merged/
 ```
 
 ## Status Management

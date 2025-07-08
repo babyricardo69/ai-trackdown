@@ -30,6 +30,18 @@ project-root/
 │       ├── TASK-002-implement-validation.md
 │       ├── TASK-003-add-oauth-buttons.md
 │       └── TASK-004-setup-webhook-endpoint.md
+├── prs/                         # Pull Request management
+│   ├── active/                  # Currently active PRs
+│   │   ├── PR-001-auth-system.md
+│   │   ├── PR-002-payment-flow.md
+│   │   └── PR-003-api-endpoints.md
+│   ├── merged/                  # Completed/merged PRs
+│   │   ├── PR-004-login-fix.md
+│   │   └── PR-005-docs-update.md
+│   └── reviews/                 # PR review documentation
+│       ├── REV-001-auth-review.md
+│       ├── REV-002-payment-review.md
+│       └── REV-003-api-review.md
 ├── docs/
 │   ├── llms-full.txt            # Complete project context for AI
 │   ├── requirements.md          # Project requirements
@@ -76,6 +88,28 @@ The main task hierarchy organized by scope:
 - Naming convention: `TASK-XXX-descriptive-name.md`
 - Typically completed within hours/days
 
+### `prs/` - Pull Request Management
+
+The pull request hierarchy organized by status:
+
+#### `prs/active/`
+- Contains open/active pull requests
+- Each PR represents a code change proposal
+- Naming convention: `PR-XXX-descriptive-name.md`
+- Status: draft, ready, in-review, approved, changes-requested
+
+#### `prs/merged/`
+- Contains completed/merged pull requests
+- Historical record of code changes
+- Naming convention: `PR-XXX-descriptive-name.md`
+- Status: merged, closed
+
+#### `prs/reviews/`
+- Contains pull request review documentation
+- Each review represents a code review session
+- Naming convention: `REV-XXX-descriptive-name.md`
+- Links to corresponding PR files
+
 ### `docs/` - Documentation
 
 - **`llms-full.txt`**: Complete project context for AI agents
@@ -93,6 +127,8 @@ Main project overview and status dashboard accessible from the root.
 - **Epic**: `EPIC-XXX` (where XXX is zero-padded number)
 - **Issue**: `ISSUE-XXX`
 - **Task**: `TASK-XXX`
+- **Pull Request**: `PR-XXX`
+- **Review**: `REV-XXX`
 
 ### File Names
 - Format: `{TYPE}-{NUMBER}-{descriptive-kebab-case-name}.md`
@@ -100,6 +136,8 @@ Main project overview and status dashboard accessible from the root.
   - `EPIC-001-user-authentication-system.md`
   - `ISSUE-045-implement-two-factor-auth.md`
   - `TASK-123-add-login-button-component.md`
+  - `PR-067-auth-feature-implementation.md`
+  - `REV-023-security-review-auth-pr.md`
 
 ### Descriptive Names
 - Use kebab-case (lowercase with hyphens)

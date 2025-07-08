@@ -13,6 +13,43 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Future changes will be listed here
 
+## [0.2.0] - 2025-07-08
+
+### Added
+- **Internal Pull Request Model**
+  - Complete internal PR management system independent of GitHub
+  - Agent-to-agent PR creation and review workflows
+  - User-controlled PR processes for all code changes
+  - PR template with YAML frontmatter and structured review sections
+  - Quick PR template for minor changes and bug fixes
+  - PR review template with comprehensive checklists and approval tracking
+
+- **PR Workflow Documentation**
+  - Complete PR lifecycle management (draft → ready → review → approved → merged)
+  - Agent-optimized PR creation patterns for AI assistants
+  - Manual PR workflows for user-controlled processes
+  - PR-to-task integration with automatic status synchronization
+  - Security and compliance review workflows
+  - Token usage tracking for AI-assisted PR creation and reviews
+
+- **Enhanced Architecture**
+  - PR entity added to data model with complete relationship mapping
+  - Review entity for structured PR review tracking
+  - prs/ directory structure with active, merged, and review subdirectories
+  - PR ID generation patterns following existing framework conventions
+
+- **Framework Integration**
+  - Seamless integration with existing task/issue hierarchy
+  - PR linking to tasks and issues with bidirectional relationships
+  - Status-based file organization matching ai-trackdown patterns
+  - Complete compatibility with existing template system
+
+### Enhanced Documentation
+- Revolutionary agent-to-agent collaboration through internal PR workflows
+- GitHub-independent PR model enabling full local control
+- Foundation established for CLI tooling implementation
+- Enterprise-ready audit trails and compliance tracking
+
 ## [0.1.0] - 2025-01-07
 
 ### Added

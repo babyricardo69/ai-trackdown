@@ -118,6 +118,10 @@ erDiagram
     PROJECT ||--o{ EPIC : contains
     EPIC ||--o{ ISSUE : contains
     ISSUE ||--o{ TASK : contains
+    PROJECT ||--o{ PR : contains
+    PR ||--o{ ISSUE : links
+    PR ||--o{ TASK : links
+    PR ||--o{ REVIEW : has
     
     PROJECT {
         string name
@@ -161,6 +165,40 @@ erDiagram
         array labels
         object token_usage
     }
+    
+    PR {
+        string id PK
+        string title
+        string status
+        string author
+        string target_branch
+        string source_branch
+        array linked_issues
+        array linked_tasks
+        date created_at
+        date updated_at
+        array files_changed
+        integer commit_count
+        integer additions
+        integer deletions
+        string merge_strategy
+        array labels
+        object token_usage
+    }
+    
+    REVIEW {
+        string id PK
+        string pr_id FK
+        string reviewer
+        string status
+        string decision
+        integer review_round
+        date created_at
+        date completed_at
+        string review_type
+        array focus_areas
+        object token_usage
+    }
 ```
 
 ### File Structure Specification
@@ -192,6 +230,17 @@ project-root/
 │       ├── TASK-001-login-form.md
 │       ├── TASK-002-oauth-config.md
 │       └── TASK-003-jwt-validation.md
+│
+├── prs/                            # Pull Request files
+│   ├── active/                     # Active/open PRs
+│   │   ├── PR-001-auth-feature.md
+│   │   └── PR-002-api-refactor.md
+│   ├── merged/                     # Merged/completed PRs
+│   │   ├── PR-003-login-fix.md
+│   │   └── PR-004-docs-update.md
+│   └── reviews/                    # PR review files
+│       ├── REV-001-auth-review.md
+│       └── REV-002-api-review.md
 │
 ├── docs/                           # Documentation
 │   ├── llms-full.txt              # Complete AI context
